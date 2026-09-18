@@ -1,0 +1,365 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@layer base {
+  :root {
+    --primary: #087f8c;
+    --primary-dark: #045d67;
+    --secondary: #0d8b85;
+    --accent: #b45309;
+    --navy: #092f3a;
+    --ink: #0f172a;
+    --muted: #334155;
+    --light: #f8fafc;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #0f172a;
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+  }
+
+  /* Crisp, sharp headings with deep contrast and strong color */
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.015em;
+    color: #092f3a;
+    font-weight: 800;
+  }
+
+  p {
+    color: #1e293b;
+  }
+
+  .font-urdu {
+    font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Amiri', serif;
+    line-height: 2.2;
+    direction: rtl;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Responsive Fluid Layout Containers for Standard, Large-Screen, Wide Display, 2K/4K & Projectors */
+.site-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 2.5vw, 2.5rem);
+  padding-right: clamp(1rem, 2.5vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+@media (min-width: 1440px) {
+  .site-container {
+    max-width: 1440px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .site-container {
+    max-width: 1560px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .site-container {
+    max-width: 1840px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  .site-container {
+    max-width: 2400px;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@media (min-width: 3400px) {
+  .site-container {
+    max-width: 3200px;
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+/* Wide Container for Immersive Sections (Hero Overlays, Navbars, Full-Bleed Modules) */
+.site-container-wide {
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 2vw, 3rem);
+  padding-right: clamp(1rem, 2vw, 3rem);
+  box-sizing: border-box;
+}
+
+@media (min-width: 1440px) {
+  .site-container-wide {
+    max-width: 1500px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .site-container-wide {
+    max-width: 1680px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .site-container-wide {
+    max-width: 1920px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .site-container-wide {
+    max-width: 2560px;
+  }
+}
+
+@media (min-width: 3400px) {
+  .site-container-wide {
+    max-width: 3400px;
+  }
+}
+
+/* Global text sharpness & contrast enforcement across the website */
+.text-sharp {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Transform light/washed-out muted greys into crisp, legible dark slate */
+.text-muted-crisp {
+  color: #334155 !important;
+}
+
+/* High-contrast solid badges & labels */
+.badge-crisp {
+  font-weight: 700 !important;
+  letter-spacing: 0.025em;
+}
+
+/* 3D Metallic Gold Button */
+.btn-3d-gold {
+  background: linear-gradient(180deg, #ffe082 0%, #f5be41 35%, #d99318 70%, #b87508 100%);
+  border: 1px solid #d49b1a;
+  box-shadow: 0 4px 12px -2px rgba(184, 117, 8, 0.45), 0 2px 4px rgba(0, 0, 0, 0.12), inset 0 1.5px 0.5px rgba(255, 255, 255, 0.8), inset 0 -2px 2px rgba(133, 76, 3, 0.4);
+}
+
+.btn-3d-gold:active {
+  box-shadow: 0 2px 6px -1px rgba(184, 117, 8, 0.45), inset 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom 3D Card Perspective Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Custom Smooth Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Ultra-Slim Top Banner Continuous Infinite Marquee */
+@keyframes top-banner-marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-top-marquee {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  will-change: transform;
+  animation: top-banner-marquee 35s linear infinite;
+}
+
+.animate-top-marquee:hover,
+.animate-top-marquee:active,
+.animate-top-marquee:focus {
+  animation-play-state: paused;
+}
+
+/* Glassmorphic and gradient utility accents */
+/* Sticky Glass Navigation Bar - Crisp, Solid & Clean */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  
+  /* Solid high-contrast background without blurry distortion */
+  background: #ffffff;
+  border-bottom: 2px solid #e2e8f0;
+  box-shadow: 0 4px 20px -2px rgba(9, 47, 58, 0.08);
+  
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+/* Glass panel fallback - crisp solid background with strong border */
+.glass-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05);
+}
+
+.glass-dark {
+  background: #092f3a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* 3D Gold Luxury Button & Red Emergency Light Styles */
+@keyframes emergency-beacon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px #ef4444, 0 0 16px rgba(239, 68, 68, 0.9), inset 0 0 4px rgba(255, 255, 255, 0.9);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 18px #ff2b2b, 0 0 32px rgba(255, 0, 0, 1), 0 0 48px rgba(239, 68, 68, 0.6), inset 0 0 8px rgba(255, 255, 255, 1);
+    filter: brightness(1.35);
+  }
+}
+
+@keyframes gold-shimmer-sweep {
+  0% {
+    transform: translateX(-140%) skewX(-25deg);
+  }
+  30%, 100% {
+    transform: translateX(260%) skewX(-25deg);
+  }
+}
+
+.animate-emergency-beacon {
+  animation: emergency-beacon-pulse 1.1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-gold-shimmer {
+  animation: gold-shimmer-sweep 3.2s infinite ease-in-out;
+}
+
+/* 3D Tactile Gold Button - Slim, Smart & Sophisticated */
+.btn-3d-gold {
+  background: linear-gradient(180deg, #FFF7A8 0%, #FFDF40 22%, #F59E0B 55%, #D97706 82%, #B45309 100%);
+  border: 1px solid #FDE68A;
+  box-shadow: 
+    0 3px 0 #853e00,
+    0 5px 14px rgba(217, 119, 6, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 2px rgba(133, 62, 0, 0.35);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-3d-gold:hover {
+  transform: translateY(-1.5px);
+  background: linear-gradient(180deg, #FFFFB5 0%, #FFE656 22%, #FBBF24 55%, #EA580C 82%, #B45309 100%);
+  box-shadow: 
+    0 4.5px 0 #853e00,
+    0 8px 18px rgba(245, 158, 11, 0.52),
+    inset 0 1.5px 1px rgba(255, 255, 255, 1),
+    inset 0 -1.5px 2px rgba(133, 62, 0, 0.4);
+}
+
+.btn-3d-gold:active {
+  transform: translateY(2px);
+  box-shadow: 
+    0 1px 0 #853e00,
+    0 2px 6px rgba(217, 119, 6, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 1.5px rgba(133, 62, 0, 0.35);
+}
+
+/* 3D Deep Blood-Red Primary Action Trigger Button */
+.btn-3d-red {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 28%, #b91c1c 62%, #991b1b 85%, #7f1d1d 100%);
+  border: 1px solid #fca5a5;
+  box-shadow: 
+    0 3px 0 #5c0f0f,
+    0 5px 14px rgba(185, 28, 28, 0.45),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.75),
+    inset 0 -1.5px 2px rgba(92, 15, 15, 0.4);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #ffffff;
+}
+
+.btn-3d-red:hover {
+  transform: translateY(-1.5px);
+  background: linear-gradient(180deg, #f87171 0%, #ef4444 28%, #dc2626 62%, #b91c1c 85%, #7f1d1d 100%);
+  box-shadow: 
+    0 4.5px 0 #5c0f0f,
+    0 8px 18px rgba(220, 38, 38, 0.55),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.9),
+    inset 0 -1.5px 2px rgba(92, 15, 15, 0.45);
+}
+
+.btn-3d-red:active {
+  transform: translateY(2px);
+  box-shadow: 
+    0 1px 0 #5c0f0f,
+    0 2px 6px rgba(185, 28, 28, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 1.5px rgba(92, 15, 15, 0.4);
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}

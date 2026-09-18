@@ -1,0 +1,1191 @@
+{
+  "header": {
+    "logoUrl": "/images/hospital-logo.png",
+    "logoPosition": "left",
+    "hospitalName": "Ali Welfare Trust Hospital",
+    "tagline": "( A Non-profitable ,Regd,Orginaztion Devoted to provide health facilities)",
+    "tickerText": "24/7 Emergency & Dialysis Active",
+    "emergencyBadge": "Emergency 24/7",
+    "locationBadge": "Qila Didar Singh, Gujranwala",
+    "opdHoursBadge": "OPD: 8:00 AM – 10:00 PM",
+    "whatsappNumber": "923452074974",
+    "emergencyPhone": "03324711101",
+    "navLinks": [
+      {
+        "name": "Home",
+        "href": "#hero"
+      },
+      {
+        "name": "Departments",
+        "href": "#departments"
+      },
+      {
+        "name": "Doctors",
+        "href": "#doctors"
+      },
+      {
+        "name": "Founder",
+        "href": "#founder"
+      },
+      {
+        "name": "Campus",
+        "href": "#gallery"
+      },
+      {
+        "name": "Donate",
+        "href": "#donate"
+      },
+      {
+        "name": "Contact Us",
+        "href": "#contact"
+      }
+    ],
+    "donateButtonText": "Donate Now"
+  },
+  "hero": {
+    "badgeText": "Registered Healthcare Trust #1142 • Serving Humanity Since 2005",
+    "titleLine1": "Excellence in Healthcare,",
+    "titleHighlight": "Compassion in Service",
+    "titleLine2": "for Every Human Life",
+    "urduTagline": "خدمتِ خلق — بلا تفریق، معیاری اور ہمدردانہ علاج",
+    "description": "Providing advanced kidney dialysis, modern clinical departments, stitchless phaco eye surgeries, computerized laboratory diagnostics, and subsidized treatments to deserving patients in Qila Didar Singh and surrounding rural areas.",
+    "opdButtonText": "Book Specialist OPD",
+    "donateButtonText": "Donate for Dialysis",
+    "stats": [
+      {
+        "label": "Registered Trust",
+        "value": "Since 2005",
+        "sub": "Non-Profit Healthcare"
+      },
+      {
+        "label": "Free Dialysis",
+        "value": "100% Free",
+        "sub": "For Deserving Renal Patients"
+      },
+      {
+        "label": "Medical Facilities",
+        "value": "24/7 Ready",
+        "sub": "Emergency, Lab & Pharmacy"
+      }
+    ],
+    "slides": [
+      {
+        "id": "slide-1",
+        "order": 1,
+        "active": true,
+        "image": "/images/hospital-building.jpg",
+        "heading": "Main Medical Campus & Executive Hospital Complex",
+        "subheading": "Serving Humanity with Dignity & 100% Free Medical Care",
+        "description": "Multi-specialty charitable hospital established to provide dignified, subsidized, and 100% free medical treatment for deserving families across Gujranwala.",
+        "category": "Main Medical Campus",
+        "badge": "Official Facility",
+        "urduTitle": "مرکزی عمارت، او پی ڈی اور تشخیصی شعبہ",
+        "urduTagline": "مرکزی عمارت، او پی ڈی اور تشخیصی شعبہ — خدمتِ خلق ہمارا نصب العین",
+        "location": "Chahal Kalan Road, Main Campus, Qila Didar Singh",
+        "tag": "State-of-the-Art Charitable Healthcare Infrastructure",
+        "buttonText": "Book OPD Consultation",
+        "buttonUrl": "#booking",
+        "title": "Main Medical Campus & Executive Hospital Complex",
+        "headline": "Main Medical Campus & Executive Hospital Complex",
+        "highlight": "Serving Humanity with Dignity & 100% Free Medical Care",
+        "subline": "Chahal Kalan Road, Main Campus, Qila Didar Singh"
+      },
+      {
+        "id": "slide-2",
+        "order": 2,
+        "active": true,
+        "image": "/images/dept-3d-dialysis.jpg",
+        "heading": "16-Bed Modern Hemodialysis & Renal Care Center",
+        "subheading": "100% Free Lifesaving Kidney Dialysis for Underprivileged Patients",
+        "description": "Equipped with automated hemodialysis machines and certified nephrology specialists, providing 100% free Zakat-sponsored life-saving hemodialysis sessions.",
+        "category": "Renal Care & Dialysis Wing",
+        "badge": "100% Free Dialysis",
+        "urduTitle": "جدید ہیمو ڈائیلاسز سنٹر — تاحیات مفت علاج",
+        "urduTagline": "مستحق گردوں کے مریضوں کے لیے تاحیات مفت ڈائیلاسز اور شفا کی امید",
+        "location": "Specialized Dialysis Wing, Ground Floor",
+        "tag": "100% Free Lifesaving Kidney Dialysis",
+        "buttonText": "Sponsor a Dialysis",
+        "buttonUrl": "/donate",
+        "title": "16-Bed Modern Hemodialysis & Renal Care Center",
+        "headline": "16-Bed Modern Hemodialysis & Renal Care Center",
+        "highlight": "100% Free Lifesaving Kidney Dialysis for Underprivileged Patients",
+        "subline": "Specialized Dialysis Wing, Ground Floor"
+      },
+      {
+        "id": "slide-3",
+        "order": 3,
+        "active": true,
+        "image": "/images/hospital-interior-1.jpg",
+        "heading": "Automated Clinical Pathology & Diagnostic Laboratory",
+        "subheading": "24/7 Accurate Diagnostics, Hematology & Color Doppler Sonology",
+        "description": "High-precision automated biochemistry analyzers, computerized reporting counters, and clinical sonology delivering prompt diagnostic accuracy.",
+        "category": "Pathology & Diagnostics",
+        "badge": "24/7 Diagnostics",
+        "urduTitle": "کمپیوٹرائزڈ پیتھالوجی لیب اور جدید الٹراساؤنڈ سنٹر",
+        "urduTagline": "تیز رفتار اور 100 فیصد مستند تشخیصی سہولیات چوبیس گھنٹے دستیاب",
+        "location": "Diagnostic Wing, Main Campus",
+        "tag": "Advanced Diagnostic Sonology & Pathology",
+        "buttonText": "View Lab Tests",
+        "buttonUrl": "/departments",
+        "title": "Automated Clinical Pathology & Diagnostic Laboratory",
+        "headline": "Automated Clinical Pathology & Diagnostic Laboratory",
+        "highlight": "24/7 Accurate Diagnostics, Hematology & Color Doppler Sonology",
+        "subline": "Diagnostic Wing, Main Campus"
+      },
+      {
+        "id": "slide-4",
+        "order": 4,
+        "active": true,
+        "image": "/images/hospital-interior-2.jpg",
+        "heading": "Specialist Consultant Outpatient Examination Chambers",
+        "subheading": "Senior Medical Specialists Across Cardiology, Nephrology & Surgery",
+        "description": "Senior specialist consultants conducting thorough examinations with modern clinical instruments, subsidized consultations, and free medicines for the needy.",
+        "category": "Specialist Consultant OPD",
+        "badge": "Specialist Faculty",
+        "urduTitle": "ماہرینِ امراض کا او پی ڈی کلینک — ہمدردانہ معائنہ",
+        "urduTagline": "معیاری طبی مشاورت، تجربہ کار کنسلٹنٹس اور مفت ادویات کی فراہمی",
+        "location": "Consultant OPD Suites, First Floor",
+        "tag": "Subsidized & Free Specialist Consultations",
+        "buttonText": "Explore Specialist Doctors",
+        "buttonUrl": "/doctors",
+        "title": "Specialist Consultant Outpatient Examination Chambers",
+        "headline": "Specialist Consultant Outpatient Examination Chambers",
+        "highlight": "Senior Medical Specialists Across Cardiology, Nephrology & Surgery",
+        "subline": "Consultant OPD Suites, First Floor"
+      },
+      {
+        "id": "slide-5",
+        "order": 5,
+        "active": true,
+        "image": "/images/hospital-interior-3.jpg",
+        "heading": "General Medical & Surgical Inpatient Recovery Ward",
+        "subheading": "Hygienic Patient Rooms, Round-the-Clock Nursing & Oxygen Manifold",
+        "description": "Clean inpatient recovery ward providing round-the-clock nursing care, post-surgical monitoring, and comfortable beds in a calm and dignified setting.",
+        "category": "Inpatient Care Ward",
+        "badge": "Inpatient Care",
+        "urduTitle": "مریضوں کا انڈور وارڈ اور آرام دہ بیڈز",
+        "urduTagline": "صاف ستھرا اور پرسکون وارڈ، 24 گھنٹے نرسنگ اور مریضوں کی دیکھ بھال",
+        "location": "First Floor Inpatient Wing",
+        "tag": "Clean & Sterile Care",
+        "buttonText": "Explore Campus Facilities",
+        "buttonUrl": "/campus",
+        "title": "General Medical & Surgical Inpatient Recovery Ward",
+        "headline": "General Medical & Surgical Inpatient Recovery Ward",
+        "highlight": "Hygienic Patient Rooms, Round-the-Clock Nursing & Oxygen Manifold",
+        "subline": "First Floor Inpatient Wing"
+      },
+      {
+        "id": "slide-6",
+        "order": 6,
+        "active": true,
+        "image": "/images/dept-3d-emergency.jpg",
+        "heading": "24/7 Emergency Triage & Acute Trauma Resuscitation Unit",
+        "subheading": "Immediate Resuscitation, Cardiac Monitoring & Trauma Care",
+        "description": "Equipped for critical medical emergencies with dedicated doctor teams, central oxygen supply, emergency medication reserve, and ambulance response.",
+        "category": "Emergency & Trauma",
+        "badge": "24/7 Emergency",
+        "urduTitle": "ایمرجنسی و فوری طبی امداد کا شعبہ",
+        "urduTagline": "ہر لمحہ تیار — فوری ایمرجنسی طبی امداد اور ٹراما ریسوسیٹیشن",
+        "location": "Ground Floor Emergency Entrance",
+        "tag": "Immediate Emergency Care",
+        "buttonText": "Emergency Helpline",
+        "buttonUrl": "tel:+923007421142",
+        "title": "24/7 Emergency Triage & Acute Trauma Resuscitation Unit",
+        "headline": "24/7 Emergency Triage & Acute Trauma Resuscitation Unit",
+        "highlight": "Immediate Resuscitation, Cardiac Monitoring & Trauma Care",
+        "subline": "Ground Floor Emergency Entrance"
+      },
+      {
+        "id": "slide-7",
+        "order": 7,
+        "active": true,
+        "image": "/images/hospital-aerial.jpg",
+        "heading": "Spacious Multi-Story Hospital Campus & Open Grounds",
+        "subheading": "Modern Architecture with Dedicated Ambulance Access & Patient Ramps",
+        "description": "Thoughtfully designed healthcare campus featuring wheelchair access, wide patient waiting corridors, on-site pharmacy, and serene open grounds.",
+        "category": "Hospital Complex & Grounds",
+        "badge": "Registered Trust #1142",
+        "urduTitle": "ہسپتال کی وسیع عمارت اور سرسبز احاطہ",
+        "urduTagline": "کشادہ ملٹی سٹوری کیمپس اور سرسبز فلاحی ماحول — شفا کا قابلِ اعتماد مرکز",
+        "location": "Chahal Kalan Road, Qila Didar Singh",
+        "tag": "Registered Charitable Trust #1142",
+        "buttonText": "View Campus Map",
+        "buttonUrl": "/campus",
+        "title": "Spacious Multi-Story Hospital Campus & Open Grounds",
+        "headline": "Spacious Multi-Story Hospital Campus & Open Grounds",
+        "highlight": "Modern Architecture with Dedicated Ambulance Access & Patient Ramps",
+        "subline": "Chahal Kalan Road, Qila Didar Singh"
+      }
+    ]
+  },
+  "marquee": [
+    {
+      "text": "Advanced Kidney Hemodialysis Unit",
+      "highlight": "24/7 Shifts"
+    },
+    {
+      "text": "Phaco Stitchless Cataract Eye Surgery",
+      "highlight": "Free Camps"
+    },
+    {
+      "text": "Round the Clock Emergency & Trauma",
+      "highlight": "Open 24/7"
+    },
+    {
+      "text": "Meezan Bank Zakat & Sadqah Portal",
+      "highlight": "100% Direct Impact"
+    },
+    {
+      "text": "4D Color Doppler & Digital Diagnostic Lab",
+      "highlight": "Precise Imaging"
+    },
+    {
+      "text": "Registered Healthcare Trust #1142",
+      "highlight": "Est. 2005"
+    },
+    {
+      "text": "Founded by Late Nazar Hussain Alvi",
+      "highlight": "Compassionate Care"
+    },
+    {
+      "text": "Main Campus: Qila Didar Singh Gujranwala",
+      "highlight": "Accessible"
+    }
+  ],
+  "quickStats": [
+    {
+      "label": "Years of Service",
+      "value": "20+",
+      "sub": "Founded in 2005",
+      "icon": "Clock"
+    },
+    {
+      "label": "Patients Treated",
+      "value": "450,000+",
+      "sub": "Compassionate care",
+      "icon": "Users"
+    },
+    {
+      "label": "Free Dialysis & Aid",
+      "value": "100%",
+      "sub": "For registered needy",
+      "icon": "HeartHandshake"
+    },
+    {
+      "label": "Emergency Readiness",
+      "value": "24/7",
+      "sub": "Open every single day",
+      "icon": "ShieldAlert"
+    },
+    {
+      "label": "Specialist Departments",
+      "value": "9+",
+      "sub": "Under one single roof",
+      "icon": "Activity"
+    }
+  ],
+  "founder": {
+    "name": "Nazar Hussain Alvi",
+    "title": "Late Founder & Visionary Patron",
+    "role": "Founder (2005)",
+    "urduTitle": "بانیِ ادارہ: محترم نذر حسین علوی (مرحوم)",
+    "quote": "Serving humanity in distress is the highest form of worship. Our doors must always remain open to the needy.",
+    "bio": "The benevolent founder whose compassion and devotion laid the cornerstone of Ali Welfare Trust Hospital in 2005, ensuring that no patient in Qila Didar Singh and surrounding villages is ever denied world-class healthcare due to lack of funds.",
+    "imageUrl": "/images/founder-nazar-alvi.jpg",
+    "memorialPillars": [
+      {
+        "title": "Foundation of Compassion (2005)",
+        "desc": "Established with a solemn pledge that financial constraints should never prevent a human being from receiving dignified healthcare.",
+        "icon": "ShieldCheck"
+      },
+      {
+        "title": "Free Dialysis & Eye Care Legacy",
+        "desc": "Pioneered community welfare health camps, subsidized dialysis programs, and free cataract eye surgeries across Gujranwala district.",
+        "icon": "Heart"
+      },
+      {
+        "title": "Perpetual Sadqah-e-Jariyah",
+        "desc": "Operating purely on non-profit principles with transparent zakat governance and audited community trust accountability.",
+        "icon": "Award"
+      }
+    ],
+    "executiveTeam": [
+      {
+        "id": "nazar-alvi",
+        "name": "Nazar Hussain Alvi",
+        "title": "Late Founder & Visionary Patron",
+        "role": "Founder (2005)",
+        "bio": "The benevolent founder whose compassion and devotion laid the cornerstone of Ali Welfare Trust Hospital in 2005, ensuring that no patient in Qila Didar Singh and surrounding villages is ever denied world-class healthcare due to lack of funds.",
+        "imageUrl": "/images/founder-nazar-alvi.jpg",
+        "isLate": true,
+        "quote": "Serving humanity in distress is the highest form of worship. Our doors must always remain open to the needy."
+      },
+      {
+        "id": "zamin-alvi",
+        "name": "Zamin Ali Alvi",
+        "title": "Chairman & Chief Executive Officer (CEO)",
+        "role": "Executive Chairman & CEO",
+        "bio": "Under his dynamic executive leadership, the hospital has expanded into a multi-specialty institution featuring state-of-the-art dialysis suites, digital radiology, advanced eye care theater, and free medicine distribution programs.",
+        "imageUrl": "/images/ceo-zamin-alvi.jpg",
+        "isLate": false,
+        "quote": "Our relentless commitment is to blend clinical excellence with heartfelt empathy for every single patient."
+      },
+      {
+        "id": "khawar-awan",
+        "name": "Khawar Abbas Awan",
+        "title": "Hospital Director",
+        "role": "Director of Administration & Development",
+        "bio": "Spearheading administrative operational excellence, welfare outreach programs, community health camps, and modern infrastructure enhancements across all inpatient and outpatient departments.",
+        "imageUrl": "/images/director-khawar-awan.jpg",
+        "isLate": false,
+        "quote": "Every donation and every effort is dedicated transparently towards saving human lives and alleviating pain."
+      }
+    ]
+  },
+  "mission": {
+    "missionEn": "To provide accessible and compassionate healthcare, ensuring high-quality medical services for our community, regardless of circumstances.",
+    "missionUrdu": "معاشرے کے ہر فرد کو بلا تفریق معیاری، سستی اور ہمدردانہ طبی سہولیات کی فراہمی",
+    "visionEn": "To be a leading healthcare institution known for excellence in patient care and community service, creating a healthier society through innovation and empowerment.",
+    "visionUrdu": "صحت عامہ میں جدت، بہترین نگہداشت اور بے لوث خدمت کے ذریعے ایک صحت مند معاشرے کی تشکیل",
+    "pillars": [
+      {
+        "title": "Compassionate Care",
+        "urdu": "ہمدردانہ نگہداشت",
+        "desc": "Treating every patient with dignity, warmth, and clinical sensitivity regardless of socioeconomic standing."
+      },
+      {
+        "title": "Clinical Excellence",
+        "urdu": "معیاری طبی مہارت",
+        "desc": "Modern diagnostic imaging, international sterilization protocols, and qualified medical specialists."
+      },
+      {
+        "title": "Transparent Welfare",
+        "urdu": "شفاف رفاہی نظام",
+        "desc": "Every rupee of Zakat and Sadqah directly utilized for patient treatments, dialysis sessions, and free medicine."
+      }
+    ]
+  },
+  "departments": [
+    {
+      "id": "dialysis",
+      "name": "Kidney Dialysis Center",
+      "urduName": "کڈنی ڈائلیسز سنٹر",
+      "shortDesc": "Advanced German-standard hemodialysis machines delivering free & subsidized life-saving renal care.",
+      "fullDesc": "Our dedicated Kidney Dialysis Unit provides round-the-clock hemodialysis supervised by experienced nephrologists and certified dialysis technicians. Complete with dedicated water treatment plant, strict sterilization protocols, and emergency backup.",
+      "iconUrl": "/images/dept-3d-dialysis.jpg",
+      "badge": "Life-Saving Center",
+      "features": [
+        "Modern Hemodialysis Machines",
+        "Reverse Osmosis (RO) Medical Water Plant",
+        "Free Sessions for Deserving Patients",
+        "Emergency 24/7 Dialysis Shift",
+        "Dedicated Hepatitis B & C Separate Units"
+      ],
+      "headDoctor": "Consultant Nephrologist",
+      "timings": "24 Hours / 3 Daily Shifts",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "eye-care",
+      "name": "Eye Care & Ophthalmology",
+      "urduName": "آئی کیئر و امراض چشم",
+      "shortDesc": "Modern phaco cataract surgeries, computer vision testing, and cornea diagnostics.",
+      "fullDesc": "Equipped with state-of-the-art ophthalmic surgical microscopes, phacoemulsification systems, auto-refractometers, and slit lamps. We organize frequent free cataract surgery camps for rural elderly citizens.",
+      "iconUrl": "/images/dept-3d-eyecare.jpg",
+      "badge": "Surgical Center",
+      "features": [
+        "Stitchless Phaco Cataract Surgery",
+        "Computerized Eye Examination",
+        "Glaucoma & Diabetic Retinopathy Screening",
+        "Free Lens Implantation for Needy Patients",
+        "Pediatric Vision Screening"
+      ],
+      "headDoctor": "Specialist Eye Surgeon",
+      "timings": "Daily: 9:00 AM - 6:00 PM",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "medicine",
+      "name": "General & Internal Medicine",
+      "urduName": "شعبہ میڈیسن و جنرل او پی ڈی",
+      "shortDesc": "Comprehensive clinical consultations for chronic, acute, and complex adult illnesses.",
+      "fullDesc": "Experienced physicians managing diabetes, hypertension, cardiovascular risks, gastrointestinal disorders, infectious diseases, respiratory conditions, and geriatric health.",
+      "iconUrl": "/images/dept-medical.png",
+      "badge": "High OPD Volume",
+      "features": [
+        "Experienced Senior Physicians",
+        "Diabetes & Hypertension Care Clinic",
+        "Preventive Health Checkups",
+        "Fever & Infectious Disease Protocol",
+        "Inpatient Medical Wards"
+      ],
+      "headDoctor": "Senior Medical Specialist",
+      "timings": "Daily: 8:00 AM - 10:00 PM",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "radiology",
+      "name": "Radiology & Color Doppler",
+      "urduName": "ریڈیالوجی و الٹراساؤنڈ",
+      "shortDesc": "High-resolution 4D Ultrasound, Color Doppler, Digital X-Rays, and precise imaging.",
+      "fullDesc": "State-of-the-art diagnostic imaging providing immediate, crystal-clear imaging reports. Operated by licensed radiologists and sonologists for obstetric, abdominal, musculoskeletal, and vascular scans.",
+      "iconUrl": "/images/dept-3d-radiology.jpg",
+      "badge": "Digital Imaging",
+      "features": [
+        "High-Resolution Color Doppler",
+        "Obstetric 3D/4D Fetal Scans",
+        "Digital High-Frequency X-Ray",
+        "Immediate Diagnostic Reporting",
+        "Bedside Portable Ultrasound Available"
+      ],
+      "headDoctor": "Consultant Radiologist",
+      "timings": "Daily: 9:00 AM - 9:00 PM (Emergency 24/7)",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "gynecology",
+      "name": "Gynecology & Obstetrics",
+      "urduName": "امراض نسواں و زچگی",
+      "shortDesc": "Safe deliveries, prenatal and postnatal maternal care, and female reproductive health.",
+      "fullDesc": "Dedicated labor rooms, modern neonatal resuscitation setup, experienced female gynecologists and trained lady health visitors ensuring safe child delivery and respectful mother-infant care.",
+      "iconUrl": "/images/dept-check.png",
+      "badge": "Maternal Health",
+      "features": [
+        "Fully Equipped Labor & Delivery Suite",
+        "Antenatal & High-Risk Pregnancy Clinics",
+        "Elective & Emergency C-Sections",
+        "Female Specialists & Midwives",
+        "Post-Partum Counseling & Vaccination"
+      ],
+      "headDoctor": "Consultant Gynecologist",
+      "timings": "24/7 Maternity Emergency",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "pathology",
+      "name": "Laboratory & Diagnostics",
+      "urduName": "پیتھالوجی و تشخیصی لیب",
+      "shortDesc": "Automated hematology, clinical chemistry, hormone assays, and serology testing.",
+      "fullDesc": "Precision laboratory utilizing fully automated analyzers with stringent external quality control. Rapid turnaround time for emergency blood counts, cardiac markers, renal function, and viral screenings.",
+      "iconUrl": "/images/dept-scan.png",
+      "badge": "24/7 Testing",
+      "features": [
+        "Fully Automated Hematology & Biochemistry",
+        "Hepatitis B & C Rapid & ELISA Screening",
+        "Kidney & Liver Function Profiles (RFT / LFT)",
+        "Digital Online Report Access",
+        "Free Lab Testing for Zakat Beneficiaries"
+      ],
+      "headDoctor": "Consultant Pathologist",
+      "timings": "24 Hours / 7 Days",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "urology",
+      "name": "Urology & Stone Care",
+      "urduName": "یورالوجی و مثانہ و گردہ",
+      "shortDesc": "Specialized management of kidney stones, prostate disorders, and urinary tract health.",
+      "fullDesc": "Advanced diagnostics and surgical care for renal calculi, benign prostatic hyperplasia, urinary tract infections, and congenital abnormalities with minimally invasive procedures.",
+      "iconUrl": "/images/dept-urologist.png",
+      "badge": "Specialist Care",
+      "features": [
+        "Kidney & Ureteral Stone Management",
+        "Prostate Health & Uroflowmetry",
+        "Endoscopic Urological Procedures",
+        "Strict Infection Prevention",
+        "Post-Surgical Inpatient Monitoring"
+      ],
+      "headDoctor": "Consultant Urologist",
+      "timings": "Mon, Wed, Fri: 2:00 PM - 7:00 PM",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "emergency",
+      "name": "24/7 Emergency & Trauma",
+      "urduName": "ایمرجنسی و ٹراما سنٹر ۲۴ گھنٹے",
+      "shortDesc": "Rapid response trauma unit with oxygen manifold, cardiac monitors, and resuscitation beds.",
+      "fullDesc": "Uninterrupted 24/7 trauma and acute care reception capable of stabilizing accidents, cardiac crises, acute respiratory failure, and medical emergencies immediately upon arrival.",
+      "iconUrl": "/images/dept-3d-emergency.jpg",
+      "badge": "Critical 24/7",
+      "features": [
+        "Always-On Duty Medical Officers",
+        "Central Oxygen Supply & Defibrillators",
+        "Rapid Triage & Minor OT",
+        "Fully Equipped Mobile Ambulance Fleet",
+        "Direct Admission to ICU / Wards"
+      ],
+      "headDoctor": "Emergency Care Incharge",
+      "timings": "24/7/365 Non-Stop",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "pharmacy",
+      "name": "In-House Welfare Pharmacy",
+      "urduName": "شعبہ ادویات و فارمیسی",
+      "shortDesc": "Quality certified medicines available 24/7, with subsidized and free medicine dispensation.",
+      "fullDesc": "Clean, temperature-controlled pharmacy stocking 100% authentic pharmaceuticals directly from approved manufacturers. Free medication dispensed to eligible needy patients on doctor prescription.",
+      "iconUrl": "/images/dept-3d-pharmacy.jpg",
+      "badge": "Subsidized / Free",
+      "features": [
+        "100% Genuine Certified Pharmaceuticals",
+        "Free Dispensation for Zakat Patients",
+        "Temperature-Controlled Cold Chain",
+        "Open 24 Hours Round the Clock",
+        "Expert Pharmacist Consultation"
+      ],
+      "headDoctor": "Chief Pharmacist",
+      "timings": "24 Hours / 7 Days",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "ent",
+      "name": "Ear, Nose & Throat (ENT)",
+      "urduName": "شعبہ ناک، کان و گلا",
+      "shortDesc": "Comprehensive diagnostics and treatments for ear infections, sinus conditions, and throat disorders.",
+      "fullDesc": "Equipped with modern diagnostic otoscopes, audiometry screening, and specialized ENT clinic offering patient-first solutions for hearing, nasal breathing, and throat health.",
+      "iconUrl": "/images/dept-check.png",
+      "badge": "Specialist Care",
+      "features": [
+        "Ear Examination & Microscopic Cleaning",
+        "Sinus & Nasal Polyps Assessment",
+        "Throat & Tonsil Care",
+        "Hearing Assessment & Tinnitus Support",
+        "Pediatric & Adult ENT Care"
+      ],
+      "headDoctor": "Dr. Saqib Jalil",
+      "timings": "Fridays: 10:00 AM - 01:00 PM",
+      "emergencyAvailable": false
+    },
+    {
+      "id": "orthopaedics",
+      "name": "Orthopaedics & Family Medicine",
+      "urduName": "ہڈی، جوڑ و فیملی میڈیسن",
+      "shortDesc": "Joint pain, fractures, arthritis management, and full-spectrum family healthcare.",
+      "fullDesc": "Dedicated orthopaedic and family medicine consultation offering advanced bone, joint, and spine evaluations alongside everyday medical triage for all family members.",
+      "iconUrl": "/images/dept-urologist.png",
+      "badge": "Bone & Joint Clinic",
+      "features": [
+        "Fracture Management & Splinting",
+        "Arthritis & Joint Infiltration Therapy",
+        "Back & Neck Pain Evaluation",
+        "Family Health Consultations",
+        "Post-Trauma Rehabilitation Support"
+      ],
+      "headDoctor": "Dr. Usama Saeed",
+      "timings": "Mon - Sat: 09:30 AM - 03:00 PM (Sunday Off)",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "physiotherapy",
+      "name": "Physical Therapy & Rehabilitation",
+      "urduName": "فزیوتھراپی و ری ہیبلی ٹیشن",
+      "shortDesc": "Targeted physical rehabilitation for stroke recovery, chronic joint pain, and mobility restoration.",
+      "fullDesc": "Modern physiotherapy unit equipped with ultrasonic therapy, TENS, cervical-lumbar traction, and tailored kinesiology exercise regimens under expert physiotherapist supervision.",
+      "iconUrl": "/images/dept-observation.png",
+      "badge": "Rehab Center",
+      "features": [
+        "Stroke & Neurological Rehabilitation",
+        "Musculoskeletal Pain Relief (TENS / US)",
+        "Frozen Shoulder & Sciatica Therapy",
+        "Post-Surgical Mobility Recovery",
+        "Spinal Traction & Ergonomic Guidance"
+      ],
+      "headDoctor": "Dr. Amara Anwar",
+      "timings": "Daily: 03:00 PM - 06:00 PM",
+      "emergencyAvailable": false
+    },
+    {
+      "id": "neurosurgery",
+      "name": "Neurosurgery & Spine Care",
+      "urduName": "شعبہ نیورو سرجری و مہرہ جات",
+      "shortDesc": "Specialist neurosurgical consultations for brain disorders, spinal disc compression, and nerve health.",
+      "fullDesc": "Expert neurosurgical evaluations offering comprehensive clinical assessment for disc herniation, traumatic brain injury follow-up, peripheral neuropathy, and neurological diseases.",
+      "iconUrl": "/images/dept-radiation.png",
+      "badge": "Tertiary Specialist",
+      "features": [
+        "Spinal Disc Herniation & Sciatica",
+        "Head Injury & Concussion Evaluation",
+        "Cranial & Spine Surgical Consultation",
+        "Peripheral Nerve Disorders",
+        "Advanced Neurological Screening"
+      ],
+      "headDoctor": "Dr. Syed Jawad Haider",
+      "timings": "Saturdays: 10:00 AM - 01:00 PM",
+      "emergencyAvailable": false
+    },
+    {
+      "id": "pulmonology",
+      "name": "Pulmonology & Chest Medicine",
+      "urduName": "امراض سینہ و سانس",
+      "shortDesc": "Specialized care for asthma, chronic bronchitis, COPD, tuberculosis, and chest infections.",
+      "fullDesc": "Dedicated chest medicine clinic with nebulization suites, spirometry assessments, and personalized therapy plans for respiratory health and lung recovery.",
+      "iconUrl": "/images/dept-ambulance.png",
+      "badge": "Chest Specialist",
+      "features": [
+        "Asthma & COPD Comprehensive Care",
+        "Chronic Cough & Bronchitis Management",
+        "Post-Pneumonia Lung Rehabilitation",
+        "Digital Chest Imaging Interpretation",
+        "Smoking Cessation & Lung Health Advice"
+      ],
+      "headDoctor": "Dr. Jamshed Ahmed Cheema",
+      "timings": "Sundays: 08:30 AM - 12:30 PM",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "pediatrics",
+      "name": "Pediatrics & Child Healthcare",
+      "urduName": "شعبہ اطفال و نگہداشتِ نو مولود",
+      "shortDesc": "Comprehensive infant, child, and adolescent healthcare, growth monitoring, and immunization.",
+      "fullDesc": "Gentle and compassionate pediatric care focusing on newborn health, childhood infections, nutritional advice, vaccination, and developmental screening.",
+      "iconUrl": "/images/dept-medical.png",
+      "badge": "Child Health",
+      "features": [
+        "Newborn & Infant Clinical Checkups",
+        "Child Nutrition & Stunted Growth Assessment",
+        "Pediatric Infections & Fever Protocol",
+        "Immunization & Vaccine Guidance",
+        "Allergy & Childhood Asthma Management"
+      ],
+      "headDoctor": "Dr. Salman Khalid",
+      "timings": "Sat & Mon: 09:00 AM - 12:00 PM",
+      "emergencyAvailable": true
+    },
+    {
+      "id": "gastroenterology",
+      "name": "Gastroenterology & Hepatology",
+      "urduName": "شعبہ امراض معدہ، جگر و آنت",
+      "shortDesc": "Specialist consultations for liver diseases, hepatitis, ulcers, acid reflux, and digestive issues.",
+      "fullDesc": "Clinical gastrointestinal consultation addressing peptic ulcer disease, GERD, hepatitis management, IBS, and chronic abdominal pain under specialist guidance.",
+      "iconUrl": "/images/dept-scan.png",
+      "badge": "Digestive Specialist",
+      "features": [
+        "Acid Peptic Disease & Gastritis Management",
+        "Hepatitis B & C Management Protocol",
+        "Fatty Liver & Cirrhosis Counseling",
+        "Irritable Bowel Syndrome (IBS) Therapy",
+        "Chronic Abdominal Pain Workup"
+      ],
+      "headDoctor": "Dr. Malik Muhammad Arfan",
+      "timings": "Sundays: 04:00 PM - 06:00 PM",
+      "emergencyAvailable": false
+    },
+    {
+      "id": "surgery",
+      "name": "General & Laparoscopic Surgery",
+      "urduName": "جنرل و لیپروسکوپک سرجری",
+      "shortDesc": "Expert surgical consultations, minor and major operative procedures, and post-operative recovery.",
+      "fullDesc": "Modern surgical department performing hernia repairs, appendectomy, gallbladder care, abscess drainage, and diabetic foot management with sterile operation theaters.",
+      "iconUrl": "/images/dept-urologist.png",
+      "badge": "Surgical Suite",
+      "features": [
+        "Hernia, Appendix & Gallbladder Evaluations",
+        "Diabetic Foot Ulcer & Wound Debridement",
+        "Minor Operative Procedures & Suturing",
+        "Sterile Operation Theaters",
+        "Post-Surgical Inpatient Ward Monitoring"
+      ],
+      "headDoctor": "Dr. Ali Raza",
+      "timings": "Mon - Sat: 02:00 PM - 07:00 PM",
+      "emergencyAvailable": true
+    }
+  ],
+  "doctors": [
+    {
+      "id": "dr-eman-salman",
+      "name": "Dr. Eman Salman",
+      "specialty": "Gynaecologist",
+      "designation": "Gynaecologist & Women's Health Specialist",
+      "departmentId": "gynecology",
+      "departmentName": "Gynecology & Obstetrics",
+      "consultationDays": "Saturday & Monday",
+      "timing": "08:00 AM – 01:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Eman Salman is a Gynaecologist providing consultation and women's healthcare services at Ali Welfare Trust Hospital. Patients can visit during her scheduled consultation hours for gynecological care.",
+      "qualification": "Consultant Gynaecologist",
+      "experience": "Senior Clinical Specialist",
+      "days": [
+        "Saturday",
+        "Monday"
+      ],
+      "imageUrl": "/images/doctor-female-scrubs.jpg",
+      "specialties": [
+        "Gynecological Care",
+        "Women's Health",
+        "Antenatal & Maternity Services"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "female"
+    },
+    {
+      "id": "dr-saqib-jalil",
+      "name": "Dr. Saqib Jalil",
+      "specialty": "Ear, Nose & Throat (ENT) Specialist",
+      "designation": "Ear, Nose & Throat (ENT) Specialist",
+      "departmentId": "ent",
+      "departmentName": "Ear, Nose & Throat (ENT)",
+      "consultationDays": "Friday",
+      "timing": "10:00 AM – 01:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Saqib Jalil is an ENT specialist providing consultation for conditions affecting the ear, nose and throat. He is available for consultation at Ali Welfare Trust Hospital on Fridays.",
+      "qualification": "Consultant ENT Specialist",
+      "experience": "Experienced ENT Consultant",
+      "days": [
+        "Friday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "Ear, Nose & Throat Disorders",
+        "Sinusitis & Nasal Care",
+        "Throat & Hearing Consultations"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "ent"
+    },
+    {
+      "id": "dr-zeeshan-saeed",
+      "name": "Dr. Zeeshan Saeed",
+      "specialty": "Kidney Transplant Physician",
+      "designation": "Kidney Transplant Physician & Nephrologist",
+      "departmentId": "dialysis",
+      "departmentName": "Kidney Dialysis & Nephrology",
+      "consultationDays": "Thursday",
+      "timing": "01:00 PM – 04:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Zeeshan Saeed is a Kidney Transplant Physician providing specialist consultation at Ali Welfare Trust Hospital. His scheduled consultation is available on Thursdays.",
+      "qualification": "Kidney Transplant Physician",
+      "experience": "Renal & Transplant Specialist",
+      "days": [
+        "Thursday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "Kidney Transplant Care",
+        "Renal Disease Management",
+        "Hemodialysis Oversight"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "kidney"
+    },
+    {
+      "id": "dr-usama-saeed",
+      "name": "Dr. Usama Saeed",
+      "specialty": "Family Physician & Orthopaedic Surgeon",
+      "designation": "Family Physician & Orthopaedic Surgeon",
+      "departmentId": "orthopaedics",
+      "departmentName": "Family Medicine & Orthopaedics",
+      "consultationDays": "Monday – Saturday (Sunday Off)",
+      "timing": "09:30 AM – 03:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Usama Saeed is a Family Physician and Orthopaedic Surgeon providing medical and orthopedic consultation at Ali Welfare Trust Hospital. He is available during the listed consultation hours, with Sunday as his weekly day off.",
+      "qualification": "Family Physician & Orthopaedic Surgeon",
+      "experience": "Comprehensive Clinical & Bone Care",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "Orthopaedic & Bone Care",
+        "Joint & Fracture Management",
+        "Family Health Consultations"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "ortho"
+    },
+    {
+      "id": "dr-amara-anwar",
+      "name": "Dr. Amara Anwar",
+      "specialty": "Physiotherapist",
+      "designation": "Consultant Physiotherapist",
+      "departmentId": "physiotherapy",
+      "departmentName": "Physical Therapy & Rehabilitation",
+      "consultationDays": "Monday – Saturday",
+      "timing": "03:00 PM – 06:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Amara Anwar is a Physiotherapist providing physiotherapy services at Ali Welfare Trust Hospital. Patients can consult during her scheduled afternoon hours.",
+      "qualification": "Consultant Physiotherapist",
+      "experience": "Physical Therapy Specialist",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "imageUrl": "/images/doctor-female-scrubs.jpg",
+      "specialties": [
+        "Physical Rehabilitation",
+        "Post-Op Mobility Therapy",
+        "Joint & Spine Physical Therapy"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "physio"
+    },
+    {
+      "id": "dr-syed-jawad-haider",
+      "name": "Dr. Syed Jawad Haider",
+      "specialty": "Consultant Neurosurgeon",
+      "designation": "Consultant Neurosurgeon",
+      "departmentId": "neurosurgery",
+      "departmentName": "Neurosurgery & Spine Care",
+      "consultationDays": "Saturday",
+      "timing": "10:00 AM – 01:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Syed Jawad Haider is a Consultant Neurosurgeon providing specialist neurosurgical consultation at Ali Welfare Trust Hospital. He is available for consultation on Saturdays.",
+      "qualification": "Consultant Neurosurgeon",
+      "experience": "Neurosurgical Specialist",
+      "days": [
+        "Saturday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "Neurosurgical Consultation",
+        "Spinal Cord & Disc Disorders",
+        "Nerve & Cranial Assessment"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "neuro"
+    },
+    {
+      "id": "dr-sheraz-ul-hassan-chathha",
+      "name": "Dr. Sheraz Ul Hassan Chathha",
+      "specialty": "General Physician",
+      "designation": "Consultant General Physician",
+      "departmentId": "medicine",
+      "departmentName": "General & Internal Medicine",
+      "consultationDays": "Sunday",
+      "timing": "03:00 PM – 08:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Sheraz Ul Hassan Chathha is a General Physician providing general medical consultation at Ali Welfare Trust Hospital. He is available for consultation on Sundays during the listed hours.",
+      "qualification": "Consultant General Physician",
+      "experience": "Experienced Medical Practitioner",
+      "days": [
+        "Sunday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "General Medical Care",
+        "Acute Illness Triage",
+        "Chronic Medical Follow-Up"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "general"
+    },
+    {
+      "id": "dr-jamshed-ahmed-cheema",
+      "name": "Dr. Jamshed Ahmed Cheema",
+      "specialty": "Chest Specialist",
+      "designation": "Consultant Chest Specialist & Pulmonologist",
+      "departmentId": "pulmonology",
+      "departmentName": "Pulmonology & Chest Medicine",
+      "consultationDays": "Sunday",
+      "timing": "08:30 AM – 12:30 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Jamshed Ahmed Cheema is a Chest Specialist providing specialist consultation at Ali Welfare Trust Hospital. He is available on Sundays during the listed morning hours.",
+      "qualification": "Consultant Chest Specialist",
+      "experience": "Respiratory Medicine Specialist",
+      "days": [
+        "Sunday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "Pulmonary & Chest Disorders",
+        "Asthma & Bronchitis Care",
+        "Respiratory Disease Workup"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "chest"
+    },
+    {
+      "id": "dr-salman-khalid",
+      "name": "Dr. Salman Khalid",
+      "specialty": "Child Specialist / Pediatrician",
+      "designation": "Consultant Child Specialist",
+      "departmentId": "pediatrics",
+      "departmentName": "Pediatrics & Child Healthcare",
+      "consultationDays": "Saturday & Monday",
+      "timing": "09:00 AM – 12:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Salman Khalid is a Child Specialist providing pediatric consultation and healthcare services at Ali Welfare Trust Hospital. He is available on Saturdays and Mondays during the scheduled morning hours.",
+      "qualification": "Child Specialist",
+      "experience": "Pediatric Health Consultant",
+      "days": [
+        "Saturday",
+        "Monday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "Pediatric Healthcare",
+        "Neonatal & Infant Wellness",
+        "Child Development & Immunity"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "child"
+    },
+    {
+      "id": "dr-amir-sohail",
+      "name": "Dr. Amir Sohail",
+      "specialty": "Eye Physician",
+      "designation": "Consultant Eye Physician & Ophthalmologist",
+      "departmentId": "eye-care",
+      "departmentName": "Eye Care & Ophthalmology",
+      "consultationDays": "Monday – Saturday",
+      "timing": "10:00 AM – 04:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Amir Sohail is an Eye Physician providing eye-care consultation at Ali Welfare Trust Hospital. He is available Monday through Saturday during the listed consultation hours.",
+      "qualification": "Consultant Eye Physician",
+      "experience": "Ophthalmic Care Specialist",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "Ophthalmic Consultations",
+        "Vision Assessment",
+        "Eye Health & Diagnostics"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "eye"
+    },
+    {
+      "id": "dr-malik-muhammad-arfan",
+      "name": "Dr. Malik Muhammad Arfan",
+      "specialty": "Gastroenterologist",
+      "designation": "Consultant Gastroenterologist",
+      "departmentId": "gastroenterology",
+      "departmentName": "Gastroenterology & Hepatology",
+      "consultationDays": "Sunday",
+      "timing": "04:00 PM – 06:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Malik Muhammad Arfan is a Gastroenterologist providing specialist consultation at Ali Welfare Trust Hospital. He is available for consultation on Sundays during the listed afternoon hours.",
+      "qualification": "Consultant Gastroenterologist",
+      "experience": "Gastrointestinal & Liver Specialist",
+      "days": [
+        "Sunday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "Gastrointestinal Health",
+        "Liver & Hepatic Care",
+        "Digestive Disease Consultations"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "gastro"
+    },
+    {
+      "id": "dr-ali-raza",
+      "name": "Dr. Ali Raza",
+      "specialty": "General Surgeon",
+      "designation": "Consultant General Surgeon",
+      "departmentId": "surgery",
+      "departmentName": "General & Laparoscopic Surgery",
+      "consultationDays": "Monday – Saturday",
+      "timing": "02:00 PM – 07:00 PM",
+      "rating": "5.0",
+      "ratingText": "★ 5.0 Rated (Rated 5 out of 5)",
+      "profile": "Dr. Ali Raza is a General Surgeon providing surgical consultation at Ali Welfare Trust Hospital. He is available during the listed afternoon and evening hours.",
+      "qualification": "Consultant General Surgeon",
+      "experience": "Surgical Specialist",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "imageUrl": "/images/doctor-male-scrubs.jpg",
+      "specialties": [
+        "General Surgical Consultations",
+        "Operative Care & Follow-Up",
+        "Wound & Post-Surgical Healing"
+      ],
+      "isAvailableToday": true,
+      "avatarType": "surgeon"
+    }
+  ],
+  "donation": {
+    "banner": {
+      "enabled": true,
+      "headline": "Ali Welfare Trust Hospital",
+      "badge": "Non-Profit Healthcare Trust #1142",
+      "appealEnglish": "Help us save precious human lives through free hemodialysis sessions, subsidized medicines, and free cataract surgeries for the impoverished.",
+      "appealUrdu": "مستحق اور نادار مریضوں کے علاج اور ادویات کے لیے دل کھول کر عطیات دیں",
+      "backgroundImage": "/images/hospital-building.jpg",
+      "showLiveTime": true,
+      "autoPopupSeconds": 120
+    },
+    "bank": {
+      "bankName": "Meezan Bank Ltd.",
+      "accountTitle": "MUHAMMAD RAFAY AWAN",
+      "iban": "PK57MEZN0009110108226635",
+      "accountNo": "09110108226635",
+      "branchName": "Qila Didar Singh Branch, Gujranwala",
+      "branchCode": "0911",
+      "city": "QILA DIDAR SINGH GUJRANWALA",
+      "currency": "PKR (Pakistani Rupee)",
+      "taxStatus": "Charitable Trust / Zakat & Sadqah Eligible",
+      "appealUrdu": "مستحق اور نادار مریضوں کے علاج اور ادویات کے لیے دل کھول کر عطیات دیں",
+      "appealEnglish": "Please donate generously to support life-saving kidney dialysis, eye surgeries, and free medical aid for poor and needy patients.",
+      "easypaisaNo": "03452074974",
+      "jazzcashNo": "03324711101"
+    },
+    "causes": [
+      {
+        "id": "dialysis-session",
+        "title": "Sponsor a Dialysis Session",
+        "urduTitle": "ایک مریض کا ڈائلیسز سیشن سپانسر کریں",
+        "description": "Provide a life-saving hemodialysis session including dialyzer, heparin, saline, and specialist nursing for a poor renal patient.",
+        "suggestedAmount": 4500,
+        "impactNote": "1 dialysis session extends a kidney patient's life by 3 to 4 days.",
+        "badge": "Urgent Need"
+      },
+      {
+        "id": "cataract-surgery",
+        "title": "Free Eye Cataract Surgery (Phaco)",
+        "urduTitle": "آنکھوں کا موتیابند آپریشن (فیکو)",
+        "description": "Restore sight for an elderly grandmother or grandfather with stitchless phacoemulsification and imported intraocular lens.",
+        "suggestedAmount": 18000,
+        "impactNote": "Restores clear eyesight and independence for life.",
+        "badge": "High Impact"
+      },
+      {
+        "id": "medicine-fund",
+        "title": "Patient Free Medicine Fund",
+        "urduTitle": "غریب مریضوں کی مفت ادویات کا فنڈ",
+        "description": "Support monthly life-saving heart, diabetes, and antibiotic treatments for patients who cannot afford pharmacy bills.",
+        "suggestedAmount": 2500,
+        "impactNote": "Supplies essential prescription medicines for an entire month.",
+        "badge": "Everyday Support"
+      },
+      {
+        "id": "emergency-ambulance",
+        "title": "24/7 Emergency & Ambulance Fund",
+        "urduTitle": "ایمرجنسی و ایمبولینس سروس فنڈ",
+        "description": "Fund life-saving oxygen cylinders, emergency trauma resuscitation kits, and rapid rural patient transfers.",
+        "suggestedAmount": 8000,
+        "impactNote": "Keeps rapid response ambulances fueled and ready 24/7.",
+        "badge": "Critical"
+      }
+    ]
+  },
+  "campus": {
+    "facilities": [
+      {
+        "id": "gal-1",
+        "title": "Official Hospital Compound & Gate",
+        "category": "exterior",
+        "imageUrl": "/images/hospital-building.jpg",
+        "description": "Official hospital compound entrance with blue Urdu calligraphy signboard and security gate welcoming patients 24/7."
+      },
+      {
+        "id": "gal-2",
+        "title": "Aerial View of Hospital Campus",
+        "category": "campus",
+        "imageUrl": "/images/hospital-aerial.jpg",
+        "description": "Elevated aerial drone photograph showing the multi-story hospital complex, open courtyard, and motorcycle/ambulance parking."
+      },
+      {
+        "id": "gal-3",
+        "title": "Central Reception & Diagnostic Lab",
+        "category": "facilities",
+        "imageUrl": "/images/hospital-interior-1.jpg",
+        "description": "Ali Welfare Diagnostic Laboratory registration, computerized reporting counter, and spacious waiting hall."
+      },
+      {
+        "id": "gal-4",
+        "title": "Specialist OPD Consultation Chambers",
+        "category": "facilities",
+        "imageUrl": "/images/hospital-interior-2.jpg",
+        "description": "Senior physicians and surgeons examining and advising patients with modern diagnostic tools."
+      },
+      {
+        "id": "gal-5",
+        "title": "Inpatient General Medical Ward",
+        "category": "wards",
+        "imageUrl": "/images/hospital-interior-3.jpg",
+        "description": "Spacious, hygienic, air-conditioned patient recovery wards maintained with strict medical hygiene standards."
+      },
+      {
+        "id": "gal-6",
+        "title": "Sterile Procedure & Dialysis Suite",
+        "category": "wards",
+        "imageUrl": "/images/gallery-2.jpg",
+        "description": "Dedicated eye surgical beds and German hemodialysis stations equipped with sterile clinical privacy curtains and lighting."
+      }
+    ],
+    "photoFrames": [
+      {
+        "id": "frame-1",
+        "title": "Main Hospital Entrance & Grounds",
+        "caption": "Main entrance with dedicated ambulance ramp and 24/7 reception",
+        "imageUrl": "/images/hospital-building.jpg",
+        "dateAdded": "Official Campus"
+      },
+      {
+        "id": "frame-2",
+        "title": "Aerial View of Healthcare Campus",
+        "caption": "Multi-wing facility in Qila Didar Singh, Gujranwala",
+        "imageUrl": "/images/hospital-aerial.jpg",
+        "dateAdded": "Campus Aerial"
+      },
+      {
+        "id": "frame-3",
+        "title": "Hemodialysis Treatment Wing",
+        "caption": "Modern German-engineered dialysis stations providing free sessions",
+        "imageUrl": "/images/hospital-interior-1.jpg",
+        "dateAdded": "Renal Wing"
+      },
+      {
+        "id": "frame-4",
+        "title": "Sterile Inpatient Recovery Ward",
+        "caption": "Air-conditioned recovery rooms with central oxygen monitoring",
+        "imageUrl": "/images/hospital-interior-2.jpg",
+        "dateAdded": "Inpatient Care"
+      }
+    ]
+  },
+  "contact": {
+    "address": "Ali Welfare Trust Hospital, Chahal Kalan, Main Campus, Qila Didar Singh, Gujranwala, Pakistan",
+    "locationDescription": "Chahal Kalan, Qila Didar Singh, Gujranwala, Punjab, Pakistan",
+    "contactNumbers": [
+      "03324711101",
+      "03364711100",
+      "+92 345 2074974"
+    ],
+    "emergencyPhone": "03324711101",
+    "helpline": "03364711100",
+    "whatsapp": "923452074974",
+    "email": "info@aliwelfaretrusthospital.org",
+    "opdHours": "OPD: Monday - Saturday (8:00 AM - 10:00 PM)",
+    "emergencyHours": "24/7 Emergency, Pharmacy & Dialysis Services",
+    "googleMapsLink": "https://maps.google.com/?q=Ali+Welfare+Trust+Hospital+Chahal+Kalan+Qila+Didar+Singh+Gujranwala",
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Ali%20Welfare%20Trust%20Hospital%20Chahal%20Kalan%20Qila%20Didar%20Singh%20Gujranwala&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    "footerDescription": "Ali Welfare Trust Hospital is a dedicated non-profit registered healthcare institution committed to delivering accessible, high-standard clinical treatments, free kidney dialysis, and subsidized healthcare to humanity.",
+    "copyrightText": "© 2026 Ali Welfare Trust Hospital (Regd. #1142). All rights reserved."
+  },
+  "updatedAt": 1789718825679,
+  "revision": 23
+}

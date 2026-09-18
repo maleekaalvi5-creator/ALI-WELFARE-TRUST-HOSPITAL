@@ -1,0 +1,6 @@
+{
+  "name": "Ali Welfare Trust Hospital",
+  "description": "Ali Welfare Trust Hospital in Qila Didar Singh, Gujranwala - 24/7 emergency care, specialized healthcare departments, specialist doctors, appointment booking, and community donation portal.",
+  "requestFramePermissions": ["microphone", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
