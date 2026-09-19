@@ -4,7 +4,7 @@ import { Award, Heart, CheckCircle, Quote, ShieldCheck, Sparkles, Target, Compas
 import { LEADERSHIP, HOSPITAL_INFO, MISSION_AND_VALUES } from '../data/hospitalData';
 import founderPhoto from '../assets/images/nazar.jpg';
 import ceoPhoto from '../assets/images/ceo-zamin-alvi.jpg';
-import directorPhoto from '../assets/images/director-khawar-awan.jpg';
+import directorPhoto from '../assets/images/khawar.jpg';
 
 interface Leader3DMotionPhotoProps {
   photo: string;
