@@ -1,6 +1,6 @@
 import React from 'react';
 import { Award } from 'lucide-react';
-import founderPhotoFallback from '../../assets/images/nazar_alvi_founder_1789126282231.jpg';
+import founderPhotoFallback from '../../assets/images/nazar.jpg';
 
 interface FounderPhotoForegroundProps {
   className?: string;
