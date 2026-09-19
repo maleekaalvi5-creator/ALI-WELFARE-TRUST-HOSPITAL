@@ -12,8 +12,8 @@ export const FounderPhotoForeground: React.FC<FounderPhotoForegroundProps> = ({
   // Permanent, pristine archival founder portrait of Late Nazar Hussain Alvi
   const permanentPhotoSrc =
     founderPhotoFallback ||
-    '/images/founder-nazar-alvi.jpg' ||
-    '/images/founder-nazar.jpg';
+    '/images/nazar.jpg' ||
+    '/images/nazar.jpg';
 
   return (
     <div
@@ -39,8 +39,8 @@ export const FounderPhotoForeground: React.FC<FounderPhotoForegroundProps> = ({
               }}
               onError={(e) => {
                 const target = e.currentTarget;
-                if (target.src !== '/images/founder-nazar.jpg') {
-                  target.src = '/images/founder-nazar.jpg';
+                if (target.src !== '/images/nazar.jpg') {
+                  target.src = '/images/nazar.jpg';
                 }
               }}
             />
