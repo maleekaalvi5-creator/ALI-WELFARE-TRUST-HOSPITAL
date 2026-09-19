@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react';
 import { Award, Heart, CheckCircle, Quote, ShieldCheck, Sparkles, Target, Compass, Camera, Upload, Check, Loader2, RefreshCw } from 'lucide-react';
 import { LEADERSHIP, HOSPITAL_INFO, MISSION_AND_VALUES } from '../data/hospitalData';
-import founderPhoto from '../assets/images/nazar_alvi_founder_1789126282231.jpg';
+import founderPhoto from '../assets/images/nazar.jpg';
 import ceoPhoto from '../assets/images/ceo-zamin-alvi.jpg';
 import directorPhoto from '../assets/images/director-khawar-awan.jpg';
 
