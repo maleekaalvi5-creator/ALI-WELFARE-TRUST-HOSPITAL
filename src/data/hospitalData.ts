@@ -709,4 +709,4 @@ export const STATS = [
   { value: "100%", label: "Free Dialysis & Aid", sub: "For registered needy", icon: "HeartHandshake" },
   { value: "24/7", label: "Emergency Readiness", sub: "Open every single day", icon: "ShieldAlert" },
   { value: "9+", label: "Specialist Departments", sub: "Under one single roof", icon: "Activity" }
-];
+]; 
