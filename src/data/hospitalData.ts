@@ -59,7 +59,7 @@ export const LEADERSHIP: LeadershipMember[] = [
     title: "Late Founder & Visionary Patron",
     role: "Founder (2005)",
     bio: "The benevolent founder whose compassion and devotion laid the cornerstone of Ali Welfare Trust Hospital in 2005, ensuring that no patient in Qila Didar Singh and surrounding villages is ever denied world-class healthcare due to lack of funds.",
-    imageUrl: "/images/founder-nazar-alvi.jpg",
+    imageUrl: "/images/WhatsApp Image 2026-09-10 at 1.35.50 PM.jpeg",
     isLate: true,
     quote: "Serving humanity in distress is the highest form of worship. Our doors must always remain open to the needy."
   },
@@ -69,7 +69,7 @@ export const LEADERSHIP: LeadershipMember[] = [
     title: "Chairman & Chief Executive Officer (CEO)",
     role: "Executive Chairman & CEO",
     bio: "Under his dynamic executive leadership, the hospital has expanded into a multi-specialty institution featuring state-of-the-art dialysis suites, digital radiology, advanced eye care theater, and free medicine distribution programs.",
-    imageUrl: "/images/ceo-zamin-alvi.jpg",
+    imageUrl: "/images/images/image (11).png",
     isLate: false,
     quote: "Our relentless commitment is to blend clinical excellence with heartfelt empathy for every single patient."
   },
@@ -79,7 +79,7 @@ export const LEADERSHIP: LeadershipMember[] = [
     title: "Hospital Director",
     role: "Director of Administration & Development",
     bio: "Spearheading administrative operational excellence, welfare outreach programs, community health camps, and modern infrastructure enhancements across all inpatient and outpatient departments.",
-    imageUrl: "/images/director-khawar-awan.jpg",
+    imageUrl: "/images/WhatsApp Image 2026-09-10 at 3.13.03 PM.jpeg",
     isLate: false,
     quote: "Every donation and every effort is dedicated transparently towards saving human lives and alleviating pain."
   }
