@@ -318,8 +318,8 @@ export const FounderMemorial: React.FC = () => {
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                       onError={(e) => {
                         const target = e.target as HTMLElement;
-                        if (target.getAttribute('src') !== '/images/founder-nazar.jpg') {
-                          target.setAttribute('src', '/images/founder-nazar.jpg');
+                        if (target.getAttribute('src') !== '/images/nazar.jpg') {
+                          target.setAttribute('src', '/images/nazar.jpg');
                         }
                       }}
                     />
