@@ -15,6 +15,7 @@ export interface Department {
 export interface Doctor {
   id: string;
   name: string;
+  urduName?: string;
   specialty: string;
   designation: string;
   departmentId: string;

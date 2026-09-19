@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   Stethoscope, 
   Search, 
@@ -14,7 +14,11 @@ import {
   Building2, 
   Sparkles,
   ChevronRight,
-  Filter
+  ChevronLeft,
+  Filter,
+  Play,
+  Pause,
+  UserCheck
 } from 'lucide-react';
 import { DOCTORS, DEPARTMENTS, HOSPITAL_INFO } from '../data/hospitalData';
 import { Doctor } from '../types';
@@ -38,6 +42,19 @@ export const DoctorsPage: React.FC<DoctorsPageProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDeptFilter, setSelectedDeptFilter] = useState<string>('all');
   const [onlyAvailableToday, setOnlyAvailableToday] = useState(false);
+  const [heroDoctorIndex, setHeroDoctorIndex] = useState(0);
+  const [isHeroDoctorPaused, setIsHeroDoctorPaused] = useState(false);
+
+  // Auto-advance hero 3D doctor slider
+  useEffect(() => {
+    if (isHeroDoctorPaused) return;
+    const timer = setInterval(() => {
+      setHeroDoctorIndex((prev) => (prev + 1) % DOCTORS.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [isHeroDoctorPaused]);
+
+  const currentHeroDoctor = DOCTORS[heroDoctorIndex] || DOCTORS[0];
 
   // Departments list for filter pills
   const filterDepartments = useMemo(() => {
@@ -76,11 +93,23 @@ export const DoctorsPage: React.FC<DoctorsPageProps> = ({
   return (
     <div className="min-h-screen bg-[#f8fafc] text-[#0f172a] flex flex-col selection:bg-[#087f8c] selection:text-white">
       
-      {/* Top Corporate Luxury Breadcrumb & Header Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#02131a] via-[#08323e] to-[#041d24] text-white border-b border-[#d5c7b2]/20 py-12 sm:py-16 md:py-20 shadow-xl">
-        {/* Soft luxury beige radial glow accent */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#d5c7b2]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Top Corporate Luxury Header Hero Banner with Interactive 3D Doctor Spotlight & Infinite Scroll */}
+      <section 
+        className="relative overflow-hidden bg-[#02131a] text-white border-b border-[#d5c7b2]/20 pt-10 pb-6 sm:pt-14 sm:pb-8 shadow-2xl"
+        onMouseEnter={() => setIsHeroDoctorPaused(true)}
+        onMouseLeave={() => setIsHeroDoctorPaused(false)}
+      >
+        {/* Dynamic Atmospheric High-Resolution Medical Backdrop */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20 mix-blend-luminosity transition-all duration-1000 scale-105"
+          style={{ backgroundImage: `url('${currentHeroDoctor.imageUrl || '/images/hospital-interior-2.jpg'}')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#02131a]/95 via-[#08323e]/90 to-[#02131a]/98 pointer-events-none" />
+
+        {/* Ambient Glowing Orbs & Tech Grid Overlay */}
+        <div className="absolute top-0 right-1/4 w-[32rem] h-[32rem] bg-teal-500/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
+        <div className="absolute bottom-0 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#087f8c_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
 
         <div className="site-container relative z-10">
           
@@ -96,59 +125,273 @@ export const DoctorsPage: React.FC<DoctorsPageProps> = ({
             <span className="text-white font-bold">Medical Faculty & Doctors Directory</span>
           </nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             
-            <div className="lg:col-span-8">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-900/80 border border-teal-400/30 text-teal-200 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-                <Stethoscope className="w-4 h-4 text-amber-300" />
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-900/80 border border-teal-400/30 text-teal-200 text-xs font-bold uppercase tracking-wider shadow-sm">
+                <Sparkles className="w-4 h-4 text-amber-300 animate-spin-slow" />
                 <span>Verified Specialist Consultants (12 Independent Departments)</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-2">
-                Distinguished Medical Specialists & Consultants
-              </h1>
-
               <div 
                 dir="rtl" 
-                className="font-urdu text-2xl sm:text-3xl lg:text-4xl font-bold text-amber-300 mb-4 leading-relaxed drop-shadow-sm"
+                className="font-urdu text-2xl sm:text-3xl lg:text-4xl font-bold text-amber-300 leading-relaxed drop-shadow-md"
               >
                 علی ویلفیئر ٹرسٹ ہسپتال کے ماہر کنسلٹنٹ ڈاکٹرز
               </div>
 
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+                Distinguished Medical Specialists & Consultants
+              </h1>
+
               <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-2xl">
                 Compassionate, accredited physicians and surgeons dedicated to ethical healthcare. Every doctor manages their verified consultation schedule, specialized diagnostic procedures, and personalized outpatient treatment at Ali Welfare Trust Hospital, Qila Didar Singh.
               </p>
+
+              {/* Quick Filter Action Pills */}
+              <div className="pt-2 flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => { setSelectedDeptFilter('all'); setOnlyAvailableToday(false); }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    selectedDeptFilter === 'all' && !onlyAvailableToday
+                      ? 'bg-amber-400 text-slate-950 shadow-md font-extrabold'
+                      : 'bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10'
+                  }`}
+                >
+                  All 12 Specialists
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setOnlyAvailableToday(!onlyAvailableToday)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                    onlyAvailableToday
+                      ? 'bg-emerald-400 text-slate-950 shadow-md font-extrabold'
+                      : 'bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10'
+                  }`}
+                >
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>Available Today</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onBookDoctor(currentHeroDoctor.departmentId, currentHeroDoctor.id)}
+                  className="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-teal-500 hover:bg-teal-400 text-slate-950 transition-all cursor-pointer flex items-center gap-1 shadow-sm"
+                >
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>Direct OPD Booking</span>
+                </button>
+              </div>
             </div>
 
-            {/* Quick Stats Pill Panel */}
-            <div className="lg:col-span-4 bg-slate-900/60 backdrop-blur-md rounded-2xl p-5 border border-emerald-500/20 shadow-lg">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-300">Registered Faculty</span>
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30">
-                  12 Specialists
-                </span>
-              </div>
+            {/* Right Column: Interactive 3D Doctor Spotlight Slider */}
+            <div className="lg:col-span-5">
+              <div className="perspective-1000">
+                <div className="relative rounded-2xl overflow-hidden bg-[#032029]/90 backdrop-blur-md border-2 border-teal-500/40 shadow-2xl group transition-all duration-300">
+                  
+                  {/* Doctor 3D Photo Container */}
+                  <div className="relative h-64 sm:h-76 w-full overflow-hidden bg-slate-950">
+                    <img
+                      src={currentHeroDoctor.imageUrl}
+                      alt={currentHeroDoctor.name}
+                      className="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#032029] via-[#032029]/20 to-black/30" />
 
-              <div className="grid grid-cols-2 gap-3 pt-3 text-center">
-                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-2xl font-black text-amber-300">100%</div>
-                  <div className="text-[11px] text-slate-300 font-medium">Verified Credentials</div>
-                </div>
-                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-2xl font-black text-emerald-400">★ 5.0</div>
-                  <div className="text-[11px] text-slate-300 font-medium">Patient Satisfaction</div>
-                </div>
-              </div>
+                    {/* Top Badges Overlay */}
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 shadow-md flex items-center gap-1">
+                        <ShieldCheck className="w-3.5 h-3.5 text-slate-950" />
+                        <span>PMDC Accredited</span>
+                      </span>
 
-              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span>OPD & Welfare Helpdesk</span>
-                </span>
-                <span className="font-bold text-amber-300 font-mono">0332-4711101</span>
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/90 text-white shadow-sm flex items-center gap-1">
+                        <Star className="w-3 h-3 fill-white text-white" />
+                        <span>★ 5.0 (Verified)</span>
+                      </span>
+                    </div>
+
+                    {/* Slide Navigation Controls */}
+                    <div className="absolute inset-y-0 left-2 right-2 flex items-center justify-between pointer-events-none">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setHeroDoctorIndex((prev) => (prev - 1 + DOCTORS.length) % DOCTORS.length);
+                        }}
+                        className="pointer-events-auto w-9 h-9 rounded-full bg-black/60 hover:bg-teal-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-lg hover:scale-110 active:scale-95"
+                        title="Previous Doctor"
+                        aria-label="Previous Doctor"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setHeroDoctorIndex((prev) => (prev + 1) % DOCTORS.length);
+                        }}
+                        className="pointer-events-auto w-9 h-9 rounded-full bg-black/60 hover:bg-teal-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-lg hover:scale-110 active:scale-95"
+                        title="Next Doctor"
+                        aria-label="Next Doctor"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+                    </div>
+
+                    {/* Doctor Name Floating Overlay */}
+                    <div className="absolute bottom-3 left-4 right-4">
+                      {currentHeroDoctor.urduName && (
+                        <div className="font-urdu text-amber-300 text-sm font-bold text-right mb-0.5">
+                          {currentHeroDoctor.urduName}
+                        </div>
+                      )}
+                      <h3 className="text-xl font-black text-white drop-shadow-md">
+                        {currentHeroDoctor.name}
+                      </h3>
+                      <p className="text-xs text-teal-200 font-bold">
+                        {currentHeroDoctor.specialty}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Doctor Details & Action Buttons */}
+                  <div className="p-4 sm:p-5 space-y-3">
+                    <div className="flex items-center justify-between text-xs text-slate-300">
+                      <span className="font-medium text-slate-400">Department:</span>
+                      <span className="font-bold text-amber-300">{currentHeroDoctor.departmentName}</span>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-teal-950/70 border border-teal-500/30 flex items-center justify-between text-xs text-teal-200">
+                      <span className="flex items-center gap-1.5 text-[11px]">
+                        <Clock className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                        <span className="font-semibold">{currentHeroDoctor.consultationDays || 'Mon - Sat Morning OPD'}</span>
+                      </span>
+                      <span className="font-mono text-emerald-400 font-bold">{currentHeroDoctor.timing || 'Daily 9AM - 2PM'}</span>
+                    </div>
+
+                    {/* Action Buttons: Book & Profile */}
+                    <div className="grid grid-cols-2 gap-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => onBookDoctor(currentHeroDoctor.departmentId, currentHeroDoctor.id)}
+                        className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer"
+                      >
+                        <Calendar className="w-3.5 h-3.5" />
+                        <span>Book Visit</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => onViewDoctorProfile(currentHeroDoctor.id)}
+                        className="w-full py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                      >
+                        <span>Full Profile</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+
+                    {/* Bottom Controls Bar: Dots Indicator, Play/Pause, and Counter */}
+                    <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                      {/* Interactive Slide Dots */}
+                      <div className="flex items-center gap-1.5">
+                        {DOCTORS.slice(0, 6).map((doc, idx) => (
+                          <button
+                            key={doc.id}
+                            type="button"
+                            onClick={() => setHeroDoctorIndex(idx)}
+                            className={`h-2 rounded-full transition-all cursor-pointer ${
+                              idx === heroDoctorIndex 
+                                ? 'w-6 bg-amber-400' 
+                                : 'w-2 bg-white/30 hover:bg-white/60'
+                            }`}
+                            aria-label={`Doctor Slide ${idx + 1}`}
+                          />
+                        ))}
+                      </div>
+
+                      {/* Pause/Play and Doctor Index */}
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsHeroDoctorPaused(!isHeroDoctorPaused)}
+                          className="p-1 rounded-md text-slate-400 hover:text-white text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                          title={isHeroDoctorPaused ? "Resume slider" : "Pause slider"}
+                        >
+                          {isHeroDoctorPaused ? <Play className="w-3 h-3 text-amber-300" /> : <Pause className="w-3 h-3" />}
+                          <span className="text-[10px] uppercase font-bold">{isHeroDoctorPaused ? "Play" : "Pause"}</span>
+                        </button>
+
+                        <span className="text-[11px] font-mono text-slate-400">
+                          {heroDoctorIndex + 1} / {DOCTORS.length}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Integrated Operational Stats Dock */}
+                  <div className="bg-[#02131a] px-4 py-3 border-t border-teal-500/20 grid grid-cols-3 gap-2 text-center text-[11px]">
+                    <div>
+                      <div className="text-amber-300 font-bold">{DOCTORS.length} Specialists</div>
+                      <div className="text-slate-400 text-[10px]">Registered Faculty</div>
+                    </div>
+                    <div>
+                      <div className="text-emerald-400 font-bold">100% Verified</div>
+                      <div className="text-slate-400 text-[10px]">PMDC Accreditation</div>
+                    </div>
+                    <div>
+                      <div className="text-teal-200 font-bold">0332-4711101</div>
+                      <div className="text-slate-400 text-[10px]">OPD Direct Line</div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
 
+          </div>
+
+          {/* Continuous Infinite Marquee Doctors Directory Ribbon */}
+          <div className="mt-8 sm:mt-10 pt-4 border-t border-white/10 overflow-hidden relative group">
+            <div className="flex items-center gap-2 mb-2 text-xs font-bold text-amber-300 uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Specialist Consultants Directory — Click Doctor to View Profile</span>
+            </div>
+
+            <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+              <div className="animate-marquee flex items-center gap-3 py-1">
+                {/* Duplicate array for seamless infinite marquee */}
+                {[...DOCTORS, ...DOCTORS].map((doc, i) => (
+                  <button
+                    key={`${doc.id}-${i}`}
+                    type="button"
+                    onClick={() => onViewDoctorProfile(doc.id)}
+                    className="flex-shrink-0 flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-teal-900/60 border border-white/10 hover:border-amber-400/50 backdrop-blur-sm transition-all cursor-pointer text-left group/item"
+                  >
+                    <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-800 border border-teal-400/40 flex-shrink-0">
+                      <img 
+                        src={doc.imageUrl} 
+                        alt="" 
+                        className="w-full h-full object-cover object-top"
+                        onError={(e) => {
+                          (e.target as HTMLElement).style.display = 'none';
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white group-hover/item:text-amber-300 transition-colors whitespace-nowrap">
+                        {doc.name}
+                      </div>
+                      <div className="text-[10px] text-teal-300/80 whitespace-nowrap">
+                        {doc.specialty} • {doc.departmentName}
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
         </div>

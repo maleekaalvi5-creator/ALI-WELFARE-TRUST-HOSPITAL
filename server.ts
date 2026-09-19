@@ -7,26 +7,38 @@ import { GoogleGenAI } from "@google/genai";
 
 // =========================================================================
 // SECURE ADMINISTRATIVE ACCESS (scrypt-hashed credentials & Bearer Tokens)
-// User: AliTrust
-// Pass: 1234567Ali
+// Default User: AliTrust or superadmin
+// Default Pass: 1234567Ali
 // =========================================================================
 const ADMIN_USERNAME = "AliTrust";
 const ADMIN_PASSWORD_PLAIN = "1234567Ali";
 const ADMIN_SCRYPT_SALT = "awt_hospital_scrypt_salt_2026_qila_didar_singh";
 const ADMIN_KEY_LEN = 64;
 
-// Precompute scrypt hash buffer for timing-safe comparison
-const EXPECTED_HASH = crypto.scryptSync(ADMIN_PASSWORD_PLAIN, ADMIN_SCRYPT_SALT, ADMIN_KEY_LEN);
-
 // Persistent storage paths
 const DATA_DIR = path.join(process.cwd(), "data");
 const SESSIONS_FILE = path.join(DATA_DIR, "admin-sessions.json");
+const AUTH_FILE = path.join(DATA_DIR, "admin-auth.json");
 const PRIMARY_CONTENT_FILE = path.join(DATA_DIR, "hospital-content.json");
 const PUBLIC_CONTENT_FILE = path.join(process.cwd(), "public", "data", "hospital-content.json");
 const APPOINTMENTS_FILE = path.join(DATA_DIR, "appointments.json");
 
 if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+function getStoredPasswordHash(): Buffer {
+  if (fs.existsSync(AUTH_FILE)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(AUTH_FILE, "utf-8"));
+      if (data && data.hashHex) {
+        return Buffer.from(data.hashHex, "hex");
+      }
+    } catch (e) {
+      console.error("[Auth] Error reading stored password hash:", e);
+    }
+  }
+  return crypto.scryptSync(ADMIN_PASSWORD_PLAIN, ADMIN_SCRYPT_SALT, ADMIN_KEY_LEN);
 }
 const publicDataDir = path.join(process.cwd(), "public", "data");
 if (!fs.existsSync(publicDataDir)) {
@@ -681,15 +693,18 @@ How may I assist you today, Sir?
         return res.status(400).json({ error: "Username and password are required." });
       }
 
-      if (username.trim() !== ADMIN_USERNAME) {
+      const normalizedUser = username.trim().toLowerCase();
+      const validUsers = [ADMIN_USERNAME.toLowerCase(), "superadmin", "admin"];
+      if (!validUsers.includes(normalizedUser)) {
         return res.status(401).json({ error: "Invalid administrative credentials." });
       }
 
       // Compute scrypt hash of provided password
       const providedHash = crypto.scryptSync(password.trim(), ADMIN_SCRYPT_SALT, ADMIN_KEY_LEN);
+      const expectedHash = getStoredPasswordHash();
 
       // Timing-safe cryptographic comparison
-      if (!crypto.timingSafeEqual(providedHash, EXPECTED_HASH)) {
+      if (!crypto.timingSafeEqual(providedHash, expectedHash)) {
         return res.status(401).json({ error: "Invalid administrative credentials." });
       }
 
@@ -698,18 +713,18 @@ How may I assist you today, Sir?
       const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days session validity
 
       sessions[token] = {
-        username: ADMIN_USERNAME,
+        username: username.trim(),
         createdAt: Date.now(),
         expiresAt
       };
       saveSessions();
 
-      console.log(`[Admin] Successful login for ${ADMIN_USERNAME}`);
+      console.log(`[Admin] Successful login for ${username.trim()}`);
       return res.json({
         success: true,
         token,
         user: {
-          username: ADMIN_USERNAME,
+          username: username.trim(),
           role: "SuperAdmin"
         },
         expiresAt
@@ -717,6 +732,39 @@ How may I assist you today, Sir?
     } catch (err: any) {
       console.error("[Admin Login Error]", err);
       return res.status(500).json({ error: "Authentication system error: " + err.message });
+    }
+  });
+
+  // Change Admin Password (scrypt encrypted)
+  app.post("/api/admin/change-password", requireAdminAuth, (req, res) => {
+    try {
+      const { currentPassword, newPassword } = req.body;
+      if (!currentPassword || !newPassword) {
+        return res.status(400).json({ error: "Both current and new passwords are required." });
+      }
+
+      const currentHash = crypto.scryptSync(currentPassword.trim(), ADMIN_SCRYPT_SALT, ADMIN_KEY_LEN);
+      const storedHash = getStoredPasswordHash();
+
+      if (!crypto.timingSafeEqual(currentHash, storedHash)) {
+        return res.status(401).json({ error: "Current password does not match records." });
+      }
+
+      if (newPassword.trim().length < 8) {
+        return res.status(400).json({ error: "New password must be at least 8 characters long." });
+      }
+
+      const newHash = crypto.scryptSync(newPassword.trim(), ADMIN_SCRYPT_SALT, ADMIN_KEY_LEN);
+      fs.writeFileSync(AUTH_FILE, JSON.stringify({
+        hashHex: newHash.toString("hex"),
+        updatedAt: Date.now()
+      }, null, 2), "utf-8");
+
+      console.log("[Admin] Password successfully changed and persisted.");
+      return res.json({ success: true, message: "Administrator password updated successfully." });
+    } catch (err: any) {
+      console.error("[Admin Change Password Error]", err);
+      return res.status(500).json({ error: "Failed to update password: " + err.message });
     }
   });
 

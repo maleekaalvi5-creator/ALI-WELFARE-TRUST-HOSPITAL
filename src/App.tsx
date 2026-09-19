@@ -29,6 +29,8 @@ import { DonatePage } from './components/DonatePage';
 import { Appointment } from './types';
 import { Phone, Calendar, Heart, MessageCircle, Sparkles, Clock } from 'lucide-react';
 import { HOSPITAL_INFO, BANK_DETAILS, DOCTORS, DEPARTMENTS } from './data/hospitalData';
+import { useHospitalContent } from './context/HospitalContentContext';
+import { HospitalVideosSection } from './components/HospitalVideosSection';
 
 export default function App() {
   // Current route detection: supports paths (/admin, /founder, /doctors, /doctor/..., /departments, /department/..., /campus, /donate) & hashes
@@ -72,6 +74,49 @@ export default function App() {
 
   const [currentRoute, setCurrentRoute] = useState<string>(getInitialRoute);
   const [activeDoctorId, setActiveDoctorId] = useState<string | null>(null);
+  const { content } = useHospitalContent();
+
+  // Dynamically synchronize live CMS Theme, Favicon, Title and SEO meta tags
+  useEffect(() => {
+    if (content?.theme) {
+      const root = document.documentElement;
+      if (content.theme.primaryColor) {
+        root.style.setProperty('--color-primary', content.theme.primaryColor);
+      }
+      if (content.theme.accentColor) {
+        root.style.setProperty('--color-accent', content.theme.accentColor);
+      }
+      if (content.theme.backgroundColor) {
+        root.style.setProperty('--color-bg-base', content.theme.backgroundColor);
+      }
+    }
+    if (content?.seo?.metaTitle) {
+      document.title = content.seo.metaTitle;
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', content.seo.metaTitle);
+    }
+    if (content?.seo?.metaDescription) {
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.setAttribute('name', 'description');
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', content.seo.metaDescription);
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', content.seo.metaDescription);
+    }
+    if (content?.header?.logoFavicon?.faviconUrl) {
+      let link: HTMLLinkElement | null = document.querySelector("link[rel*='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        document.head.appendChild(link);
+      }
+      link.href = content.header.logoFavicon.faviconUrl;
+    }
+  }, [content?.theme, content?.seo, content?.header?.logoFavicon]);
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -217,13 +262,11 @@ export default function App() {
   };
 
   const handleCancelAppointment = async (id: string) => {
-    if (confirm('Are you sure you want to cancel this appointment token?')) {
-      setAppointments((prev) => prev.filter((a) => a.id !== id));
-      try {
-        await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
-      } catch (e) {
-        console.warn('Failed to delete appointment on backend:', e);
-      }
+    setAppointments((prev) => prev.filter((a) => a.id !== id));
+    try {
+      await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
+    } catch (e) {
+      console.warn('Failed to delete appointment on backend:', e);
     }
   };
 
@@ -719,60 +762,71 @@ export default function App() {
       <main className="flex-1">
         
         {/* 1. Hero Showcase with 3D Badges */}
-        <Hero
-          onOpenBooking={() => handleOpenBooking()}
-          onOpenDonation={handleScrollToDonation}
-        />
+        {content?.pagesSections?.heroVisible !== false && (
+          <Hero
+            onOpenBooking={() => handleOpenBooking()}
+            onOpenDonation={handleScrollToDonation}
+          />
+        )}
 
         {/* 2. Infinite Continuous Scroll Marquee */}
-        <InfiniteMarquee />
+        {content?.pagesSections?.marqueeVisible !== false && <InfiniteMarquee />}
 
         {/* 3. Interactive Quick Stats */}
-        <QuickStats />
+        {content?.pagesSections?.quickStatsVisible !== false && <QuickStats />}
 
         {/* 4. Founder Memorial Tribute (Late Nazar Hussain Alvi) & Leadership */}
-        <FounderMemorial />
+        {content?.pagesSections?.founderMemorialVisible !== false && <FounderMemorial />}
 
         {/* 4b. 3D Infinite Perspective Quality & Service Pillars Scroll */}
-        <MemorialInfiniteScroll />
+        {content?.pagesSections?.memorialScrollVisible !== false && <MemorialInfiniteScroll />}
 
         {/* 5. 3D Department Grid & Capabilities */}
-        <DepartmentGrid
-          onSelectDepartmentForBooking={(deptId) => handleOpenBooking(deptId)}
-          onViewDepartmentDetail={(deptId) => navigateTo(`/department/${deptId}`)}
-          onViewDepartmentsDirectory={() => navigateTo('/departments')}
-        />
+        {content?.pagesSections?.departmentGridVisible !== false && (
+          <DepartmentGrid
+            onSelectDepartmentForBooking={(deptId) => handleOpenBooking(deptId)}
+            onViewDepartmentDetail={(deptId) => navigateTo(`/department/${deptId}`)}
+            onViewDepartmentsDirectory={() => navigateTo('/departments')}
+          />
+        )}
 
         {/* 5b. Slim Infinite Clinical Bridge Scroll (Unites Departments & Specialist Doctors) */}
-        <DeptDoctorsBridgeScroll
-          onSelectDoctor={(docId) => {
-            setActiveDoctorId(docId);
-            navigateTo(`/doctor/${docId}`);
-          }}
-          onSelectDepartment={(deptId) => navigateTo(`/department/${deptId}`)}
-        />
+        {content?.pagesSections?.bridgeScrollVisible !== false && (
+          <DeptDoctorsBridgeScroll
+            onSelectDoctor={(docId) => {
+              setActiveDoctorId(docId);
+              navigateTo(`/doctor/${docId}`);
+            }}
+            onSelectDepartment={(deptId) => navigateTo(`/department/${deptId}`)}
+          />
+        )}
 
         {/* 6. Medical Specialists & Consultants */}
-        <SpecialistDoctors
-          onBookDoctor={(deptId, docId) => handleOpenBooking(deptId, docId)}
-          onViewDoctorProfile={(docId) => {
-            setActiveDoctorId(docId);
-            navigateTo(`/doctor/${docId}`);
-          }}
-          onViewDoctorsDirectory={() => navigateTo('/doctors')}
-        />
+        {content?.pagesSections?.specialistDoctorsVisible !== false && (
+          <SpecialistDoctors
+            onBookDoctor={(deptId, docId) => handleOpenBooking(deptId, docId)}
+            onViewDoctorProfile={(docId) => {
+              setActiveDoctorId(docId);
+              navigateTo(`/doctor/${docId}`);
+            }}
+            onViewDoctorsDirectory={() => navigateTo('/doctors')}
+          />
+        )}
 
         {/* 7. Animated "Donate Now" Poster with Meezan Bank Quick Details */}
-        <DonationPoster />
+        {content?.pagesSections?.donationPosterVisible !== false && <DonationPoster />}
 
         {/* 8. Campus & Facilities Gallery */}
-        <HospitalGallery />
+        {content?.pagesSections?.campusGalleryVisible !== false && <HospitalGallery />}
+
+        {/* 8b. Video Showcase & Virtual Tours */}
+        {content?.pagesSections?.videosVisible !== false && <HospitalVideosSection />}
 
         {/* 9. In-House Leaflet & OSRM GPS Navigation System */}
-        <HospitalRouteNavigator />
+        {content?.pagesSections?.navigatorVisible !== false && <HospitalRouteNavigator />}
 
         {/* 10. Interactive Contact & Location Section */}
-        <ContactSection />
+        {content?.pagesSections?.contactSectionVisible !== false && <ContactSection />}
 
       </main>
 
@@ -780,6 +834,7 @@ export default function App() {
       <Footer
         onOpenBooking={(deptId) => handleOpenBooking(deptId)}
         onOpenDonation={handleScrollToDonation}
+        onNavigateRoute={navigateTo}
       />
 
       {/* Floating Action Pill for Mobile & Quick Dial - Positioned on bottom-right */}

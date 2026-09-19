@@ -143,36 +143,43 @@ const DEFAULT_7_SLIDES: HeroSlide[] = [
   }
 ];
 
-const SLIDE_DURATION = 4000; // Faster brisk slide interval
-const PROGRESS_TICK = 40;
+const SLIDE_DURATION = 3000; // Fast energetic slide interval as requested
+const PROGRESS_TICK = 30;
 
 /**
  * Letter-by-Letter Typewriter Heading Animation
- * Smoothly reveals heading characters with micro-stagger and opacity
+ * Smoothly reveals characters grouped by unbroken words so words NEVER split across lines
  */
 const TypewriterHeading: React.FC<{ text: string }> = ({ text }) => {
-  const characters = useMemo(() => Array.from(text), [text]);
+  const words = useMemo(() => text.split(' ').filter(Boolean), [text]);
 
   return (
     <h1 
       id="hero-typewriter-heading"
-      className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-black tracking-tight leading-[1.14] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
+      className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] xl:text-[3.1rem] 2xl:text-5xl font-black tracking-tight leading-[1.18] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
       aria-label={text}
     >
-      {characters.map((char, index) => (
-        <motion.span
-          key={`${char}-${index}`}
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.22,
-            delay: Math.min(index * 0.016, 0.9), // quick elegant stagger
-            ease: "easeOut"
-          }}
-          className="inline-block"
+      {words.map((word, wordIndex) => (
+        <span 
+          key={`${word}-${wordIndex}`} 
+          className="inline-block whitespace-nowrap mr-[0.25em] last:mr-0"
         >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
+          {Array.from(word).map((char, charIndex) => (
+            <motion.span
+              key={`${char}-${charIndex}`}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.16,
+                delay: Math.min((wordIndex * 4 + charIndex) * 0.01, 0.45),
+                ease: "easeOut"
+              }}
+              className="inline-block"
+            >
+              {char}
+            </motion.span>
+          ))}
+        </span>
       ))}
     </h1>
   );
@@ -285,47 +292,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
     <section
       id="hero"
       aria-label="Ali Welfare Trust Hospital Hero Showcase"
-      className="relative h-[530px] sm:h-[590px] md:h-[640px] lg:h-[680px] 2xl:h-[740px] 3xl:h-[820px] max-h-[90vh] bg-[#020b10] border-b border-teal-950/60 text-white overflow-hidden select-none"
+      className="relative h-[520px] sm:h-[570px] md:h-[610px] lg:h-[640px] 2xl:h-[700px] max-h-[88vh] bg-[#020b10] border-b border-teal-950/60 text-white overflow-hidden select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onDragOver={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsHeroDragging(true);
-      }}
-      onDragLeave={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsHeroDragging(false);
-      }}
-      onDrop={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsHeroDragging(false);
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-          setIsUploadModalOpen(true);
-        }
-      }}
     >
-      {/* Full Hero Drag & Drop Photo Indicator Overlay */}
-      {isHeroDragging && (
-        <div 
-          id="hero-drag-overlay"
-          className="absolute inset-0 z-50 bg-[#02131a]/95 backdrop-blur-md border-4 border-dashed border-teal-400 flex flex-col items-center justify-center p-6 text-center animate-in fade-in duration-200"
-        >
-          <div className="w-16 h-16 rounded-2xl bg-teal-500/20 text-teal-300 flex items-center justify-center mb-3 border border-teal-400 shadow-2xl">
-            <Upload className="w-8 h-8 animate-bounce" />
-          </div>
-          <h3 className="text-xl sm:text-2xl font-black text-white mb-1">
-            Drop Image to Update Slider Photo
-          </h3>
-          <p className="text-xs sm:text-sm text-teal-200 font-bold max-w-md">
-            Release your photo here to open the 7-Slide Manager and apply it immediately!
-          </p>
-        </div>
-      )}
 
       {/* ============================================================ */}
       {/* 1. CINEMATIC 3D PERSPECTIVE & TRAVELING REVEAL STAGE        */}
@@ -354,10 +326,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
               z: 0,
               filter: 'brightness(1)',
               transition: {
-                clipPath: { duration: 0.52, ease: [0.22, 1, 0.36, 1] },
-                opacity: { duration: 0.35, ease: 'easeOut' },
-                scale: { duration: 4.5, ease: 'easeOut' },
-                z: { duration: 0.52, ease: 'easeOut' }
+                clipPath: { duration: 0.32, ease: [0.22, 1, 0.36, 1] },
+                opacity: { duration: 0.22, ease: 'easeOut' },
+                scale: { duration: 3.2, ease: 'easeOut' },
+                z: { duration: 0.32, ease: 'easeOut' }
               }
             }}
             exit={{
@@ -366,9 +338,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
               z: -50,
               filter: 'brightness(0.9)',
               transition: {
-                opacity: { duration: 0.42, ease: 'easeInOut' },
-                scale: { duration: 0.42, ease: 'easeInOut' },
-                z: { duration: 0.42, ease: 'easeInOut' }
+                opacity: { duration: 0.28, ease: 'easeInOut' },
+                scale: { duration: 0.28, ease: 'easeInOut' },
+                z: { duration: 0.28, ease: 'easeInOut' }
               }
             }}
             className="absolute inset-0 w-full h-full bg-[#020b10]"
@@ -392,7 +364,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
             <motion.div
               initial={{ opacity: 0.8, x: direction === 'next' ? '100vw' : '-100vw' }}
               animate={{ opacity: [0.8, 1, 0], x: direction === 'next' ? '-50vw' : '50vw' }}
-              transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-y-0 w-1.5 bg-gradient-to-b from-transparent via-[#087f8c] to-transparent blur-[1px] pointer-events-none shadow-[0_0_15px_#087f8c]"
             />
           </motion.div>
@@ -477,7 +449,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
       {/* ============================================================ */}
       <div 
         id="hero-slider-overlay-container"
-        className="absolute inset-0 flex flex-col justify-between p-4 sm:p-7 md:p-10 lg:p-12 2xl:p-16 z-20 site-container-wide w-full pointer-events-none"
+        className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6 md:p-8 lg:p-10 2xl:p-14 z-20 site-container-wide w-full pointer-events-none"
       >
         
         {/* ============================================================ */}
@@ -533,9 +505,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
         {/* ============================================================ */}
         <div 
           id="hero-content-column"
-          className="w-full max-w-2xl lg:max-w-3xl 2xl:max-w-4xl mb-4 sm:mb-6 pointer-events-auto"
+          className="w-full max-w-2xl lg:max-w-3xl 2xl:max-w-4xl mt-auto mb-1.5 sm:mb-2.5 pointer-events-auto"
         >
-          <div className="space-y-3 2xl:space-y-4">
+          <div className="space-y-2.5 sm:space-y-3 2xl:space-y-3.5">
             {/* 1. Urdu Calligraphy Tagline (dir="rtl") */}
             <motion.div
               key={`urdu-${activeSlide.id}-${safeIndex}`}
@@ -579,7 +551,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
             {/* 5. Tactile 3D Action Buttons (Header buttons remain untouched) */}
             <div 
               id="hero-action-buttons-group"
-              className="flex flex-wrap items-center gap-2.5 sm:gap-3.5 pt-2"
+              className="flex flex-wrap items-center gap-2.5 sm:gap-3.5 pt-1.5"
             >
               {/* Donate Now Button */}
               <motion.button
@@ -612,6 +584,22 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
                 <PhoneCall className="w-4 h-4 text-rose-400 animate-pulse" />
                 <span>24/7 Helpline: {headerConfig?.emergencyPhone || HOSPITAL_INFO.emergencyPhone}</span>
               </a>
+            </div>
+
+            {/* 6. High-Trust Impact Indicators (Gracefully connects buttons to bottom controls, removing dead void) */}
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black/40 border border-emerald-400/30 backdrop-blur-sm text-[11px] sm:text-xs text-emerald-300 font-semibold shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>100% Free Zakat Healthcare</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black/40 border border-amber-400/30 backdrop-blur-sm text-[11px] sm:text-xs text-amber-200 font-semibold shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                <span>16 Automated Dialysis Stations</span>
+              </span>
+              <span className="hidden xs:inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black/40 border border-teal-400/30 backdrop-blur-sm text-[11px] sm:text-xs text-teal-200 font-semibold shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                <span>24/7 Specialist OPD & Emergency</span>
+              </span>
             </div>
           </div>
         </div>

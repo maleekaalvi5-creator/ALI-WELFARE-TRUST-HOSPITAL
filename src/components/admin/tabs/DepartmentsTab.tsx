@@ -15,6 +15,7 @@ export const DepartmentsTab: React.FC<DepartmentsTabProps> = ({
   token
 }) => {
   const [activeDeptIndex, setActiveDeptIndex] = useState(0);
+  const [confirmDeleteIdx, setConfirmDeleteIdx] = useState<number | null>(null);
 
   const handleUpdateDept = (idx: number, updated: Department) => {
     const list = [...departments];
@@ -46,16 +47,11 @@ export const DepartmentsTab: React.FC<DepartmentsTabProps> = ({
   };
 
   const handleDeleteDept = (idx: number) => {
-    if (departments.length <= 1) {
-      alert("At least one department must remain in the hospital directory.");
-      return;
-    }
-    const deptToDelete = departments[idx];
-    if (confirm(`Are you sure you want to permanently delete the department "${deptToDelete.name}"?`)) {
-      const list = departments.filter((_, i) => i !== idx);
-      onChange(list);
-      setActiveDeptIndex(Math.max(0, idx - 1));
-    }
+    if (departments.length <= 1) return;
+    const list = departments.filter((_, i) => i !== idx);
+    onChange(list);
+    setActiveDeptIndex(Math.max(0, idx - 1));
+    setConfirmDeleteIdx(null);
   };
 
   const handleFeatureChange = (deptIdx: number, featIdx: number, val: string) => {
@@ -124,14 +120,36 @@ export const DepartmentsTab: React.FC<DepartmentsTabProps> = ({
               <h3 className="text-sm font-black text-slate-800">{currentDept.name}</h3>
             </div>
             
-            <button
-              type="button"
-              onClick={() => handleDeleteDept(activeDeptIndex)}
-              className="px-3 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-              <span>Delete Department</span>
-            </button>
+            {confirmDeleteIdx === activeDeptIndex ? (
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold text-rose-600">Permanently delete?</span>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteDept(activeDeptIndex)}
+                  className="px-2.5 py-1 rounded-lg bg-rose-600 text-white font-bold text-xs flex items-center gap-1 cursor-pointer hover:bg-rose-700"
+                >
+                  <Trash2 className="w-3 h-3" />
+                  <span>Yes, Delete</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setConfirmDeleteIdx(null)}
+                  className="px-2 py-1 rounded-lg bg-slate-100 text-slate-600 font-bold text-xs hover:bg-slate-200"
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setConfirmDeleteIdx(activeDeptIndex)}
+                className="px-3 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors"
+                title="Delete this department"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Delete Department</span>
+              </button>
+            )}
           </div>
 
           <ImageUploadField

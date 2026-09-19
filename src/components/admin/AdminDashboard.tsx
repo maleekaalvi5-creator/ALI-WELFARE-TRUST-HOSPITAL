@@ -38,9 +38,18 @@ import { DoctorsTab } from './tabs/DoctorsTab';
 import { DonationBoxTab } from './tabs/DonationBoxTab';
 import { CampusGalleryTab } from './tabs/CampusGalleryTab';
 import { ContactFooterTab } from './tabs/ContactFooterTab';
+import { SeoTab } from './tabs/SeoTab';
+import { ThemeTab } from './tabs/ThemeTab';
+import { PagesSectionsTab } from './tabs/PagesSectionsTab';
+import { VideosTab } from './tabs/VideosTab';
+import { SecurityAuditTab } from './tabs/SecurityAuditTab';
+import { Search, Palette, Video, ShieldAlert } from 'lucide-react';
 
 type TabId = 
   | 'header' 
+  | 'pages_sections'
+  | 'theme'
+  | 'seo'
   | 'donate_banner' 
   | 'hero_slider' 
   | 'cards_stats' 
@@ -50,7 +59,9 @@ type TabId =
   | 'doctors' 
   | 'donation_box' 
   | 'campus_gallery' 
-  | 'contact_footer';
+  | 'videos'
+  | 'contact_footer'
+  | 'security_audit';
 
 interface AdminDashboardProps {
   onNavigateHome: () => void;
@@ -116,17 +127,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   // Handle Logout
   const handleLogout = async () => {
-    if (confirm('Are you sure you want to end your administrative session?')) {
-      try {
-        await fetch('/api/admin/logout', {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-      } catch {}
-      localStorage.removeItem('awt_admin_token');
-      sessionStorage.removeItem('awt_admin_token');
-      onNavigateLogin();
-    }
+    try {
+      await fetch('/api/admin/logout', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+    } catch {}
+    localStorage.removeItem('awt_admin_token');
+    sessionStorage.removeItem('awt_admin_token');
+    onNavigateLogin();
   };
 
   // Save All Changes to Live Website
@@ -134,14 +143,32 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     setIsSaving(true);
     setStatusMessage(null);
 
-    const result = await saveContent(draft, token);
+    // Append an audit log entry for this modification
+    const newAuditLog = {
+      id: `log-${Date.now()}`,
+      timestamp: Date.now(),
+      user: "superadmin",
+      role: "SuperAdmin",
+      action: "Content Saved",
+      section: activeTab,
+      details: `Saved changes to section: ${activeTab} across all connected devices.`
+    };
+
+    const payload: HospitalContent = {
+      ...draft,
+      auditLogs: [...(draft.auditLogs || []), newAuditLog],
+      updatedAt: Date.now()
+    };
+
+    const result = await saveContent(payload, token);
     setIsSaving(false);
 
     if (result.success) {
+      setDraft(payload);
       setHasUnsavedChanges(false);
       setStatusMessage({
         type: 'success',
-        text: 'All changes saved successfully! Live website on all desktop and mobile devices updated in real-time.'
+        text: 'All changes saved successfully! Live website on all desktop, mobile, tablet and projector displays updated in real-time.'
       });
       setTimeout(() => setStatusMessage(null), 5000);
     } else {
@@ -159,9 +186,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   const navItems: { id: TabId; label: string; icon: React.ElementType; badge?: string }[] = [
-    { id: 'header', label: 'Header & Logo', icon: Layout },
+    { id: 'header', label: 'Logo, Favicon & Header', icon: Layout },
+    { id: 'pages_sections', label: 'Pages & Section Toggles', icon: Layers },
+    { id: 'theme', label: 'Theme Colors & Fonts', icon: Palette },
+    { id: 'seo', label: 'SEO & Social Share Cards', icon: Search },
     { id: 'donate_banner', label: 'Donate Banner & Time', icon: Clock },
-    { id: 'hero_slider', label: 'Hero, Slider & Marquee', icon: Sparkles },
+    { id: 'hero_slider', label: 'Hero Slider & Photos', icon: Sparkles, badge: `${draft.hero?.slides?.length || 0} Photos` },
     { id: 'cards_stats', label: 'Heading 2 & Metric Cards', icon: Layers },
     { id: 'founder_trustees', label: 'Founder & Board of Trustees', icon: Award },
     { id: 'mission', label: 'Hospital Mission & Vision', icon: BookOpen },
@@ -169,7 +199,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     { id: 'doctors', label: 'Doctors Directory & Pages', icon: UserCheck, badge: `${draft.doctors.length}` },
     { id: 'donation_box', label: 'Donation Box & Bank Info', icon: Heart },
     { id: 'campus_gallery', label: 'Campus, Facilities & Frames', icon: Building, badge: `${draft.campus.facilities.length}` },
+    { id: 'videos', label: 'Videos & Virtual Tours', icon: Video, badge: `${draft.videos?.length || 2}` },
     { id: 'contact_footer', label: 'Phone Numbers, Map & Footer', icon: Phone },
+    { id: 'security_audit', label: 'Security & Audit History', icon: ShieldCheck, badge: `${draft.auditLogs?.length || 0}` },
   ];
 
   if (isVerifying) {
@@ -357,6 +389,28 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             />
           )}
 
+          {activeTab === 'pages_sections' && (
+            <PagesSectionsTab
+              pagesSections={draft.pagesSections}
+              onChange={(updated) => handleDraftChange({ ...draft, pagesSections: updated })}
+            />
+          )}
+
+          {activeTab === 'theme' && (
+            <ThemeTab
+              theme={draft.theme}
+              onChange={(updated) => handleDraftChange({ ...draft, theme: updated })}
+            />
+          )}
+
+          {activeTab === 'seo' && (
+            <SeoTab
+              seo={draft.seo}
+              onChange={(updated) => handleDraftChange({ ...draft, seo: updated })}
+              token={token}
+            />
+          )}
+
           {activeTab === 'donate_banner' && (
             <DonateBannerTab
               banner={draft.donation.banner}
@@ -441,10 +495,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             />
           )}
 
+          {activeTab === 'videos' && (
+            <VideosTab
+              videos={draft.videos}
+              onChange={(updated) => handleDraftChange({ ...draft, videos: updated })}
+              token={token}
+            />
+          )}
+
           {activeTab === 'contact_footer' && (
             <ContactFooterTab
               contact={draft.contact}
               onChange={(updated) => handleDraftChange({ ...draft, contact: updated })}
+            />
+          )}
+
+          {activeTab === 'security_audit' && (
+            <SecurityAuditTab
+              auditLogs={draft.auditLogs}
+              token={token}
+              onAuditLogsChange={(updated) => handleDraftChange({ ...draft, auditLogs: updated })}
             />
           )}
 

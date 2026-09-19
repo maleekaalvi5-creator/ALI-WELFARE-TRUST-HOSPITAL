@@ -295,6 +295,94 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       "Ask any general medical or internet question"
     ]
   },
+  logoFavicon: {
+    logoUrl: "/images/hospital-logo-clean.png",
+    faviconUrl: "/images/hospital-emblem-clean.png",
+    emblemUrl: "/images/hospital-emblem-clean.png",
+    logoHeight: 52,
+    altText: "Ali Welfare Trust Hospital Logo",
+    customBrandUrdu: "علی ویلفیئر ٹرسٹ ہسپتال",
+    showEmblemOnMobile: true
+  },
+  seo: {
+    metaTitle: "Ali Welfare Trust Hospital | 100% Free Kidney Dialysis & Emergency Care in Gujranwala",
+    metaDescription: "Registered Non-Profit Healthcare Trust #1142 in Qila Didar Singh, Gujranwala. Offering 24/7 emergency care, 100% free hemodialysis, specialist doctors, and modern laboratory diagnostics.",
+    keywords: "Ali Welfare Trust Hospital, Qila Didar Singh, free dialysis hospital, Gujranwala hospital, non profit hospital Pakistan, zakat hospital Pakistan, free eye surgery",
+    ogImage: "/images/hospital-building.jpg",
+    ogTitle: "Ali Welfare Trust Hospital — Serving Humanity with Dignity",
+    ogDescription: "Dedicated registered non-profit medical trust providing free hemodialysis, round-the-clock emergency care, and modern healthcare facilities.",
+    canonicalUrl: "https://aliwelfaretrust.org",
+    author: "Ali Welfare Trust",
+    robots: "index, follow",
+    googleSiteVerification: "",
+    jsonLdSchemaEnabled: true,
+    hospitalType: "MedicalOrganization",
+    priceRange: "Free & Subsidized"
+  },
+  theme: {
+    primaryColor: "#087f8c",
+    secondaryColor: "#092f3a",
+    accentColor: "#d97706",
+    headingFont: "Outfit",
+    bodyFont: "Plus Jakarta Sans",
+    fontUrdu: "Amiri",
+    borderRadius: "rounded-2xl",
+    darkNavMode: true
+  },
+  pagesSections: {
+    topBar: { enabled: true, title: "Emergency & Timings Bar" },
+    heroSlider: { enabled: true, title: "Cinematic 3D Hero Showcase", badge: "Primary Entrance" },
+    marquee: { enabled: true, title: "Live Medical Facilities Marquee" },
+    quickStats: { enabled: true, title: "Hospital Metrics & Impact Stats" },
+    founderMemorial: { enabled: true, title: "Founder Memorial & Vision", urduTitle: "بانیِ ادارہ — محترم نذر حسین علوی" },
+    memorialInfiniteScroll: { enabled: true, title: "Memorial Continuous Tribute" },
+    departments: { enabled: true, title: "Specialized Medical Departments", subtitle: "Equipped with modern clinical diagnostics" },
+    deptDoctorsBridge: { enabled: true, title: "Clinical Bridge & Quality Pledge" },
+    specialistDoctors: { enabled: true, title: "Consultant Doctors Directory", subtitle: "Senior medical faculty and specialist physicians" },
+    donationPoster: { enabled: true, title: "Zakat & Sadqah Appeal Box" },
+    campusGallery: { enabled: true, title: "Hospital Campus & Modern Facilities" },
+    videoTours: { enabled: true, title: "Campus Video Tours & Documentary" },
+    routeNavigator: { enabled: true, title: "Location & Patient Route Navigator" },
+    contactSection: { enabled: true, title: "Contact Us & Emergency Help" },
+    footer: { enabled: true, title: "Official Hospital Footer" },
+    donationPopupBanner: { enabled: true, title: "2-Minute Recurring Donation Modal" },
+    aiAgent: { enabled: true, title: "Ali Care 24/7 AI Health Consultant" }
+  },
+  videos: [
+    {
+      id: "vid-1",
+      title: "Ali Welfare Trust Hospital Campus Documentary",
+      urduTitle: "ہسپتال کی دستاویزی فلم اور خدمات کا جائزہ",
+      category: "Documentary",
+      youtubeId: "dQw4w9WgXcQ",
+      posterUrl: "/images/hospital-building.jpg",
+      duration: "04:15",
+      description: "A comprehensive documentary showing the founding vision, 24/7 dialysis unit, modern emergency ward, and patient care facilities.",
+      isFeatured: true
+    },
+    {
+      id: "vid-2",
+      title: "Advanced Kidney Hemodialysis Unit Virtual Tour",
+      urduTitle: "جدید ہیمو ڈائیلاسز سینٹر کا تفصیلی معائنہ",
+      category: "Renal Center",
+      youtubeId: "dQw4w9WgXcQ",
+      posterUrl: "/images/gallery-2.jpg",
+      duration: "03:40",
+      description: "Take a virtual step inside the specialized renal center where deserving patients receive 100% free hemodialysis sessions daily.",
+      isFeatured: false
+    }
+  ],
+  auditLogs: [
+    {
+      id: "log-init",
+      timestamp: Date.now() - 3600000,
+      user: "superadmin",
+      role: "SuperAdmin",
+      action: "System Initialized",
+      section: "All Modules",
+      details: "Central Content Engine synchronized across all client devices."
+    }
+  ],
   revision: 1,
   updatedAt: Date.now()
 };

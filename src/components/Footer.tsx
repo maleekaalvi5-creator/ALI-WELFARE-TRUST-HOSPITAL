@@ -6,7 +6,8 @@ import {
   Heart,
   Calendar,
   ExternalLink,
-  Clock
+  Clock,
+  Lock
 } from 'lucide-react';
 import { HOSPITAL_INFO, DEPARTMENTS } from '../data/hospitalData';
 import { HospitalLogo } from './HospitalLogo';
@@ -113,6 +114,16 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenDonation, o
             >
               GPS Directions
             </a>
+            <span>•</span>
+            <button
+              type="button"
+              onClick={() => onNavigateRoute ? onNavigateRoute('/admin-login') : window.location.assign('/admin-login')}
+              className="text-slate-400 hover:text-teal-300 transition-colors inline-flex items-center gap-1 cursor-pointer"
+              title="Secure Staff & Admin Management Portal"
+            >
+              <Lock className="w-3 h-3" />
+              <span>Admin Portal</span>
+            </button>
             <span>•</span>
             <button
               onClick={scrollToTop}

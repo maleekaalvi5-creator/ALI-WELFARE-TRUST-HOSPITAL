@@ -16,6 +16,7 @@ export const FounderTrusteesTab: React.FC<FounderTrusteesTabProps> = ({
   token
 }) => {
   const [activeTrusteeIndex, setActiveTrusteeIndex] = useState(0);
+  const [confirmDeleteIdx, setConfirmDeleteIdx] = useState<number | null>(null);
 
   const updateFounderField = <K extends keyof FounderConfig>(field: K, value: FounderConfig[K]) => {
     onChange({ ...founder, [field]: value });
@@ -43,15 +44,11 @@ export const FounderTrusteesTab: React.FC<FounderTrusteesTabProps> = ({
   };
 
   const handleDeleteTrustee = (idx: number) => {
-    if (founder.executiveTeam.length <= 1) {
-      alert("At least one trustee/executive member must remain.");
-      return;
-    }
-    if (confirm("Are you sure you want to remove this Board of Trustee member?")) {
-      const list = founder.executiveTeam.filter((_, i) => i !== idx);
-      updateFounderField('executiveTeam', list);
-      setActiveTrusteeIndex(Math.max(0, idx - 1));
-    }
+    if (founder.executiveTeam.length <= 1) return;
+    const list = founder.executiveTeam.filter((_, i) => i !== idx);
+    updateFounderField('executiveTeam', list);
+    setActiveTrusteeIndex(Math.max(0, idx - 1));
+    setConfirmDeleteIdx(null);
   };
 
   const currentTrustee = founder.executiveTeam[activeTrusteeIndex] || founder.executiveTeam[0];
@@ -195,14 +192,36 @@ export const FounderTrusteesTab: React.FC<FounderTrusteesTabProps> = ({
           <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-700">Editing: {currentTrustee.name}</span>
-              <button
-                type="button"
-                onClick={() => handleDeleteTrustee(activeTrusteeIndex)}
-                className="text-xs text-rose-600 hover:text-rose-700 font-bold flex items-center gap-1 cursor-pointer"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Remove Trustee</span>
-              </button>
+              {confirmDeleteIdx === activeTrusteeIndex ? (
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-rose-600">Remove?</span>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteTrustee(activeTrusteeIndex)}
+                    className="px-2.5 py-1 rounded-lg bg-rose-600 text-white font-bold text-xs flex items-center gap-1 cursor-pointer hover:bg-rose-700"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                    <span>Yes, Remove</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setConfirmDeleteIdx(null)}
+                    className="px-2 py-1 rounded-lg bg-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-300"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setConfirmDeleteIdx(activeTrusteeIndex)}
+                  className="text-xs text-rose-600 hover:text-rose-700 font-bold flex items-center gap-1 cursor-pointer"
+                  title="Remove this trustee"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Remove Trustee</span>
+                </button>
+              )}
             </div>
 
             <ImageUploadField

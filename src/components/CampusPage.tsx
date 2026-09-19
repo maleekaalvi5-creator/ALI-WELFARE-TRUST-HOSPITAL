@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Building2, 
@@ -19,6 +19,7 @@ import {
   Award, 
   FileText, 
   ChevronRight, 
+  ChevronLeft,
   Navigation, 
   Maximize2, 
   X,
@@ -29,7 +30,9 @@ import {
   MessageCircle,
   Truck,
   Layers,
-  Sparkles
+  Sparkles,
+  Play,
+  Pause
 } from 'lucide-react';
 import { HOSPITAL_INFO, GALLERY_ITEMS, DEPARTMENTS } from '../data/hospitalData';
 
@@ -49,6 +52,8 @@ export const CampusPage: React.FC<CampusPageProps> = ({
   const [activeFloor, setActiveFloor] = useState<number>(0);
   const [selectedPhoto, setSelectedPhoto] = useState<any | null>(null);
   const [galleryFilter, setGalleryFilter] = useState<string>('all');
+  const [heroPhotoIndex, setHeroPhotoIndex] = useState<number>(0);
+  const [isHeroTourPaused, setIsHeroTourPaused] = useState<boolean>(false);
 
   const floorPlans = [
     {
@@ -288,6 +293,17 @@ export const CampusPage: React.FC<CampusPageProps> = ({
     ? campusPhotos 
     : campusPhotos.filter(p => p.category === galleryFilter);
 
+  // Auto-advance hero 3D campus photo tour slider
+  useEffect(() => {
+    if (isHeroTourPaused) return;
+    const timer = setInterval(() => {
+      setHeroPhotoIndex((prev) => (prev + 1) % campusPhotos.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [isHeroTourPaused, campusPhotos.length]);
+
+  const currentHeroPhoto = campusPhotos[heroPhotoIndex] || campusPhotos[0];
+
   return (
     <div className="bg-[#fbf9f5] min-h-screen text-[#0f172a] selection:bg-[#087f8c] selection:text-white pb-20">
       
@@ -319,22 +335,35 @@ export const CampusPage: React.FC<CampusPageProps> = ({
         </div>
       </div>
 
-      {/* 2. HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#02131a] via-[#08323e] to-[#041d24] text-white pt-12 pb-16 lg:pt-16 lg:pb-24 shadow-xl">
-        <div className="absolute inset-0 bg-[radial-gradient(#087f8c_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* 2. HERO SECTION WITH INTERACTIVE 3D CAMPUS TOUR SLIDER & INFINITE SCROLL */}
+      <section 
+        className="relative overflow-hidden bg-[#02131a] text-white pt-10 pb-6 sm:pt-14 sm:pb-8 shadow-2xl"
+        onMouseEnter={() => setIsHeroTourPaused(true)}
+        onMouseLeave={() => setIsHeroTourPaused(false)}
+      >
+        {/* Dynamic High-Resolution Atmospheric Campus Backdrop */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-luminosity transition-all duration-1000 scale-105"
+          style={{ backgroundImage: `url('${currentHeroPhoto.imageUrl}')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#02131a]/95 via-[#04242c]/90 to-[#02131a]/98 pointer-events-none" />
+        
+        {/* Tech Grid & Glowing Orbs */}
+        <div className="absolute inset-0 bg-[radial-gradient(#087f8c_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-96 h-96 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
         
         <div className="site-container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             
             {/* Left Column: Heading & Key Details */}
-            <div className="lg:col-span-7 space-y-5">
+            <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-900/80 border border-teal-500/50 text-teal-200 text-xs font-bold tracking-wide uppercase shadow-xs">
-                <Building2 className="w-3.5 h-3.5 text-amber-300" />
+                <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin-slow" />
                 <span>Purpose-Built Medical Complex</span>
               </div>
 
-              <div className="font-urdu text-2xl sm:text-3xl text-amber-300 leading-relaxed font-bold">
+              <div className="font-urdu text-2xl sm:text-3xl text-amber-300 leading-relaxed font-bold drop-shadow-md">
                 علی ویلفیئر ٹرسٹ ہسپتال — جدید ترین کیمپس و طبی سہولیات
               </div>
 
@@ -353,7 +382,7 @@ export const CampusPage: React.FC<CampusPageProps> = ({
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <button
                   onClick={() => onBookAppointment?.()}
-                  className="btn-3d-red px-6 py-3 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg cursor-pointer"
+                  className="btn-3d-red px-6 py-3 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Book Campus Appointment</span>
@@ -363,7 +392,7 @@ export const CampusPage: React.FC<CampusPageProps> = ({
                   href={HOSPITAL_INFO.googleMapsLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-3d-gold px-5 py-3 rounded-xl font-black text-xs sm:text-sm text-[#3a1d04] flex items-center gap-2 shadow-md cursor-pointer"
+                  className="btn-3d-gold px-5 py-3 rounded-xl font-black text-xs sm:text-sm text-[#3a1d04] flex items-center gap-2 shadow-md cursor-pointer hover:scale-105 active:scale-95 transition-all"
                 >
                   <Navigation className="w-4 h-4" />
                   <span>Get Driving Directions</span>
@@ -399,34 +428,181 @@ export const CampusPage: React.FC<CampusPageProps> = ({
               </div>
             </div>
 
-            {/* Right Column: Campus Visual Card */}
+            {/* Right Column: Interactive 3D Virtual Campus Tour Multi-Perspective Slider */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-amber-500/40 group">
-                <img
-                  src="/images/hospital-building.jpg"
-                  alt="Ali Welfare Trust Hospital Main Campus"
-                  className="w-full h-80 sm:h-96 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#02131a] via-transparent to-black/20" />
-                
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#031d24]/90 backdrop-blur-md border border-teal-700/50 text-white">
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <span className="font-bold text-sm text-amber-300 flex items-center gap-1.5">
-                      <Building2 className="w-4 h-4 text-teal-400" />
-                      Main Campus Facility
+              <div className="perspective-1000">
+                <div className="relative rounded-2xl overflow-hidden bg-[#032029]/90 backdrop-blur-md border-2 border-amber-500/40 shadow-2xl group transition-all duration-300">
+                  
+                  {/* Active Photo Container */}
+                  <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-slate-950">
+                    <img
+                      src={currentHeroPhoto.imageUrl}
+                      alt={currentHeroPhoto.title}
+                      className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#02131a] via-[#02131a]/20 to-black/30" />
+
+                    {/* Top Overlay Badges */}
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 shadow-md flex items-center gap-1">
+                        <Building2 className="w-3 h-3" />
+                        <span>Angle {heroPhotoIndex + 1} of {campusPhotos.length}</span>
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedPhoto(currentHeroPhoto)}
+                        className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-black/60 hover:bg-teal-600 text-white border border-white/20 backdrop-blur-md transition-all flex items-center gap-1 cursor-pointer"
+                        title="Open Fullscreen Lightbox"
+                      >
+                        <Maximize2 className="w-3 h-3" />
+                        <span>Fullscreen</span>
+                      </button>
+                    </div>
+
+                    {/* Navigation Arrows */}
+                    <div className="absolute inset-y-0 left-2 right-2 flex items-center justify-between pointer-events-none">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setHeroPhotoIndex((prev) => (prev - 1 + campusPhotos.length) % campusPhotos.length);
+                        }}
+                        className="pointer-events-auto w-9 h-9 rounded-full bg-black/60 hover:bg-teal-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-lg hover:scale-110 active:scale-95"
+                        title="Previous View"
+                        aria-label="Previous View"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setHeroPhotoIndex((prev) => (prev + 1) % campusPhotos.length);
+                        }}
+                        className="pointer-events-auto w-9 h-9 rounded-full bg-black/60 hover:bg-teal-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-lg hover:scale-110 active:scale-95"
+                        title="Next View"
+                        aria-label="Next View"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+                    </div>
+
+                    {/* Floating Caption Overlay */}
+                    <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-[#031d24]/90 backdrop-blur-md border border-teal-700/50 text-white">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <span className="font-bold text-xs sm:text-sm text-amber-300 flex items-center gap-1.5 truncate">
+                          <Building2 className="w-3.5 h-3.5 text-teal-400 flex-shrink-0" />
+                          <span className="truncate">{currentHeroPhoto.title}</span>
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-teal-600 text-white flex-shrink-0">
+                          {currentHeroPhoto.category}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-teal-100 line-clamp-1">
+                        {currentHeroPhoto.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Interactive Thumbnail Strip */}
+                  <div className="p-3 bg-[#02131a] border-t border-teal-800/40">
+                    <div className="flex items-center justify-between gap-1.5 mb-2">
+                      <span className="text-[11px] font-bold text-slate-300">
+                        Select Campus View:
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsHeroTourPaused(!isHeroTourPaused)}
+                          className="text-[10px] text-slate-400 hover:text-white flex items-center gap-1 font-bold cursor-pointer"
+                        >
+                          {isHeroTourPaused ? <Play className="w-2.5 h-2.5 text-amber-300" /> : <Pause className="w-2.5 h-2.5" />}
+                          <span>{isHeroTourPaused ? 'Play' : 'Pause'}</span>
+                        </button>
+                        <span className="text-[10px] font-mono text-slate-400">
+                          {heroPhotoIndex + 1}/{campusPhotos.length}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* 6 Miniature Perspective Buttons */}
+                    <div className="grid grid-cols-6 gap-1.5">
+                      {campusPhotos.map((photo, idx) => (
+                        <button
+                          key={photo.id}
+                          type="button"
+                          onClick={() => setHeroPhotoIndex(idx)}
+                          className={`relative rounded-lg overflow-hidden h-10 border transition-all cursor-pointer group/thumb ${
+                            idx === heroPhotoIndex 
+                              ? 'border-amber-400 ring-2 ring-amber-400/40 scale-105' 
+                              : 'border-white/20 opacity-60 hover:opacity-100'
+                          }`}
+                          title={photo.title}
+                        >
+                          <img
+                            src={photo.imageUrl}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Campus Address & Verification Bar */}
+                  <div className="px-4 py-2.5 bg-[#010c10] border-t border-white/5 flex items-center justify-between text-[11px] text-slate-300">
+                    <span className="flex items-center gap-1.5 truncate">
+                      <MapPin className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                      <span className="truncate">Chahal Kalan Road, Qila Didar Singh</span>
                     </span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-600 text-white">
-                      Operational 24/7
+                    <span className="font-mono text-emerald-400 font-bold flex-shrink-0">
+                      24/7 Open
                     </span>
                   </div>
-                  <p className="text-xs text-teal-100">
-                    Ali Welfare Trust Hospital, Chahal Kalan Road, Qila Didar Singh, Gujranwala, Punjab, Pakistan
-                  </p>
+
                 </div>
               </div>
             </div>
 
           </div>
+
+          {/* Continuous Infinite Marquee Ribbon of Campus Engineering & Infrastructure Highlights */}
+          <div className="mt-8 sm:mt-10 pt-4 border-t border-white/10 overflow-hidden relative group">
+            <div className="flex items-center gap-2 mb-2 text-xs font-bold text-amber-300 uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Campus Engineering & Clinical Infrastructure Highlights</span>
+            </div>
+
+            <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+              <div className="animate-marquee flex items-center gap-3 py-1">
+                {/* Duplicate campusFeatures array for seamless infinite marquee */}
+                {[...campusFeatures, ...campusFeatures].map((feat, i) => {
+                  const FeatIcon = feat.icon;
+                  return (
+                    <div
+                      key={`${feat.title}-${i}`}
+                      className="flex-shrink-0 flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-teal-900/60 border border-white/10 hover:border-amber-400/50 backdrop-blur-sm transition-all text-left"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-teal-950 border border-teal-500/40 flex items-center justify-center text-amber-300 flex-shrink-0">
+                        <FeatIcon className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-white whitespace-nowrap">
+                          {feat.title}
+                        </div>
+                        <div className="text-[10px] text-emerald-300 font-medium whitespace-nowrap">
+                          {feat.metric}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 

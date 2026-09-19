@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Upload, Link as LinkIcon, Check, Loader2, Image as ImageIcon } from 'lucide-react';
+import { Upload, Link as LinkIcon, Check, Loader2, Image as ImageIcon, Trash2 } from 'lucide-react';
 
 interface ImageUploadFieldProps {
   label: string;
@@ -148,6 +148,19 @@ export const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
           )}
 
           {hint && <p className="text-[10px] text-slate-500">{hint}</p>}
+          {value && (
+            <div className="pt-0.5">
+              <button
+                type="button"
+                onClick={() => onChange('')}
+                className="text-[11px] font-bold text-rose-600 hover:text-rose-700 hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors"
+                title="Remove photo from this item"
+              >
+                <Trash2 className="w-3 h-3" />
+                <span>Remove Photo</span>
+              </button>
+            </div>
+          )}
           {uploadError && <p className="text-[11px] text-rose-600 font-medium">{uploadError}</p>}
         </div>
       </div>

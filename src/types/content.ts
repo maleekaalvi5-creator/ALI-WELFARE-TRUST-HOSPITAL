@@ -3,6 +3,9 @@ import { Department, Doctor, LeadershipMember, DonationCause, GalleryItem } from
 export interface HeaderConfig {
   logoUrl: string;
   logoPosition: 'left' | 'center';
+  logoHeight?: number;
+  faviconUrl?: string;
+  logoFavicon?: LogoFaviconConfig;
   hospitalName: string;
   tagline: string;
   tickerText: string;
@@ -181,6 +184,109 @@ export interface HospitalContent {
   campus: CampusConfig;
   contact: ContactConfig;
   aiSettings?: AISettingsConfig;
+  logoFavicon?: LogoFaviconConfig;
+  seo?: SEOConfig;
+  theme?: ThemeConfig;
+  pagesSections?: PagesSectionsConfig;
+  videos?: HospitalVideoItem[];
+  auditLogs?: AuditLogEntry[];
   updatedAt?: number;
   revision?: number;
+}
+
+export interface LogoFaviconConfig {
+  logoUrl: string;
+  faviconUrl: string;
+  emblemUrl: string;
+  logoHeight: number;
+  altText: string;
+  customBrandUrdu: string;
+  showEmblemOnMobile: boolean;
+}
+
+export interface SEOConfig {
+  metaTitle: string;
+  metaDescription: string;
+  keywords: string;
+  ogImage: string;
+  ogTitle: string;
+  ogDescription: string;
+  canonicalUrl: string;
+  author: string;
+  robots: string;
+  googleSiteVerification: string;
+  jsonLdSchemaEnabled: boolean;
+  hospitalType: string;
+  priceRange: string;
+}
+
+export interface ThemeConfig {
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  headingFont: 'Outfit' | 'Plus Jakarta Sans' | 'Playfair Display' | 'Inter';
+  bodyFont: 'Plus Jakarta Sans' | 'Inter' | 'System UI';
+  fontUrdu: 'Amiri' | 'Noto Nastaliq Urdu' | 'Jameel Noori Nastaleeq';
+  borderRadius: 'rounded-xl' | 'rounded-2xl' | 'rounded-lg' | 'rounded-3xl';
+  darkNavMode: boolean;
+}
+
+export interface SectionToggle {
+  enabled: boolean;
+  title?: string;
+  urduTitle?: string;
+  subtitle?: string;
+  badge?: string;
+}
+
+export interface PagesSectionsConfig {
+  topBar: SectionToggle;
+  heroSlider: SectionToggle;
+  marquee: SectionToggle;
+  quickStats: SectionToggle;
+  founderMemorial: SectionToggle;
+  memorialInfiniteScroll: SectionToggle;
+  departments: SectionToggle;
+  deptDoctorsBridge: SectionToggle;
+  specialistDoctors: SectionToggle;
+  donationPoster: SectionToggle;
+  campusGallery: SectionToggle;
+  videoTours: SectionToggle;
+  routeNavigator: SectionToggle;
+  contactSection: SectionToggle;
+  footer: SectionToggle;
+  donationPopupBanner: SectionToggle;
+  aiAgent: SectionToggle;
+}
+
+export interface HospitalVideoItem {
+  id: string;
+  title: string;
+  urduTitle?: string;
+  category: string;
+  youtubeId?: string;
+  videoUrl?: string;
+  posterUrl?: string;
+  duration?: string;
+  description: string;
+  isFeatured: boolean;
+}
+
+export interface AuditLogEntry {
+  id: string;
+  timestamp: number;
+  user: string;
+  role: string;
+  action: string;
+  section: string;
+  details?: string;
+}
+
+export interface AdminUserRecord {
+  id: string;
+  username: string;
+  fullName: string;
+  role: 'SuperAdmin' | 'ContentEditor' | 'MedicalRegistrar';
+  lastLogin?: number;
+  active: boolean;
 }

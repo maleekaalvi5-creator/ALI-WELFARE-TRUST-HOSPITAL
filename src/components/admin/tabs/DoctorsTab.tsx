@@ -19,6 +19,7 @@ export const DoctorsTab: React.FC<DoctorsTabProps> = ({
   token
 }) => {
   const [activeDoctorIndex, setActiveDoctorIndex] = useState(0);
+  const [confirmDeleteIdx, setConfirmDeleteIdx] = useState<number | null>(null);
 
   const handleUpdateDoctor = (idx: number, updated: Doctor) => {
     const list = [...doctors];
@@ -53,16 +54,11 @@ export const DoctorsTab: React.FC<DoctorsTabProps> = ({
   };
 
   const handleDeleteDoctor = (idx: number) => {
-    if (doctors.length <= 1) {
-      alert("At least one doctor must remain in the specialist directory.");
-      return;
-    }
-    const docToDelete = doctors[idx];
-    if (confirm(`Are you sure you want to permanently delete Dr. ${docToDelete.name}?`)) {
-      const list = doctors.filter((_, i) => i !== idx);
-      onChange(list);
-      setActiveDoctorIndex(Math.max(0, idx - 1));
-    }
+    if (doctors.length <= 1) return;
+    const list = doctors.filter((_, i) => i !== idx);
+    onChange(list);
+    setActiveDoctorIndex(Math.max(0, idx - 1));
+    setConfirmDeleteIdx(null);
   };
 
   const handleDeptSelect = (idx: number, deptId: string) => {
@@ -136,14 +132,36 @@ export const DoctorsTab: React.FC<DoctorsTabProps> = ({
                 <span>Preview Doctor's Full Page</span>
               </button>
 
-              <button
-                type="button"
-                onClick={() => handleDeleteDoctor(activeDoctorIndex)}
-                className="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Delete Doctor</span>
-              </button>
+              {confirmDeleteIdx === activeDoctorIndex ? (
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-rose-600">Delete doctor?</span>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteDoctor(activeDoctorIndex)}
+                    className="px-2.5 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs flex items-center gap-1 cursor-pointer hover:bg-rose-700"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                    <span>Yes, Delete</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setConfirmDeleteIdx(null)}
+                    className="px-2 py-1.5 rounded-lg bg-slate-100 text-slate-600 font-bold text-xs hover:bg-slate-200"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setConfirmDeleteIdx(activeDoctorIndex)}
+                  className="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors"
+                  title="Delete this doctor"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Delete Doctor</span>
+                </button>
+              )}
             </div>
           </div>
 

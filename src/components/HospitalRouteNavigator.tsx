@@ -212,9 +212,6 @@ export const HospitalRouteNavigator: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const searchDebounceRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Active Category Filter for Presets
-  const [selectedHubCategory, setSelectedHubCategory] = useState<string>('Major Cities');
-
   // Routing State
   const [travelMode, setTravelMode] = useState<TravelMode>('driving');
   const [routeData, setRouteData] = useState<RouteData | null>(null);
@@ -992,8 +989,6 @@ export const HospitalRouteNavigator: React.FC = () => {
     return `${hrs} hr ${remMins} min`;
   };
 
-  const filteredHubs = POPULAR_HUBS.filter(h => h.category === selectedHubCategory);
-
   return (
     <section 
       id="hospital-route-navigator" 
@@ -1484,62 +1479,6 @@ export const HospitalRouteNavigator: React.FC = () => {
                     </button>
                   </div>
                 )}
-              </div>
-            </div>
-
-            {/* Quick Departure Hubs (Major Cities & Regional Centers) */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-              <div className="flex items-center justify-between mb-2.5">
-                <label className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                  <Building2 className="w-3.5 h-3.5 text-[#087f8c]" />
-                  <span>Popular Departure Hubs</span>
-                </label>
-
-                {/* Category Tab Pills */}
-                <div className="flex items-center gap-1 text-[11px] bg-slate-100 p-0.5 rounded-lg">
-                  {['Major Cities', 'Nearby Towns', 'Gujranwala Area'].map((cat) => (
-                    <button
-                      key={cat}
-                      type="button"
-                      onClick={() => setSelectedHubCategory(cat)}
-                      className={`px-2 py-0.5 rounded-md font-medium transition-colors cursor-pointer ${
-                        selectedHubCategory === cat 
-                          ? 'bg-white text-[#087f8c] font-bold shadow-2xs' 
-                          : 'text-slate-500 hover:text-slate-800'
-                      }`}
-                    >
-                      {cat.split(' ')[0]}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5">
-                {filteredHubs.map((preset, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => {
-                      setOriginCoords(preset.coords);
-                      setOriginLabel(preset.name);
-                      setOriginSource('hub');
-                      setDetectionMethod(`Hub: ${preset.name.split('(')[0]}`);
-                      setLocationStatus(`Selected ${preset.name.split('(')[0]}`);
-                      setPermissionNotice(null);
-                      if (mapInstanceRef.current) {
-                        mapInstanceRef.current.flyTo(preset.coords, 12, { duration: 1.2 });
-                      }
-                    }}
-                    className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer text-left ${
-                      originCoords[0] === preset.coords[0] && originCoords[1] === preset.coords[1]
-                        ? 'bg-teal-50 border-[#087f8c] text-[#087f8c] font-bold shadow-xs'
-                        : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
-                    }`}
-                  >
-                    <span>{preset.name.split('(')[0]}</span>
-                    <span className="text-[10px] text-slate-400 ml-1">({preset.distEstimate})</span>
-                  </button>
-                ))}
               </div>
             </div>
 
