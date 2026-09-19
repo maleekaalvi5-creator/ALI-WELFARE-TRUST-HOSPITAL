@@ -69,7 +69,7 @@ export const LEADERSHIP: LeadershipMember[] = [
     title: "Chairman & Chief Executive Officer (CEO)",
     role: "Executive Chairman & CEO",
     bio: "Under his dynamic executive leadership, the hospital has expanded into a multi-specialty institution featuring state-of-the-art dialysis suites, digital radiology, advanced eye care theater, and free medicine distribution programs.",
-    imageUrl: "/images/images/image (11).png",
+    imageUrl: "images/image (11).png",
     isLate: false,
     quote: "Our relentless commitment is to blend clinical excellence with heartfelt empathy for every single patient."
   },
