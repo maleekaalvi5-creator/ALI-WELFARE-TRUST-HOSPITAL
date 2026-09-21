@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   Bot, 
   X, 
@@ -282,91 +283,60 @@ export const HospitalAIAgent: React.FC<HospitalAIAgentProps> = ({
 
   return (
     <>
-      {/* Bottom-Left Floating Ali Care + 4 Orbiting Dots System */}
-      <div className="fixed bottom-5 left-5 z-[999] select-none w-[65px] h-[65px]">
-        {/* Ali Main Button (65px, bottom-left) */}
-        <button
+      {/* Bottom-Left Floating Framer Motion Ali AI Button */}
+      <motion.div className="fixed bottom-6 left-6 z-50 select-none">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="w-16 h-16 bg-teal-700 rounded-full shadow-2xl flex flex-col items-center justify-center text-white font-bold cursor-pointer border-2 border-teal-300"
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute bottom-0 left-0 w-[65px] h-[65px] rounded-full bg-gradient-to-br from-[#083838] to-[#0E6F76] text-white shadow-[0_8px_25px_rgba(14,111,118,0.4)] flex flex-col items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer border-2 border-teal-200/60 z-20"
           title="Ali Care — 24/7 Intelligent AI Agent"
         >
-          <span className="text-sm font-extrabold tracking-wide leading-tight text-white">Ali</span>
-          <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-400/30 text-amber-200 font-bold border border-amber-300/40 mt-0.5">AI</span>
-        </button>
+          <span className="text-sm font-extrabold tracking-wide leading-tight">Ali</span>
+          <span className="text-[9px] px-1 rounded bg-amber-400 text-teal-950 font-bold mt-0.5">AI</span>
+        </motion.button>
 
-        {/* 4 Orbiting Dots Wrapper (hugging Ali circle tightly with max 4-6px gap) */}
-        <div className="absolute w-[75px] h-[75px] -top-[5px] -left-[5px] pointer-events-none z-30">
-          
-          {/* Dot 1: Top (12 o'clock) */}
-          <div 
-            className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-auto transition-all duration-300"
-            onMouseEnter={() => setExpandedDot(1)}
-            onMouseLeave={() => setExpandedDot(null)}
-            onClick={() => { onOpenBooking(); setExpandedDot(null); }}
-          >
-            {expandedDot === 1 ? (
-              <div className="absolute left-1/2 -translate-x-1/2 -top-7 flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#0E6F76] text-white shadow-lg text-[10px] font-bold whitespace-nowrap cursor-pointer animate-in zoom-in-95 border border-teal-300">
-                <Calendar className="w-3 h-3 text-teal-200" />
-                <span>Book Appointment</span>
-              </div>
-            ) : (
-              <div className="w-3 h-3 rounded-full bg-white border-2 border-[#0E6F76] shadow-md animate-pulse cursor-pointer hover:scale-150 transition-transform" title="Book Appointment" />
-            )}
-          </div>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              className="absolute bottom-20 left-0 pointer-events-auto"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => { window.location.href = `tel:${emergencyPhone}`; }}
+                style={{ x: 0, y: -80 }}
+                className="absolute px-4 py-2 bg-rose-600 text-white rounded-full shadow-lg font-bold text-xs flex items-center gap-2 whitespace-nowrap cursor-pointer"
+              >
+                <Phone className="w-3.5 h-3.5" /> Call
+              </motion.button>
 
-          {/* Dot 2: Right-Top (2 o'clock) */}
-          <div 
-            className="absolute top-[18%] right-0 pointer-events-auto transition-all duration-300"
-            onMouseEnter={() => setExpandedDot(2)}
-            onMouseLeave={() => setExpandedDot(null)}
-            onClick={() => { window.open(`https://wa.me/${HOSPITAL_INFO.whatsapp}?text=Hello%20Ali%20Welfare%20Trust%20Hospital`, '_blank'); setExpandedDot(null); }}
-          >
-            {expandedDot === 2 ? (
-              <div className="absolute left-4 top-0 flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-600 text-white shadow-lg text-[10px] font-bold whitespace-nowrap cursor-pointer animate-in zoom-in-95 border border-emerald-300">
-                <MessageSquare className="w-3 h-3 text-emerald-200" />
-                <span>WhatsApp</span>
-              </div>
-            ) : (
-              <div className="w-3 h-3 rounded-full bg-white border-2 border-emerald-600 shadow-md animate-pulse cursor-pointer hover:scale-150 transition-transform" title="WhatsApp" />
-            )}
-          </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => { window.open(`https://wa.me/${HOSPITAL_INFO.whatsapp}?text=Hello%20Ali%20Welfare%20Trust%20Hospital`, '_blank'); }}
+                style={{ x: 60, y: -60 }}
+                className="absolute px-4 py-2 bg-emerald-600 text-white rounded-full shadow-lg font-bold text-xs flex items-center gap-2 whitespace-nowrap cursor-pointer"
+              >
+                <MessageSquare className="w-3.5 h-3.5" /> WhatsApp
+              </motion.button>
 
-          {/* Dot 3: Right-Bottom (4 o'clock) */}
-          <div 
-            className="absolute bottom-[18%] right-0 pointer-events-auto transition-all duration-300"
-            onMouseEnter={() => setExpandedDot(3)}
-            onMouseLeave={() => setExpandedDot(null)}
-            onClick={() => { window.location.href = `tel:${emergencyPhone}`; setExpandedDot(null); }}
-          >
-            {expandedDot === 3 ? (
-              <div className="absolute left-4 bottom-0 flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-600 text-white shadow-lg text-[10px] font-bold whitespace-nowrap cursor-pointer animate-in zoom-in-95 border border-rose-300">
-                <Phone className="w-3 h-3 text-rose-200" />
-                <span>Call</span>
-              </div>
-            ) : (
-              <div className="w-3 h-3 rounded-full bg-white border-2 border-rose-600 shadow-md animate-pulse cursor-pointer hover:scale-150 transition-transform" title="Call Emergency" />
-            )}
-          </div>
-
-          {/* Dot 4: Left-Top (10 o'clock) */}
-          <div 
-            className="absolute top-[18%] left-0 pointer-events-auto transition-all duration-300"
-            onMouseEnter={() => setExpandedDot(4)}
-            onMouseLeave={() => setExpandedDot(null)}
-            onClick={() => { onOpenDonation(); setExpandedDot(null); }}
-          >
-            {expandedDot === 4 ? (
-              <div className="absolute right-4 top-0 flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-600 text-white shadow-lg text-[10px] font-bold whitespace-nowrap cursor-pointer animate-in zoom-in-95 border border-amber-300">
-                <Heart className="w-3 h-3 text-amber-200 fill-white" />
-                <span>Donate</span>
-              </div>
-            ) : (
-              <div className="w-3 h-3 rounded-full bg-white border-2 border-amber-600 shadow-md animate-pulse cursor-pointer hover:scale-150 transition-transform" title="Donate Now" />
-            )}
-          </div>
-
-        </div>
-      </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => { onOpenBooking(); }}
+                style={{ x: 80, y: 0 }}
+                className="absolute px-4 py-2 bg-teal-600 text-white rounded-full shadow-lg font-bold text-xs flex items-center gap-2 whitespace-nowrap cursor-pointer"
+              >
+                <Calendar className="w-3.5 h-3.5" /> Book Appointment
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
       {/* AI Agent Chat Modal (350px x 500px Above Bottom-Left Button) */}
       {isOpen && (
@@ -522,7 +492,7 @@ export const HospitalAIAgent: React.FC<HospitalAIAgentProps> = ({
                 <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-bounce" />
                 <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-bounce [animation-delay:0.2s]" />
                 <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-bounce [animation-delay:0.4s]" />
-                <span className="ml-1 text-[11px] text-[#087f8c] font-semibold">Ali Care is searching and reasoning...</span>
+                <span className="ml-1 text-[11px] text-[#087f8c] font-semibold">Ali is typing...</span>
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -552,7 +522,7 @@ export const HospitalAIAgent: React.FC<HospitalAIAgentProps> = ({
 
               <input
                 type="text"
-                placeholder={isListening ? "Listening to your voice..." : "Ask Ali Care anything in English or اردو..."}
+                placeholder={isListening ? "Listening to your voice..." : "Ask Ali Care anything in English or Urdu"}
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-[#092f3a] focus:outline-none focus:border-[#087f8c] bg-slate-50"
