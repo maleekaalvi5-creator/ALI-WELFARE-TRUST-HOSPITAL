@@ -837,64 +837,7 @@ export default function App() {
         onNavigateRoute={navigateTo}
       />
 
-      {/* Floating Action Pill for Mobile & Quick Dial - Positioned on bottom-right */}
-      <aside aria-label="Quick Access Controls" className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-30 flex flex-col items-end gap-2.5">
-        {/* Direct Call Hospital CTA */}
-        <a
-          href={`tel:${HOSPITAL_INFO.emergencyPhone}`}
-          className="px-3.5 py-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white shadow-xl shadow-rose-900/30 font-bold text-xs sm:text-sm flex items-center gap-1.5 hover:scale-105 transition-all cursor-pointer animate-pulse"
-          title="Call Hospital Emergency Desk Directly"
-        >
-          <Phone className="w-4 h-4" />
-          <span>Call: {HOSPITAL_INFO.emergencyPhone}</span>
-        </a>
 
-        {/* WhatsApp Fast Help & Quick Actions */}
-        <div className="flex items-center gap-2">
-          {/* Quick Humble Donation Trigger with Timer (Shows only Donate + Timer) */}
-          <button
-            onClick={() => setDonationBannerOpen(true)}
-            className="group relative px-3 sm:px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-600 hover:to-amber-800 text-white shadow-lg shadow-amber-900/20 font-bold text-xs sm:text-sm flex items-center gap-2 hover:scale-105 active:scale-98 transition-all duration-200 cursor-pointer border border-amber-300/40"
-            title="Open Donation Account Details & Live Appeal"
-          >
-            <div className="relative flex items-center justify-center">
-              <Heart className="w-4 h-4 fill-white text-white group-hover:scale-110 transition-transform duration-200" />
-              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-amber-200 animate-ping" />
-            </div>
-
-            <span className="tracking-wide">Donate</span>
-
-            {/* Unique Professional Timer Pill */}
-            <div className="flex items-center gap-1 pl-1.5 border-l border-amber-300/40 text-[11px] font-mono text-amber-100 font-extrabold">
-              <Clock className="w-3 h-3 text-amber-200 animate-spin-slow" />
-              <span>
-                {bannerSecondsLeft > 0
-                  ? `${Math.floor(bannerSecondsLeft / 60)}:${(bannerSecondsLeft % 60).toString().padStart(2, '0')}`
-                  : '0:00'}
-              </span>
-            </div>
-          </button>
-
-          <a
-            href={`https://wa.me/${HOSPITAL_INFO.whatsapp}?text=Hello%20Ali%20Welfare%20Trust%20Hospital%20Qila%20Didar%20Singh`}
-            target="_blank"
-            rel="noreferrer"
-            className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg flex items-center justify-center transition-transform hover:scale-110 cursor-pointer"
-            title="Chat on WhatsApp"
-          >
-            <MessageCircle className="w-6 h-6" />
-          </a>
-
-          {/* Book Appointment Floating Button */}
-          <button
-            onClick={() => handleOpenBooking()}
-            className="px-4 py-3 rounded-full bg-[#087f8c] hover:bg-[#045d67] text-white shadow-xl shadow-teal-900/30 font-bold text-xs sm:text-sm flex items-center gap-2 hover:scale-105 transition-all cursor-pointer"
-          >
-            <Calendar className="w-4 h-4 text-teal-200" />
-            <span>Book Appointment</span>
-          </button>
-        </div>
-      </aside>
 
       {/* Official Luxury 3D Soft Animated Donation Banner Modal (Matches User Screenshot Exactly) */}
       <DonationPopupBanner

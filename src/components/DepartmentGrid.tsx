@@ -99,18 +99,39 @@ export const DepartmentGrid: React.FC<DepartmentGridProps> = ({
         </div>
 
         {/* 3D Department Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 sm:gap-8 2xl:gap-8 3xl:gap-10">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.15
+              }
+            }
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 sm:gap-8 2xl:gap-8 3xl:gap-10"
+        >
           {filteredDepartments.map((dept) => (
-            <Interactive3DCard
+            <motion.div
               key={dept.id}
-              tiltMax={9}
-              scaleHover={1.02}
-              glowColor="rgba(8, 127, 140, 0.22)"
+              variants={{
+                hidden: { opacity: 0, y: 60, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } }
+              }}
               className="h-full"
             >
-              <div
-                className="h-full bg-white rounded-3xl p-6 shadow-md hover:shadow-2xl border border-slate-100 hover:border-teal-300 transition-all duration-200 flex flex-col justify-between group relative overflow-hidden"
+              <Interactive3DCard
+                tiltMax={9}
+                scaleHover={1.02}
+                glowColor="rgba(8, 127, 140, 0.22)"
+                className="h-full"
               >
+                <div
+                  className="h-full bg-white rounded-3xl p-6 shadow-md hover:shadow-2xl border border-slate-100 hover:border-teal-300 transition-all duration-200 flex flex-col justify-between group relative overflow-hidden"
+                >
                 {/* Top Accent Strip */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#087f8c] via-[#11a7a0] to-[#d7b56d] opacity-80 group-hover:opacity-100 transition-opacity" />
 
@@ -198,8 +219,9 @@ export const DepartmentGrid: React.FC<DepartmentGridProps> = ({
                 </div>
               </div>
             </Interactive3DCard>
+          </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Detailed Department Modal */}
         {selectedDept && (

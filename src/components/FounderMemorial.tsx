@@ -72,6 +72,8 @@ const Leader3DMotionPhoto: React.FC<Leader3DMotionPhotoProps> = ({ photo, name, 
     mouseY.set(0);
   };
 
+  const badgeTitle = name.includes('Zamin') ? 'Chairman' : 'Director';
+
   return (
     <motion.div
       ref={containerRef}
@@ -85,7 +87,7 @@ const Leader3DMotionPhoto: React.FC<Leader3DMotionPhotoProps> = ({ photo, name, 
       }}
       className="w-full h-72 sm:h-80 md:h-84 lg:h-88 rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 border-3 sm:border-4 border-[#d7b56d] shadow-[0_16px_36px_-10px_rgba(9,47,58,0.25)] flex-shrink-0 relative transition-all duration-300 select-none box-border"
     >
-      {/* 4K Ultra-Sharp Crystal-Clear Portrait (Zero Blur, Zero Scaling, 100% Native Clarity) */}
+      {/* Crystal-Clear Portrait */}
       <img
         src={photo}
         alt={name}
@@ -96,13 +98,13 @@ const Leader3DMotionPhoto: React.FC<Leader3DMotionPhotoProps> = ({ photo, name, 
         }}
       />
 
-      {/* 4K Ultra-HD Crisp Unobtrusive Corner Badge */}
+      {/* Role Badge (Chairman / Director) */}
       <div 
         className="absolute top-3.5 right-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#08222b] border border-[#d7b56d] text-white shadow-md pointer-events-none select-none z-10"
       >
         <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
         <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 font-sans">
-          4K Ultra HD
+          {badgeTitle}
         </span>
       </div>
     </motion.div>
@@ -301,6 +303,7 @@ export const FounderMemorial: React.FC = () => {
         {/* Founder Tribute Hero Card (Late Nazar Hussain Alvi) */}
         {founder && (
           <div
+            data-aos="fade-up"
             className="mb-8 sm:mb-10 bg-gradient-to-br from-[#092f3a] via-[#0b3b48] to-[#045d67] rounded-3xl p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden border border-teal-500/20"
           >
             {/* Background watermark quote */}
@@ -408,7 +411,7 @@ export const FounderMemorial: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {/* Mission Card */}
-            <div className="bg-gradient-to-br from-teal-50/90 to-cyan-50/40 rounded-3xl p-6 sm:p-8 border border-teal-200/80 shadow-sm relative overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div data-aos="fade-right" className="bg-gradient-to-br from-teal-50/90 to-cyan-50/40 rounded-3xl p-6 sm:p-8 border border-teal-200/80 shadow-sm relative overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
               <div>
                 <div className="w-12 h-12 rounded-2xl bg-[#087f8c] text-white flex items-center justify-center mb-4 shadow-sm">
                   <Target className="w-6 h-6" />
@@ -437,7 +440,7 @@ export const FounderMemorial: React.FC = () => {
             </div>
 
             {/* Values & Vision Card */}
-            <div className="bg-gradient-to-br from-amber-50/90 to-orange-50/40 rounded-3xl p-6 sm:p-8 border border-amber-200/80 shadow-sm relative overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div data-aos="fade-left" className="bg-gradient-to-br from-amber-50/90 to-orange-50/40 rounded-3xl p-6 sm:p-8 border border-amber-200/80 shadow-sm relative overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
               <div>
                 <div className="w-12 h-12 rounded-2xl bg-[#d7b56d] text-[#092f3a] flex items-center justify-center mb-4 shadow-sm">
                   <Compass className="w-6 h-6" />
@@ -482,12 +485,13 @@ export const FounderMemorial: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] mx-auto items-stretch">
-            {executiveTeam.map((leader) => {
+            {executiveTeam.map((leader, index) => {
               const currentPhoto = uploadedLeaderPhotos[leader.id] || defaultLeaderPhotos[leader.id] || leader.imageUrl;
 
               return (
                 <div
                   key={leader.id}
+                  data-aos={index === 0 ? "fade-right" : "fade-left"}
                   className="bg-slate-50 hover:bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 hover:border-teal-300 transition-all duration-300 hover:shadow-xl group flex flex-col justify-between box-border h-full"
                 >
                   <div className="flex-1 flex flex-col justify-between">

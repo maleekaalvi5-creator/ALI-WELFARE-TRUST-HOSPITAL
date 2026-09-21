@@ -306,6 +306,11 @@ export const DoctorProfilePage: React.FC<DoctorProfilePageProps> = ({
                 </a>
               </div>
 
+              {/* Disclaimer */}
+              <p className="mt-2 text-xs text-slate-500 italic">
+                Note: Images are for representation only. Actual doctor on duty may vary as per roster.
+              </p>
+
             </div>
 
           </div>

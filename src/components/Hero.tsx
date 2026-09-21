@@ -515,7 +515,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: 'easeOut' }}
               dir="rtl"
-              className="font-urdu text-xl sm:text-2xl md:text-3xl 2xl:text-4xl font-bold leading-relaxed text-[#5eead4] drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)] text-right sm:text-left"
+              className="font-urdu text-base sm:text-lg md:text-xl font-medium leading-relaxed text-teal-200 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)] text-right sm:text-left"
             >
               {slideUrdu}
             </motion.div>

@@ -117,18 +117,39 @@ export const SpecialistDoctors: React.FC<SpecialistDoctorsProps> = ({
         </div>
 
         {/* Doctors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 2xl:gap-8 3xl:gap-10">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.15
+              }
+            }
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 2xl:gap-8 3xl:gap-10"
+        >
           {filteredDoctors.map((doc) => (
-            <Interactive3DCard
+            <motion.div
               key={doc.id}
-              tiltMax={8}
-              scaleHover={1.02}
-              glowColor="rgba(8, 127, 140, 0.22)"
+              variants={{
+                hidden: { opacity: 0, y: 60, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } }
+              }}
               className="h-full"
             >
-              <div
-                className="h-full bg-white rounded-3xl p-6 border-2 border-slate-300/80 hover:border-[#087f8c] shadow-sm hover:shadow-2xl transition-all duration-200 flex flex-col justify-between group relative"
+              <Interactive3DCard
+                tiltMax={8}
+                scaleHover={1.02}
+                glowColor="rgba(8, 127, 140, 0.22)"
+                className="h-full"
               >
+                <div
+                  className="h-full bg-white rounded-3xl p-6 border-2 border-slate-300/80 hover:border-[#087f8c] shadow-sm hover:shadow-2xl transition-all duration-200 flex flex-col justify-between group relative"
+                >
                 <div>
                   {/* Doctor Portrait Photo */}
                   <div className="relative mb-5 flex justify-center">
@@ -259,10 +280,16 @@ export const SpecialistDoctors: React.FC<SpecialistDoctorsProps> = ({
                     <span>Book Token</span>
                   </button>
                 </div>
+
+                {/* Disclaimer */}
+                <p className="mt-2 text-[10px] text-slate-500 italic text-center">
+                  Note: Images are for representation only. Actual doctor on duty may vary as per roster.
+                </p>
               </div>
             </Interactive3DCard>
+          </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

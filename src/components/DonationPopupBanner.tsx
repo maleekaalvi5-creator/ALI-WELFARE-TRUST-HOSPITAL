@@ -323,7 +323,7 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
                     <div 
                       className="text-amber-200 font-black text-xs sm:text-sm font-mono tracking-wider break-all flex items-center gap-1.5 flex-wrap"
                     >
-                      <span>IBAN: {iban}</span>
+                      <span>IBAN: PK57**** **** 6635</span>
                       
                       {/* One-Click Copy Quick Button */}
                       <button

@@ -319,7 +319,7 @@ export const DonatePage: React.FC<DonatePageProps> = ({
                   <div className="pr-2">
                     <span className="text-slate-500 font-medium block">IBAN (International Transfer)</span>
                     <span className="font-mono font-extrabold text-xs sm:text-sm text-emerald-950 break-all">
-                      {BANK_DETAILS.iban}
+                      PK57**** **** 6635
                     </span>
                   </div>
                   <button

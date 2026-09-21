@@ -75,7 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const emergencyPhone = header?.emergencyPhone || HOSPITAL_INFO.emergencyPhone;
   const whatsappNumber = header?.whatsappNumber || HOSPITAL_INFO.whatsapp;
   const hospitalName = header?.hospitalName || "Ali Welfare Trust Hospital";
-  const tagline = header?.tagline || "( A Non-profitable ,Regd,Orginaztion Devoted to provide health facilities)";
+  const tagline = header?.tagline || "(A Non-Profit, Regd. Organization Devoted to Providing Health Facilities)";
   const donateBtnText = header?.donateButtonText || "DONATE NOW";
   const logoPosition = header?.logoPosition || 'left';
 
@@ -194,7 +194,12 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="h-[96px] sm:h-[102px] md:h-[106px] w-full pointer-events-none" aria-hidden="true" />
 
       {/* Main Sticky/Fixed Glass Navigation Bar with Periodic Shine Effect */}
-      <header className="navbar w-full box-border">
+      <motion.header 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="navbar w-full box-border"
+      >
         {/* Top Notification / Emergency Bar - Solid Crisp High-Contrast Bar */}
         <div className="bg-[#041a21] text-white text-[11px] sm:text-xs border-b border-amber-400/40 relative z-10 shadow-sm w-full h-7 sm:h-7.5 md:h-8 overflow-hidden select-none flex items-center box-border">
         
@@ -487,7 +492,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
 
       {/* =========================================================================
           COLLAPSIBLE SLIDE-OUT MOBILE DRAWER (< 768px)
