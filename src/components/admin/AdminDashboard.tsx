@@ -41,7 +41,6 @@ import { ContactFooterTab } from './tabs/ContactFooterTab';
 import { SeoTab } from './tabs/SeoTab';
 import { ThemeTab } from './tabs/ThemeTab';
 import { PagesSectionsTab } from './tabs/PagesSectionsTab';
-import { VideosTab } from './tabs/VideosTab';
 import { SecurityAuditTab } from './tabs/SecurityAuditTab';
 import { Search, Palette, Video, ShieldAlert } from 'lucide-react';
 
@@ -199,7 +198,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     { id: 'doctors', label: 'Doctors Directory & Pages', icon: UserCheck, badge: `${draft.doctors.length}` },
     { id: 'donation_box', label: 'Donation Box & Bank Info', icon: Heart },
     { id: 'campus_gallery', label: 'Campus, Facilities & Frames', icon: Building, badge: `${draft.campus.facilities.length}` },
-    { id: 'videos', label: 'Videos & Virtual Tours', icon: Video, badge: `${draft.videos?.length || 2}` },
     { id: 'contact_footer', label: 'Phone Numbers, Map & Footer', icon: Phone },
     { id: 'security_audit', label: 'Security & Audit History', icon: ShieldCheck, badge: `${draft.auditLogs?.length || 0}` },
   ];
@@ -491,14 +489,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <CampusGalleryTab
               campus={draft.campus}
               onChange={(updated) => handleDraftChange({ ...draft, campus: updated })}
-              token={token}
-            />
-          )}
-
-          {activeTab === 'videos' && (
-            <VideosTab
-              videos={draft.videos}
-              onChange={(updated) => handleDraftChange({ ...draft, videos: updated })}
               token={token}
             />
           )}

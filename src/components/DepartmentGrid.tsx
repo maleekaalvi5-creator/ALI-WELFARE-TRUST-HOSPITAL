@@ -99,28 +99,19 @@ export const DepartmentGrid: React.FC<DepartmentGridProps> = ({
         </div>
 
         {/* 3D Department Grid */}
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.15
-              }
-            }
-          }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 sm:gap-8 2xl:gap-8 3xl:gap-10"
-        >
-          {filteredDepartments.map((dept) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 sm:gap-8 2xl:gap-8 3xl:gap-10">
+          {filteredDepartments.map((dept, index) => (
             <motion.div
               key={dept.id}
-              variants={{
-                hidden: { opacity: 0, y: 60, scale: 0.95 },
-                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } }
+              initial={{ opacity: 0, y: 60, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: (index % 3) * 0.15, 
+                ease: "easeOut" 
               }}
+              whileHover={{ y: -8, scale: 1.02 }}
               className="h-full"
             >
               <Interactive3DCard
@@ -221,7 +212,7 @@ export const DepartmentGrid: React.FC<DepartmentGridProps> = ({
             </Interactive3DCard>
           </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Detailed Department Modal */}
         {selectedDept && (

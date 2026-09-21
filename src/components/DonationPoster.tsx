@@ -99,7 +99,13 @@ export const DonationPoster: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch mb-10">
           
           {/* Left Column: Interactive Bank Details Card (Meezan Bank) */}
-          <div className="lg:col-span-6 xl:col-span-5 flex flex-col">
+          <motion.div
+            initial={{ x: -80, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="lg:col-span-6 xl:col-span-5 flex flex-col"
+          >
             <motion.div
               whileHover={{ y: -4, scale: 1.005 }}
               transition={{ type: "spring", stiffness: 320, damping: 22 }}
@@ -319,10 +325,16 @@ export const DonationPoster: React.FC = () => {
                 </div>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Cause Selector & Donation Impact Calculator (Targeted Focus Element) */}
-          <div className="lg:col-span-6 xl:col-span-7 flex flex-col">
+          <motion.div
+            initial={{ x: 80, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="lg:col-span-6 xl:col-span-7 flex flex-col"
+          >
             <div className="bg-white/10 backdrop-blur-md rounded-3xl p-6 sm:p-7 lg:p-8 border border-white/15 shadow-2xl flex flex-col justify-between h-full">
               
               {/* Header */}
@@ -490,7 +502,7 @@ export const DonationPoster: React.FC = () => {
               </div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

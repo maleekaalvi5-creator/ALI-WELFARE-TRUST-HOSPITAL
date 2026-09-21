@@ -4,6 +4,14 @@ import fs from "fs";
 import crypto from "crypto";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
+
+const supabaseAdmin = (supabaseUrl && supabaseServiceKey)
+  ? createClient(supabaseUrl, supabaseServiceKey, { auth: { persistSession: false } })
+  : null;
 
 // =========================================================================
 // SECURE ADMINISTRATIVE ACCESS (scrypt-hashed credentials & Bearer Tokens)
@@ -322,6 +330,98 @@ async function startServer() {
       return res.status(500).json({ error: err.message });
     }
   });
+
+  // Supabase Header Admin API
+  const handleHeaderAdmin = async (req: any, res: any) => {
+    try {
+      const body = req.body;
+      if (supabaseAdmin) {
+        const { error } = await supabaseAdmin
+          .from('site_settings')
+          .upsert({ key: 'header', value: body, updated_at: new Date().toISOString() }, { onConflict: 'key' });
+        if (error) {
+          console.error("[Supabase Header Upsert Error]:", error);
+        }
+      }
+      const current = loadCentralContent();
+      current.header = { ...(current.header || {}), ...body };
+      saveCentralContent(current);
+      return res.json({ success: true, message: "Header updated successfully." });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  };
+
+  app.post("/api/admin/header", requireAdminAuth, handleHeaderAdmin);
+  app.put("/api/admin/header", requireAdminAuth, handleHeaderAdmin);
+
+  // Supabase File Upload API
+  app.post("/api/admin/upload", requireAdminAuth, async (req: any, res: any) => {
+    try {
+      const { fileData, fileName, bucketName } = req.body;
+      const bucket = bucketName || 'website-assets';
+
+      if (!fileData) {
+        return res.status(400).json({ error: "No file data provided." });
+      }
+
+      if (!supabaseAdmin) {
+        return res.status(400).json({ error: "Supabase storage is not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY." });
+      }
+
+      const buffer = Buffer.from(fileData.replace(/^data:.*;base64,/, ""), 'base64');
+      const pathName = `uploads/${Date.now()}_${fileName || 'asset.jpg'}`;
+
+      const { data, error } = await supabaseAdmin.storage
+        .from(bucket)
+        .upload(pathName, buffer, {
+          contentType: 'image/jpeg',
+          upsert: true
+        });
+
+      if (error) {
+        return res.status(500).json({ error: error.message });
+      }
+
+      const { data: publicUrlData } = supabaseAdmin.storage.from(bucket).getPublicUrl(data.path);
+      return res.json({ success: true, url: publicUrlData.publicUrl });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
+  // Supabase Department Image Update API
+  const handleDeptUpdate = async (req: any, res: any) => {
+    try {
+      const { id } = req.params;
+      const { image_url, description, name } = req.body;
+
+      if (supabaseAdmin) {
+        await supabaseAdmin
+          .from('departments')
+          .update({ image_url, description, name })
+          .eq('id', id);
+      }
+
+      const current = loadCentralContent();
+      if (current.departments) {
+        const dept = current.departments.find((d: any) => d.id === id);
+        if (dept) {
+          if (image_url) dept.image_url = image_url;
+          if (description) dept.description = description;
+          if (name) dept.name = name;
+          saveCentralContent(current);
+        }
+      }
+
+      return res.json({ success: true, image_url });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  };
+
+  app.patch("/api/admin/departments/:id", requireAdminAuth, handleDeptUpdate);
+  app.put("/api/admin/departments/:id", requireAdminAuth, handleDeptUpdate);
 
   // Admin PUT: save updated live content across all devices with Conflict Protection
   app.put("/api/admin/content", requireAdminAuth, (req, res) => {
@@ -791,7 +891,7 @@ How may I assist you today, Sir?
   // -----------------------------------------------------------------------
   // ADMIN IMAGE UPLOAD API
   // -----------------------------------------------------------------------
-  app.post("/api/admin/upload-image", requireAdminAuth, (req, res) => {
+  app.post("/api/admin/upload-image", requireAdminAuth, async (req: any, res: any) => {
     try {
       const { dataUrl, filename, category } = req.body;
       if (!dataUrl || typeof dataUrl !== "string") {
@@ -820,17 +920,42 @@ How may I assist you today, Sir?
         else if (rawMime.includes("svg")) ext = "svg";
       }
 
+      const safeBase = (filename || category || "upload").replace(/[^a-zA-Z0-9_-]/g, "_").toLowerCase();
+      const savedFileName = `${safeBase}_${Date.now()}.${ext}`;
+
+      // If Supabase Admin is configured, upload to Supabase storage bucket 'website-assets' / 'hospital-images'
+      if (supabaseAdmin) {
+        const bucket = category === 'department' || category === 'hospital-images' ? 'hospital-images' : 'website-assets';
+        const pathName = `uploads/${savedFileName}`;
+        const { data, error } = await supabaseAdmin.storage
+          .from(bucket)
+          .upload(pathName, buffer, {
+            contentType: `image/${ext}`,
+            upsert: true
+          });
+
+        if (!error && data) {
+          const { data: publicUrlData } = supabaseAdmin.storage.from(bucket).getPublicUrl(data.path);
+          console.log(`[Supabase Storage Upload] Uploaded to ${bucket}: ${publicUrlData.publicUrl}`);
+          return res.json({
+            success: true,
+            url: publicUrlData.publicUrl,
+            filename: savedFileName
+          });
+        } else {
+          console.error("[Supabase Storage Upload Error]:", error);
+        }
+      }
+
+      // Fallback to local storage if Supabase is not configured or failed
       const imagesDir = path.join(process.cwd(), "public", "images");
       if (!fs.existsSync(imagesDir)) {
         fs.mkdirSync(imagesDir, { recursive: true });
       }
 
-      const safeBase = (filename || category || "upload").replace(/[^a-zA-Z0-9_-]/g, "_").toLowerCase();
-      const savedFileName = `${safeBase}_${Date.now()}.${ext}`;
       const filePath = path.join(imagesDir, savedFileName);
-
       fs.writeFileSync(filePath, buffer);
-      console.log(`[Image Upload] Saved ${savedFileName} (${buffer.length} bytes)`);
+      console.log(`[Image Upload] Saved locally ${savedFileName} (${buffer.length} bytes)`);
 
       return res.json({
         success: true,

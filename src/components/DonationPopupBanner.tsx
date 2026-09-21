@@ -167,17 +167,12 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
             className="fixed inset-0 bg-black/75 cursor-pointer z-0"
           />
 
-          {/* Centered Luxury Animated Donation Card with smooth Right-to-Center transition */}
+          {/* Centered Luxury Animated Donation Card with smooth Spring transition */}
           <motion.div
-            initial={{ opacity: 0, x: 400, scale: 0.95, rotateY: 4 }}
-            animate={{ opacity: 1, x: 0, scale: 1, rotateY: 0 }}
-            exit={{ opacity: 0, x: 350, scale: 0.95, rotateY: -3 }}
-            transition={{ 
-              type: "spring", 
-              damping: 26, 
-              stiffness: 240,
-              mass: 0.85
-            }}
+            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, type: "spring" }}
             whileHover={{ y: -2, transition: { duration: 0.2 } }}
             className="relative w-full max-w-[500px] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-amber-400/80 z-10 my-auto text-left shadow-2xl bg-[#092f3a]"
             style={{

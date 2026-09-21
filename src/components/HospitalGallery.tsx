@@ -63,10 +63,19 @@ export const HospitalGallery: React.FC = () => {
 
         {/* Photo Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 2xl:gap-8">
-          {filteredItems.map((item) => (
-            <div
+          {filteredItems.map((item, index) => (
+            <motion.div
               key={item.id}
-              className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200 group cursor-pointer transition-all duration-200 hover:-translate-y-1"
+              initial={{ opacity: 0, y: 60, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: (index % 3) * 0.15, 
+                ease: "easeOut" 
+              }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200 group cursor-pointer"
               onClick={() => setActivePhoto(item)}
             >
               <div className="relative h-60 sm:h-64 overflow-hidden bg-slate-100">
@@ -96,7 +105,7 @@ export const HospitalGallery: React.FC = () => {
                   {item.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

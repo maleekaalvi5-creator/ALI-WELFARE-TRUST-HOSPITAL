@@ -30,7 +30,6 @@ import { Appointment } from './types';
 import { Phone, Calendar, Heart, MessageCircle, Sparkles, Clock } from 'lucide-react';
 import { HOSPITAL_INFO, BANK_DETAILS, DOCTORS, DEPARTMENTS } from './data/hospitalData';
 import { useHospitalContent } from './context/HospitalContentContext';
-import { HospitalVideosSection } from './components/HospitalVideosSection';
 
 export default function App() {
   // Current route detection: supports paths (/admin, /founder, /doctors, /doctor/..., /departments, /department/..., /campus, /donate) & hashes
@@ -818,9 +817,6 @@ export default function App() {
 
         {/* 8. Campus & Facilities Gallery */}
         {content?.pagesSections?.campusGalleryVisible !== false && <HospitalGallery />}
-
-        {/* 8b. Video Showcase & Virtual Tours */}
-        {content?.pagesSections?.videosVisible !== false && <HospitalVideosSection />}
 
         {/* 9. In-House Leaflet & OSRM GPS Navigation System */}
         {content?.pagesSections?.navigatorVisible !== false && <HospitalRouteNavigator />}

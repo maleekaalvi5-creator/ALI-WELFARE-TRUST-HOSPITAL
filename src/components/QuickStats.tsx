@@ -34,15 +34,21 @@ export const QuickStats: React.FC = () => {
 
   return (
     <div className="relative pt-6 sm:pt-8 md:pt-10 pb-4 site-container box-border">
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 lg:gap-4 box-border"
-      >
-        {STATS.map((stat, idx) => (
-          <motion.div key={stat.label} variants={itemVariants} className="h-full w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 lg:gap-4 box-border">
+        {STATS.map((stat, index) => (
+          <motion.div 
+            key={stat.label} 
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ 
+              duration: 0.6, 
+              delay: (index % 5) * 0.12, 
+              ease: "easeOut" 
+            }}
+            whileHover={{ y: -6, scale: 1.02 }}
+            className="h-full w-full"
+          >
             <Interactive3DCard
               tiltMax={10}
               glowColor="rgba(8, 127, 140, 0.22)"
@@ -67,7 +73,7 @@ export const QuickStats: React.FC = () => {
             </Interactive3DCard>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

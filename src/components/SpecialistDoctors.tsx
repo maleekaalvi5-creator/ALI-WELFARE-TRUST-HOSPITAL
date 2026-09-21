@@ -117,28 +117,19 @@ export const SpecialistDoctors: React.FC<SpecialistDoctorsProps> = ({
         </div>
 
         {/* Doctors Grid */}
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.15
-              }
-            }
-          }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 2xl:gap-8 3xl:gap-10"
-        >
-          {filteredDoctors.map((doc) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 2xl:gap-8 3xl:gap-10">
+          {filteredDoctors.map((doc, index) => (
             <motion.div
               key={doc.id}
-              variants={{
-                hidden: { opacity: 0, y: 60, scale: 0.95 },
-                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } }
+              initial={{ opacity: 0, y: 60, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: (index % 3) * 0.15, 
+                ease: "easeOut" 
               }}
+              whileHover={{ y: -8, scale: 1.02 }}
               className="h-full"
             >
               <Interactive3DCard
@@ -289,7 +280,7 @@ export const SpecialistDoctors: React.FC<SpecialistDoctorsProps> = ({
             </Interactive3DCard>
           </motion.div>
           ))}
-        </motion.div>
+        </div>
 
       </div>
     </section>
