@@ -196,11 +196,15 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
                 src={bgImg}
                 alt="Ali Welfare Trust Hospital Campus Building"
                 className="w-full h-full object-cover object-center scale-100 opacity-100"
+                style={{
+                  filter: 'contrast(1.08) saturate(1.15) brightness(1.04)',
+                  imageRendering: 'crisp-edges'
+                }}
               />
               
-              {/* Soft Gradient Vignette Overlay to ensure text readability while keeping hospital photo clearly visible */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/40 backdrop-blur-[1px]" />
-              <div className="absolute inset-0 bg-teal-950/30" />
+              {/* Ultra-clear 8K HD Vignette Overlay: Hospital building shows brilliantly behind with maximum clarity */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-black/25" />
+              <div className="absolute inset-0 bg-teal-950/15" />
               
               {/* Delicate Warm & Teal Ambient Highlights (Subtle & Non-Obtrusive) */}
               <div className="absolute top-0 right-0 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
