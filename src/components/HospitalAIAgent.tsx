@@ -283,60 +283,73 @@ export const HospitalAIAgent: React.FC<HospitalAIAgentProps> = ({
 
   return (
     <>
-      {/* Bottom-Left Floating Framer Motion Ali AI Button */}
-      <motion.div className="fixed bottom-6 left-6 z-50 select-none">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="w-16 h-16 bg-teal-700 rounded-full shadow-2xl flex flex-col items-center justify-center text-white font-bold cursor-pointer border-2 border-teal-300"
+      {/* Extreme Left Vertical Line of 4 Blinking 3D Dots (Theme-matched dark shades, extreme left edge) */}
+      <div className="fixed bottom-32 left-1 z-[9999] flex flex-col items-center gap-1.5 pointer-events-auto">
+        
+        {/* Dot 1: Call (Deep Amber/Teal shade) */}
+        <div className="relative group flex items-center">
+          <button
+            onClick={() => window.location.href='tel:03006421447'}
+            className="w-3.5 h-3.5 rounded-full bg-amber-600 border border-amber-300 shadow-md animate-pulse cursor-pointer hover:scale-125 transition-transform"
+            title="Call Helpline"
+          />
+          <div className="absolute left-6 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none bg-slate-900 text-white text-[11px] font-semibold px-2 py-0.5 rounded-md shadow-lg whitespace-nowrap border border-amber-500/40 z-50">
+            📞 Call: 0300-6421447
+          </div>
+        </div>
+
+        {/* Dot 2: WhatsApp (Deep Emerald) */}
+        <div className="relative group flex items-center">
+          <button
+            onClick={() => window.open('https://wa.me/923006421447','_blank')}
+            className="w-3.5 h-3.5 rounded-full bg-emerald-700 border border-emerald-300 shadow-md animate-pulse cursor-pointer hover:scale-125 transition-transform"
+            title="WhatsApp"
+          />
+          <div className="absolute left-6 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none bg-slate-900 text-white text-[11px] font-semibold px-2 py-0.5 rounded-md shadow-lg whitespace-nowrap border border-emerald-500/40 z-50">
+            💬 WhatsApp Chat
+          </div>
+        </div>
+
+        {/* Dot 3: Appointment (Deep Teal) */}
+        <div className="relative group flex items-center">
+          <button
+            onClick={() => { document.getElementById('book-token-btn')?.click(); onOpenBooking(); }}
+            className="w-3.5 h-3.5 rounded-full bg-teal-700 border border-teal-300 shadow-md animate-pulse cursor-pointer hover:scale-125 transition-transform"
+            title="Book Appointment"
+          />
+          <div className="absolute left-6 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none bg-slate-900 text-white text-[11px] font-semibold px-2 py-0.5 rounded-md shadow-lg whitespace-nowrap border border-teal-500/40 z-50">
+            📅 Book Appointment
+          </div>
+        </div>
+
+        {/* Dot 4: Donate (Deep Slate Navy) */}
+        <div className="relative group flex items-center">
+          <button
+            onClick={() => { window.location.href='#donate'; onOpenDonation(); }}
+            className="w-3.5 h-3.5 rounded-full bg-slate-700 border border-slate-300 shadow-md animate-pulse cursor-pointer hover:scale-125 transition-transform"
+            title="Donate"
+          />
+          <div className="absolute left-6 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none bg-slate-900 text-white text-[11px] font-semibold px-2 py-0.5 rounded-md shadow-lg whitespace-nowrap border border-slate-500/40 z-50">
+            ❤️ Donate Now
+          </div>
+        </div>
+
+      </div>
+
+      {/* Bottom-Left Floating Prominent 3D Glass Ali AI Button */}
+      <div className="fixed bottom-5 left-2 z-[9999] pointer-events-auto">
+        <button
           onClick={() => setIsOpen(!isOpen)}
+          className="relative w-15 h-15 sm:w-17 sm:h-17 rounded-full bg-gradient-to-tr from-[#031d24] via-[#08434d] to-[#042830] text-white shadow-[0_15px_40px_rgba(3,29,36,0.8),inset_0_3px_6px_rgba(255,255,255,0.4),inset_0_-4px_8px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center font-bold border-2 border-teal-300/90 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 group"
           title="Ali Care — 24/7 Intelligent AI Agent"
         >
-          <span className="text-sm font-extrabold tracking-wide leading-tight">Ali</span>
-          <span className="text-[9px] px-1 rounded bg-amber-400 text-teal-950 font-bold mt-0.5">AI</span>
-        </motion.button>
-
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              className="absolute bottom-20 left-0 pointer-events-auto"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => { window.location.href = `tel:${emergencyPhone}`; }}
-                style={{ x: 0, y: -80 }}
-                className="absolute px-4 py-2 bg-rose-600 text-white rounded-full shadow-lg font-bold text-xs flex items-center gap-2 whitespace-nowrap cursor-pointer"
-              >
-                <Phone className="w-3.5 h-3.5" /> Call
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => { window.open(`https://wa.me/${HOSPITAL_INFO.whatsapp}?text=Hello%20Ali%20Welfare%20Trust%20Hospital`, '_blank'); }}
-                style={{ x: 60, y: -60 }}
-                className="absolute px-4 py-2 bg-emerald-600 text-white rounded-full shadow-lg font-bold text-xs flex items-center gap-2 whitespace-nowrap cursor-pointer"
-              >
-                <MessageSquare className="w-3.5 h-3.5" /> WhatsApp
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => { onOpenBooking(); }}
-                style={{ x: 80, y: 0 }}
-                className="absolute px-4 py-2 bg-teal-600 text-white rounded-full shadow-lg font-bold text-xs flex items-center gap-2 whitespace-nowrap cursor-pointer"
-              >
-                <Calendar className="w-3.5 h-3.5" /> Book Appointment
-              </motion.button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+          {/* Glass shine reflection highlight */}
+          <span className="absolute inset-x-2 top-1 h-2 rounded-full bg-white/35 pointer-events-none blur-[0.5px]" />
+          
+          <span className="text-xs sm:text-sm font-black tracking-wider uppercase bg-gradient-to-r from-white via-teal-100 to-amber-200 bg-clip-text text-transparent drop-shadow-md">Ali</span>
+          <span className="text-[9px] sm:text-[10px] bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 text-teal-950 font-black px-1.5 py-0.2 rounded-full shadow-md tracking-wider -mt-0.5 border border-amber-200/50">AI</span>
+        </button>
+      </div>
 
       {/* AI Agent Chat Modal (350px x 500px Above Bottom-Left Button) */}
       {isOpen && (

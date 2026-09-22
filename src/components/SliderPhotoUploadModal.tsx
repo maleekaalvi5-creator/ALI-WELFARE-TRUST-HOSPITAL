@@ -101,15 +101,6 @@ export const SliderPhotoUploadModal: React.FC<SliderPhotoUploadModalProps> = ({
     }
   }, [isOpen, currentSlideIndex, slides, loadSlide]);
 
-  // Clean stale local storage on mount
-  useEffect(() => {
-    try {
-      localStorage.removeItem('awt_custom_hero_slides');
-    } catch {
-      // ignore
-    }
-  }, []);
-
   // Image File Compression & Upload Preparation
   // CRITICAL: FILENAME NEVER OVERWRITES HEADING OR DESCRIPTION
   const handleFileSelect = (file: File) => {

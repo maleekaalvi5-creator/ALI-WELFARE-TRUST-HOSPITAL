@@ -205,15 +205,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
     return DEFAULT_7_SLIDES;
   }, [heroConfig?.slides]);
 
-  // Clean up legacy localStorage cache on mount so no corrupt state ever lingers
-  useEffect(() => {
-    try {
-      localStorage.removeItem('awt_custom_hero_slides');
-    } catch {
-      // ignore
-    }
-  }, []);
-
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [progress, setProgress] = useState<number>(0);
@@ -561,7 +552,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onOpenDonation }) => 
                 className="btn-3d-gold relative px-5 py-2.5 sm:py-3 2xl:px-7 2xl:py-3.5 rounded-xl uppercase text-[#3a1d04] font-black text-xs sm:text-sm 2xl:text-base inline-flex items-center gap-2 cursor-pointer transition-all hover:-translate-y-0.5 shadow-lg select-none group"
               >
                 <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse shadow-[0_0_8px_#ef4444]" />
-                <Heart className="w-4 h-4 text-rose-600 fill-rose-600 group-hover:scale-110 transition-transform" />
                 <span>{heroConfig?.donateButtonText || "DONATE NOW"}</span>
               </motion.button>
 
