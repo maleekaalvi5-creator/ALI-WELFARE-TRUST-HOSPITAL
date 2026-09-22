@@ -174,10 +174,10 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, type: "spring" }}
             whileHover={{ y: -2, transition: { duration: 0.2 } }}
-            className="relative w-full max-w-[500px] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-amber-400/80 z-10 my-auto text-left shadow-2xl bg-[#092f3a]"
+            className="relative w-full max-w-[500px] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-amber-400/80 z-10 my-auto text-left shadow-2xl bg-black/30 backdrop-blur-[2px]"
             style={{
               perspective: 1200,
-              boxShadow: "0 20px 50px -10px rgba(0,0,0,0.85), 0 8px 20px -4px rgba(0,0,0,0.6)"
+              boxShadow: "0 25px 60px -10px rgba(0,0,0,0.7), 0 8px 25px -4px rgba(0,0,0,0.5)"
             }}
           >
             {/* Dynamic Specular Reflection Sheen Sweep Across Card on Entrance */}
@@ -195,22 +195,22 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
               <img
                 src={bgImg}
                 alt="Ali Welfare Trust Hospital Campus Building"
-                className="w-full h-full object-cover object-center scale-100"
+                className="w-full h-full object-cover object-center scale-100 opacity-100"
               />
               
-              {/* Very Light, Subtle Contrast Overlays: Background image remains crisp and clearly visible */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/35 to-black/25" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/40" />
+              {/* Soft Gradient Vignette Overlay to ensure text readability while keeping hospital photo clearly visible */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/40 backdrop-blur-[1px]" />
+              <div className="absolute inset-0 bg-teal-950/30" />
               
               {/* Delicate Warm & Teal Ambient Highlights (Subtle & Non-Obtrusive) */}
               <div className="absolute top-0 right-0 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#087f8c]/15 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#087f8c]/20 rounded-full blur-3xl pointer-events-none" />
             </div>
 
             {/* Top Close / Cancel Button (Prominent & High Z-Index) */}
             <button
               onClick={handleClose}
-              className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-40 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-xl border border-white/50 bg-black/60 hover:bg-black/90 active:bg-black text-white flex items-center gap-1 transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-xl backdrop-blur-md group"
+              className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-40 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-xl border border-white/60 bg-black/70 hover:bg-black/90 active:bg-black text-white flex items-center gap-1 transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-xl backdrop-blur-md group"
               aria-label="Cancel and Close Donation Banner"
               title="Cancel / Close (Proceed to Website)"
             >
@@ -226,14 +226,14 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
               <div>
                 {/* [ DONATE NOW ] Tag with Amber Brackets & REAL-TIME PAKISTAN STANDARD TIME */}
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap pr-16 sm:pr-20">
-                  <span className="text-[#f59e0b] font-black text-xs sm:text-sm tracking-wider font-mono select-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+                  <span className="text-[#f59e0b] font-black text-xs sm:text-sm tracking-wider font-mono select-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
                     [&nbsp;DONATE NOW&nbsp;]
                   </span>
 
                   {/* Real-time Live Pakistan Standard Time Clock Badge */}
                   {showClock && livePktTime && (
                     <div 
-                      className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/60 border border-amber-400/50 backdrop-blur-md shadow-md text-amber-200 text-[9px] sm:text-[10px]"
+                      className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/70 border border-amber-400/60 backdrop-blur-md shadow-md text-amber-200 text-[9px] sm:text-[10px]"
                       title="Current Pakistan Standard Time (PKT, UTC+5)"
                     >
                       <Clock className="w-3 h-3 text-amber-400 animate-spin-slow" />
@@ -247,7 +247,7 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
                   )}
 
                   {/* Real Logo Emblem Badge for Professional Authenticity */}
-                  <div className="hidden xs:flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/40 border border-white/20 backdrop-blur-xs text-[9px] uppercase font-extrabold text-amber-200 tracking-wider">
+                  <div className="hidden xs:flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/50 border border-white/30 backdrop-blur-xs text-[9px] uppercase font-extrabold text-amber-200 tracking-wider">
                     <HospitalLogo variant="emblem" className="w-3.5 h-3.5" />
                     <span>{banner?.badge || "Tax Exempted / Zakat"}</span>
                   </div>
@@ -255,7 +255,7 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
 
                 {/* Main Heading: Ali Welfare Trust Hospital */}
                 <h2 
-                  className="text-xl sm:text-2xl md:text-3xl font-black text-white leading-tight tracking-tight font-sans"
+                  className="text-xl sm:text-2xl md:text-3xl font-black text-white leading-tight tracking-tight font-sans drop-shadow-[0_3px_10px_rgba(0,0,0,0.95)]"
                   style={{
                     textShadow: "0 2px 8px rgba(0,0,0,0.95), 0 4px 18px rgba(0,0,0,0.9), 0 1px 0 rgba(255,255,255,0.3)"
                   }}
@@ -266,10 +266,10 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
                 {/* Golden Underline Bar */}
                 <div className="h-1 w-16 sm:w-20 bg-gradient-to-r from-[#f59e0b] to-[#d7b56d] rounded-full mt-1.5 mb-2.5 shadow-md shadow-amber-500/50" />
 
-                {/* Humble Message (Crisp, High-Contrast Solid Background) */}
-                <div className="bg-[#06242c]/95 p-2.5 sm:p-3 rounded-xl border border-teal-500/40 mb-2.5 shadow-md">
+                {/* Humble Message (Translucent Glass over background photo) */}
+                <div className="bg-black/45 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-teal-400/50 mb-2.5 shadow-xl">
                   <p 
-                    className="text-white text-xs sm:text-sm leading-snug font-bold"
+                    className="text-white text-xs sm:text-sm leading-snug font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]"
                   >
                     {appealEn}
                   </p>
@@ -277,7 +277,7 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
                   {banner?.appealUrdu && (
                     <p 
                       dir="rtl"
-                      className="text-amber-300 text-xs sm:text-sm leading-snug font-urdu font-bold mt-1.5 pt-1.5 border-t border-teal-500/30"
+                      className="text-amber-300 text-xs sm:text-sm leading-snug font-urdu font-bold mt-1.5 pt-1.5 border-t border-teal-500/40 drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]"
                     >
                       {banner.appealUrdu}
                     </p>
@@ -286,7 +286,7 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
 
                 {/* "For Donation:" Subheading */}
                 <div 
-                  className="text-white font-black text-xs sm:text-sm tracking-tight mb-1.5 flex items-center gap-1.5"
+                  className="text-white font-black text-xs sm:text-sm tracking-tight mb-1.5 flex items-center gap-1.5 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
                 >
                   <span>For Donation:</span>
                   <span className="text-[10px] px-2 py-0.5 rounded-md bg-emerald-600 text-white font-extrabold shadow-sm">
@@ -295,9 +295,9 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
                 </div>
 
                 {/* ============================================================ */}
-                {/* BANK DETAILS SECTION (CRISP SOLID HIGH-CONTRAST CARD)        */}
+                {/* BANK DETAILS SECTION (TRANSLUCENT GLASS OVER HOSPITAL PHOTO)  */}
                 {/* ============================================================ */}
-                <div className="bg-[#051c23]/95 p-3 sm:p-3.5 rounded-xl border-2 border-amber-400/50 space-y-1.5 text-white font-sans text-xs sm:text-sm font-bold leading-tight mb-3 shadow-xl">
+                <div className="bg-black/55 backdrop-blur-md p-3 sm:p-3.5 rounded-xl border-2 border-amber-400/80 space-y-1.5 text-white font-sans text-xs sm:text-sm font-bold leading-tight mb-3 shadow-2xl">
                   
                   {/* Bank Name */}
                   <div 

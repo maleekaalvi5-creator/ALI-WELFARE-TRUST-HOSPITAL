@@ -91,7 +91,7 @@ const Leader3DMotionPhoto: React.FC<Leader3DMotionPhotoProps> = ({ photo, name, 
       <img
         src={photo}
         alt={name}
-        className="w-full h-full object-cover object-top select-none"
+        className="w-full h-full object-cover object-[center_20%] select-none"
         style={{
           imageRendering: '-webkit-optimize-contrast',
           filter: 'contrast(1.03) brightness(1.01)',
@@ -313,12 +313,12 @@ export const FounderMemorial: React.FC = () => {
               {/* Founder Authentic Image Frame - Permanently Embedded */}
               <div className="lg:col-span-5 flex flex-col items-center justify-center">
                 <div className="relative group">
-                  <div className="w-64 h-80 sm:w-72 sm:h-96 md:w-80 md:h-[420px] lg:w-[320px] lg:h-[430px] rounded-2xl overflow-hidden border-4 sm:border-[5px] border-[#d7b56d] shadow-2xl bg-slate-900 relative">
+                  <div className="w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:w-[320px] h-80 sm:h-96 md:h-[420px] lg:h-[430px] rounded-2xl overflow-hidden border-4 sm:border-[5px] border-[#d7b56d] shadow-2xl bg-slate-900 relative mx-auto">
                     <img
                       src={founderPhotoUrl}
                       alt="Nazar Hussain Alvi (Late) - Late Founder & Visionary Patron"
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-105"
                       onError={(e) => {
                         const target = e.target as HTMLElement;
                         if (target.getAttribute('src') !== '/images/nazar.jpg') {

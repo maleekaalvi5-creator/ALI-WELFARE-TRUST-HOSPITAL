@@ -626,24 +626,12 @@ ${contactSummary}
       let replyText = "";
       let sources: Array<{ title: string; uri: string }> = [];
 
-      const queryLower = message.toLowerCase();
-      let intent = "general";
-      if (queryLower.includes("fever") || queryLower.includes("bukhar") || queryLower.includes("cough") || queryLower.includes("flu") || queryLower.includes("pain") || queryLower.includes("dard") || queryLower.includes("bimari") || queryLower.includes("tabiyat")) {
-        intent = "medical_triage";
-      } else if (queryLower.includes("book") || queryLower.includes("doctor") || queryLower.includes("appointment") || queryLower.includes("timing") || queryLower.includes("time")) {
-        intent = "book_doctor";
-      } else if (queryLower.includes("donation") || queryLower.includes("meezan") || queryLower.includes("zakat") || queryLower.includes("sadqah") || queryLower.includes("account")) {
-        intent = "donation_guide";
-      } else if (queryLower.includes("salam") || queryLower.includes("hello") || queryLower.includes("hi") || queryLower.includes("hey") || queryLower.includes("assalam")) {
-        intent = "greeting";
-      }
-
       let apiSuccess = false;
       if (client) {
         try {
           const contents: any[] = [];
           if (Array.isArray(messages)) {
-            for (const msg of messages.slice(-6)) {
+            for (const msg of messages.slice(-10)) {
               if (msg.role === "user" || msg.role === "model") {
                 contents.push({
                   role: msg.role,
@@ -696,104 +684,8 @@ ${contactSummary}
         }
       }
 
-      if (!apiSuccess) {
-        // Dynamic Conversational Problem Solver & Medical Consultant (ChatGPT-like fallback in Roman Urdu / English)
-        const isRomanUrdu = /hai|kya|kaise|karo|batao|mujhe|dard|bukhar|doctor|timing|kaha|hain|hain|btao|bataen/i.test(message);
-        
-        if (intent === "medical_triage") {
-          if (isRomanUrdu) {
-            replyText = `Main samajh sakta hoon ke aap ko tabiyat ki kharabi ya bukhar mehsoos ho raha hai. Sab se pehle temperature note karein, paani aur fluids zyada piyein, aur aram karein. \n\nBehtar tashhees (diagnosis) ke liye hamare Internal Medicine specialist **Dr. Muhammad Farooq** (Timing: Subah 9 se dopahar 3 baje tak) se mashwara karein. Kya main aap ki appointment book kar doon?\n\nKisi bhi emergency ki soorat mein aap foran hamare emergency number par rabta karein: ${content?.contact?.emergencyPhone || '03324711101'}.`;
-          } else {
-            replyText = `I understand your health concern regarding fever or body pain. Please monitor your temperature regularly, stay hydrated with water and oral rehydration solutions, and get ample rest.\n\nFor a thorough clinical examination, I recommend consulting our Internal Medicine specialist, **Dr. Muhammad Farooq** (Available Mon–Sat, 9:00 AM – 3:00 PM). Shall I schedule your consultation right now?\n\nFor urgent assistance, you can call our 24/7 Emergency Wing directly at ${content?.contact?.emergencyPhone || '03324711101'}.`;
-          }
-        } else if (intent === "book_doctor") {
-          if (isRomanUrdu) {
-            replyNameOrSpecialist: 
-            replyText = `Bilkul! Hamare paas senior specialist doctors mojood hain:\n• Dr. Muhammad Farooq (Internal Medicine)\n• Dr. Ayesha Siddiqa (Gynecology)\n• Dr. Tariq Mahmood Alvi (Nephrology & Dialysis)\n• Dr. Bilal Hassan (Eye Specialist)\n\nAap kis doctor se appointment book karna chahte hain? Main abhi form open kar deta hoon.`;
-          } else {
-            replyText = `I can help you schedule an appointment with our senior hospital specialists. Our consultants include Internal Medicine, Gynecology, Nephrology, and Eye specialists.\n\nWould you like me to open the appointment booking form for you right now?`;
-          }
-        } else if (intent === "donation_guide") {
-          replyText = `Jazakallah Khair for your charitable intent! 100% of your Zakat and Sadqah donations to Ali Welfare Trust Hospital directly support free dialysis for kidney patients and free eye surgeries.\n\nMeezan Bank Account Details:\n• Account Title: Muhammad Rafae Awan (Ali Welfare Trust)\n• Account Number: 09110108226635\n• IBAN: PK57MEZN0009110108226635\n• Branch: Qila Didar Singh (Code 0911)\n\nFeel free to share transfer receipts on WhatsApp (${content?.contact?.whatsapp || "+92 345 2074974"}) for confirmation.`;
-        } else if (intent === "greeting") {
-          if (isRomanUrdu) {
-            replyText = `Assalam-o-Alaikum! Main hoon "Ali Care", Ali Welfare Trust Hospital ka 24/7 AI Healthcare Consultant aur Problem Solver. Aaj main aap ki kis tarah madad kar sakta hoon? (Jaise appointment, doctor timings, ya medical advice)`;
-          } else {
-            replyText = `Assalam-o-Alaikum! I am Ali Care, your dedicated 24/7 AI Healthcare Consultant and Problem Solver for Ali Welfare Trust Hospital, Qila Didar Singh. How may I assist you with your health or hospital inquiries today?`;
-          }
-        } else {
-          if (isRomanUrdu) {
-            replyText = `Main aap ki baat samajh gaya hoon. Ali Welfare Trust Hospital, Qila Didar Singh mein hum 24/7 emergency, free dialysis, specialist OPDs aur welfare pharmacy provide kar rahe hain. \n\nAap ko mazeed kis bare mein maloomat chahiye? Doctor appointment, hospital timings, ya donations ke hawale se?`;
-          } else {
-            replyText = `Thank you for reaching out to Ali Welfare Trust Hospital, Qila Didar Singh. I am here to provide instant answers, medical triage advice, doctor schedules, and welfare assistance. How may I help you further?`;
-          }
-        }
-      }
-
-      // Intelligent Fallback Knowledge & Problem Solver Engine
       if (!replyText) {
-        const lower = message.toLowerCase();
-        if (lower.includes("dialysis") || lower.includes("kidney") || lower.includes("گردے") || lower.includes("ڈائیلاسز")) {
-          replyText = `Ali Welfare Trust Hospital operates a specialized Hemodialysis Center equipped with German Fresenius dialysis stations and an industrial Reverse Osmosis (RO) water purification plant.
-
-Key Details:
-• 100% Free Dialysis: Underprivileged renal patients receive completely free treatment funded by Zakat and Welfare contributions.
-• Round-the-Clock: Shifts operate 24/7 with continuous nephrology supervision.
-• Emergency Resuscitation: Acute kidney trauma and electrolyte balance units are always prepared.
-
-Would you like me to book a consultation with our Nephrologist (Dr. Tariq Mahmood Alvi) or guide you on welfare registration?`;
-        } else if (lower.includes("book") || lower.includes("appointment") || lower.includes("doctor") || lower.includes("consultation") || lower.includes("ڈاکٹر") || lower.includes("اپائنٹمنٹ")) {
-          replyText = `I can help you schedule an appointment with any of our senior hospital consultants:
-
-Available Specialists:
-• Dr. Muhammad Farooq — Internal Medicine (Mon–Sat, 9:00 AM – 3:00 PM)
-• Dr. Ayesha Siddiqa — Gynecology & Obstetrician (Mon–Sat, 10:00 AM – 2:00 PM)
-• Dr. Tariq Mahmood Alvi — Nephrology & Dialysis Care (Daily, 9:00 AM – 5:00 PM)
-• Dr. Bilal Hassan — Ophthalmology & Phaco Cataract (Mon–Fri, 9:00 AM – 2:00 PM)
-• Dr. Zubair Ahmad Khan — Radiology & 4D Color Doppler (Daily, 10:00 AM – 4:00 PM)
-
-To book immediately, please provide:
-1. Patient Full Name
-2. Contact Mobile Number
-3. Preferred Specialist or Department
-4. Preferred Date and Time
-
-Or you can click the "Book Doctor Appointment" button below to select your slot directly.`;
-        } else if (lower.includes("donate") || lower.includes("zakat") || lower.includes("sadqah") || lower.includes("bank") || lower.includes("meezan") || lower.includes("عطیات") || lower.includes("زکوۃ")) {
-          const bank = content?.donation?.bank || {};
-          replyText = `May Allah reward you generously for your compassion. 100% of donations to Ali Welfare Trust Hospital directly fund free kidney dialysis sessions, cataract eye surgeries, and medicines for patients in need.
-
-Official Meezan Bank Account Details:
-• Bank Name: ${bank.bankName || "Meezan Bank Ltd."}
-• Account Title: ${bank.accountTitle || "Muhammad Rafae Awan (Ali Welfare Trust)"}
-• Account Number: ${bank.accountNo || "09110108226635"}
-• IBAN: ${bank.iban || "PK57MEZN0009110108226635"}
-• Branch: ${bank.branchName || "Qila Didar Singh Branch"} (Code: ${bank.branchCode || "0911"})
-• Tax Status: Approved Non-Profit Organization (Regd. #1142)
-
-Receipts & Proof: Send transfer receipts via WhatsApp to ${content?.contact?.whatsapp || "+92 345 2074974"} for instant confirmation.`;
-        } else if (lower.includes("emergency") || lower.includes("ambulance") || lower.includes("urgent") || lower.includes("ایمرجنسی")) {
-          replyText = `EMERGENCY ALERT: Our 24/7 Emergency Wing, Trauma Resuscitation Ward, and Welfare Pharmacy are open right now.
-
-• Emergency Hotline: ${content?.contact?.emergencyPhone || "03324711101"} (Direct line)
-• General Helpline: ${content?.contact?.helpline || "03364711100"}
-• WhatsApp Emergency Desk: +${content?.contact?.whatsapp || "923452074974"}
-• Location: Main Campus, Chahal Kalan Road, Qila Didar Singh, Gujranwala
-
-If this is a life-threatening emergency, please call our emergency hotline immediately.`;
-        } else {
-          replyText = `Peace be upon you, Sir. I am "Ali Care", your dedicated 24/7 AI Healthcare Consultant and General Problem Solver for Ali Welfare Trust Hospital, Qila Didar Singh.
-
-Respected Sir, I am at your service to assist with:
-1. Booking Appointments with our senior specialist doctors (Nephrology, Gynecology, Eye, Internal Medicine, Radiology)
-2. Patient Appointment Reminders & OPD visit preparation
-3. Guiding you step-by-step in making Zakat & Sadqah donations to our Meezan Bank account
-4. Inquiries regarding our 100% Free Kidney Dialysis program
-5. Direct emergency calls, routing, and solving any health or general knowledge problem from the web
-
-How may I assist you today, Sir?
-محترم جناب، میں آپ کی کیا خدمت کر سکتا ہوں؟`;
-        }
+        replyText = `Assalam-o-Alaikum! Main hoon "Ali Care", Ali Welfare Trust Hospital ka 24/7 AI Healthcare Consultant aur Problem Solver. \n\nAaj main aap ki tabiyat, doctor appointments, free dialysis program, ya Meezan Bank donations ke baray mein kis tarah madad kar sakta hoon? (Aap apna sawal Roman Urdu, Urdu ya English mein pooch sakte hain)`;
       }
 
       // Check if user is asking to book or schedule

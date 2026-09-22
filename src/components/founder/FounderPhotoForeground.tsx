@@ -32,7 +32,7 @@ export const FounderPhotoForeground: React.FC<FounderPhotoForegroundProps> = ({
             <img
               src={permanentPhotoSrc}
               alt="Late Nazar Hussain Alvi - Founder of Ali Welfare Trust Hospital"
-              className="w-full h-auto aspect-[4/5] object-cover object-top block transition-none filter-none"
+              className="w-full h-auto aspect-[4/5] object-cover object-[center_20%] block transition-none filter-none"
               style={{
                 imageRendering: 'auto',
                 WebkitFontSmoothing: 'antialiased',

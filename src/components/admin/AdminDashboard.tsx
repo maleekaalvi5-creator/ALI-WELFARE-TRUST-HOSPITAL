@@ -22,7 +22,8 @@ import {
   Building, 
   Phone, 
   RefreshCw,
-  ExternalLink
+  ExternalLink,
+  Download
 } from 'lucide-react';
 import { HospitalLogo } from '../HospitalLogo';
 
@@ -178,6 +179,24 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
+  // Export & Sync to Codebase (Download updated hospital-content.json for Vercel/GitHub deployment baking)
+  const handleExportCodebaseConfig = () => {
+    const payload = JSON.stringify(draft, null, 2);
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(payload);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "hospital-content.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+
+    setStatusMessage({
+      type: 'success',
+      text: 'Configuration successfully exported! Place this hospital-content.json file in public/data/ or src/data/ to bake all edits into your Vercel & GitHub deployments.'
+    });
+    setTimeout(() => setStatusMessage(null), 8000);
+  };
+
   // Mark changes
   const handleDraftChange = (newDraft: HospitalContent) => {
     setDraft(newDraft);
@@ -281,6 +300,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <span>Save Live Changes</span>
                 </>
               )}
+            </button>
+
+            {/* Export & Sync to Codebase for Vercel/GitHub */}
+            <button
+              type="button"
+              onClick={handleExportCodebaseConfig}
+              className="px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md transition-all active:scale-95"
+              title="Download updated configuration to bake edits into GitHub & Vercel codebase"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline">Export & Sync to Codebase</span>
             </button>
 
             {/* Preview Public Site */}
