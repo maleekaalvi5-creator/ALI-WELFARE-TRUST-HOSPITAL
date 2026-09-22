@@ -232,7 +232,14 @@ let geminiClient: GoogleGenAI | null = null;
 function getGeminiClient(): GoogleGenAI | null {
   if (!geminiClient && process.env.GEMINI_API_KEY) {
     try {
-      geminiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      geminiClient = new GoogleGenAI({
+        apiKey: process.env.GEMINI_API_KEY,
+        httpOptions: {
+          headers: {
+            'User-Agent': 'aistudio-build',
+          }
+        }
+      });
     } catch (err) {
       console.warn("[Gemini API] Failed to initialize GoogleGenAI:", err);
     }
@@ -653,7 +660,7 @@ ${contactSummary}
           let response: any = null;
           try {
             response = await client.models.generateContent({
-              model: "gemini-2.5-flash",
+              model: "gemini-3.8-flash",
               contents,
               config: {
                 systemInstruction: systemPrompt,
@@ -661,13 +668,23 @@ ${contactSummary}
               }
             });
           } catch (searchErr) {
-            response = await client.models.generateContent({
-              model: "gemini-2.5-flash",
-              contents,
-              config: {
-                systemInstruction: systemPrompt
-              }
-            });
+            try {
+              response = await client.models.generateContent({
+                model: "gemini-3.8-flash",
+                contents,
+                config: {
+                  systemInstruction: systemPrompt
+                }
+              });
+            } catch (fallbackErr) {
+              response = await client.models.generateContent({
+                model: "gemini-3.6-flash",
+                contents,
+                config: {
+                  systemInstruction: systemPrompt
+                }
+              });
+            }
           }
 
           if (response && response.text) {

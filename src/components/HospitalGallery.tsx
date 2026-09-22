@@ -3,10 +3,14 @@ import { motion } from 'motion/react';
 import { Image as ImageIcon, Eye, MapPin, X } from 'lucide-react';
 import { GALLERY_ITEMS } from '../data/hospitalData';
 import { GalleryItem } from '../types';
+import { useHospitalContent } from '../context/HospitalContentContext';
 
 export const HospitalGallery: React.FC = () => {
+  const { content } = useHospitalContent();
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
   const [activePhoto, setActivePhoto] = useState<GalleryItem | null>(null);
+
+  const galleryItems = content?.campus?.facilities?.length ? content.campus.facilities : GALLERY_ITEMS;
 
   const filters = [
     { id: 'all', label: 'All Views' },
@@ -17,8 +21,8 @@ export const HospitalGallery: React.FC = () => {
   ];
 
   const filteredItems = selectedFilter === 'all'
-    ? GALLERY_ITEMS
-    : GALLERY_ITEMS.filter((item) => item.category === selectedFilter);
+    ? galleryItems
+    : galleryItems.filter((item) => item.category === selectedFilter);
 
   return (
     <section id="gallery" className="py-8 sm:py-12 bg-[#f7fafb] relative">

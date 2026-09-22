@@ -35,6 +35,7 @@ import {
   Pause
 } from 'lucide-react';
 import { HOSPITAL_INFO, GALLERY_ITEMS, DEPARTMENTS } from '../data/hospitalData';
+import { useHospitalContent } from '../context/HospitalContentContext';
 
 interface CampusPageProps {
   onNavigateHome: () => void;
@@ -244,7 +245,9 @@ export const CampusPage: React.FC<CampusPageProps> = ({
     }
   ];
 
-  const campusPhotos = [
+  const { content } = useHospitalContent();
+
+  const defaultCampusPhotos = [
     {
       id: "cp-1",
       title: "Main Hospital Entrance & Urdu Signboard",
@@ -288,6 +291,16 @@ export const CampusPage: React.FC<CampusPageProps> = ({
       desc: "Specialized clinical stations with medical-grade lighting, oxygen lines, and sterile curtains."
     }
   ];
+
+  const campusPhotos = content?.campus?.photoFrames?.length
+    ? content.campus.photoFrames.map((f, idx) => ({
+        id: f.id || `cp-${idx}`,
+        title: f.title,
+        category: (idx % 4 === 0) ? 'exterior' : (idx % 4 === 1) ? 'campus' : (idx % 4 === 2) ? 'clinical' : 'wards',
+        imageUrl: f.imageUrl,
+        desc: f.caption || f.dateAdded || "Hospital Campus View"
+      }))
+    : defaultCampusPhotos;
 
   const filteredPhotos = galleryFilter === 'all' 
     ? campusPhotos 
