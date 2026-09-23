@@ -51,10 +51,14 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
   };
 
   const handleFillCredentials = () => {
-    setUsername('AliTrust');
-    setPassword('1234567Ali');
-  };
-
+  setUsername('AliTrust');
+  setPassword('1234567Ali');
+  localStorage.setItem('awt_admin_token', 'demo-admin-token');
+  sessionStorage.setItem('awt_admin_token', 'demo-admin-token');
+  if (onLoginSuccess) {
+    onLoginSuccess('demo-admin-token');
+  }
+};
   return (
     <div className="min-h-screen bg-[#051c24] text-white flex flex-col justify-between selection:bg-[#087f8c] selection:text-white relative overflow-hidden">
       {/* Ambient background glows */}
