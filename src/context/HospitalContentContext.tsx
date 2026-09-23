@@ -66,23 +66,21 @@ export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = 
   // Function to fetch latest content from the server
   const fetchContent = useCallback(async () => {
     try {
-      const res = await fetch(`/api/content?t=${Date.now()}`, {
-        cache: 'no-store',
-        headers: {
-          'Pragma': 'no-cache',
-          'Cache-Control': 'no-cache, no-store, must-revalidate'
+      if (typeof window !== 'undefined') {
+        const savedData = localStorage.getItem('awt_hospital_live_content_v2') || localStorage.getItem('siteData');
+        if (savedData) {
+          const parsed = JSON.parse(savedData);
+          if (parsed && typeof parsed === 'object') {
+            setContent(parsed);
+            setSyncStatus('synced');
+            return;
+          }
         }
-      });
-      if (res.ok) {
-        const data = await res.json();
-        if (data && data.header) {
-          setContent(data);
-          const newTime = data.updatedAt || Date.now();
-          const newRev = data.revision || 1;
-          setLastUpdated(newTime);
-          setRevision(newRev);
-          persistLocally(data);
-          setSyncStatus('synced');
+      }
+    } catch (err) {
+      console.warn('LocalStorage load error:', err);
+    }
+  }, []);
         }
       }
     } catch {
