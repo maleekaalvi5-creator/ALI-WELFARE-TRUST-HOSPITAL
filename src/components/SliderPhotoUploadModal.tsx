@@ -268,7 +268,7 @@ export const SliderPhotoUploadModal: React.FC<SliderPhotoUploadModalProps> = ({
     }
   };
 
-  // Permanently Delete Slide: Removes record from server JSON, recalculates order, zero blank slides
+  // Permanently Delete Slide: Removes record from state/localStorage, recalculates order
   const handleDeleteCurrentSlide = async () => {
     if (slides.length <= 1) {
       setStatusMessage({ type: 'error', text: 'At least one slide must remain in the hero slider.' });
@@ -279,27 +279,21 @@ export const SliderPhotoUploadModal: React.FC<SliderPhotoUploadModalProps> = ({
     setIsDeleting(true);
     setStatusMessage(null);
 
-    const targetSlide = slides[activeTab];
-
     try {
-      const response = await fetch('/api/delete-slider-photo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          slideIndex: activeTab,
-          slideId: targetSlide?.id
-        })
-      });
+      const updatedSlides = slides.filter((_, idx) => idx !== activeTab);
+      const updatedContent = {
+        ...content,
+        hero: {
+          ...(content.hero || {}),
+          slides: updatedSlides
+        }
+      };
 
-      const resJson = await response.json();
-      if (!response.ok || !resJson.success) {
-        throw new Error(resJson.error || "Failed to delete slide from server.");
+      const token = localStorage.getItem('awt_admin_token') || 'awt_token';
+      const result = await saveContent(updatedContent, token, true);
+      if (!result.success) {
+        throw new Error(result.error || "Failed to delete slide.");
       }
-
-      // Remove stale localStorage
-      try {
-        localStorage.removeItem('awt_custom_hero_slides');
-      } catch {}
 
       await reloadContent();
 
@@ -326,12 +320,18 @@ export const SliderPhotoUploadModal: React.FC<SliderPhotoUploadModalProps> = ({
 
     setIsSaving(true);
     try {
-      const res = await fetch('/api/save-hero-slides', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slides: reordered })
-      });
-      if (!res.ok) throw new Error("Failed to reorder slides.");
+      const updatedContent = {
+        ...content,
+        hero: {
+          ...(content.hero || {}),
+          slides: reordered
+        }
+      };
+
+      const token = localStorage.getItem('awt_admin_token') || 'awt_token';
+      const result = await saveContent(updatedContent, token, true);
+      if (!result.success) throw new Error(result.error || "Failed to reorder slides.");
+
       await reloadContent();
       const newIdx = activeTab - 1;
       setActiveTab(newIdx);
@@ -354,12 +354,18 @@ export const SliderPhotoUploadModal: React.FC<SliderPhotoUploadModalProps> = ({
 
     setIsSaving(true);
     try {
-      const res = await fetch('/api/save-hero-slides', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slides: reordered })
-      });
-      if (!res.ok) throw new Error("Failed to reorder slides.");
+      const updatedContent = {
+        ...content,
+        hero: {
+          ...(content.hero || {}),
+          slides: reordered
+        }
+      };
+
+      const token = localStorage.getItem('awt_admin_token') || 'awt_token';
+      const result = await saveContent(updatedContent, token, true);
+      if (!result.success) throw new Error(result.error || "Failed to reorder slides.");
+
       await reloadContent();
       const newIdx = activeTab + 1;
       setActiveTab(newIdx);
