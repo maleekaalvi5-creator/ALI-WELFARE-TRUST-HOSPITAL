@@ -63,7 +63,7 @@ export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = 
     }
   };
 
-  // Function to fetch latest content from the server
+  // Function to fetch latest content from local storage / cache
   const fetchContent = useCallback(async () => {
     try {
       if (typeof window !== 'undefined') {
@@ -79,14 +79,6 @@ export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = 
       }
     } catch (err) {
       console.warn('LocalStorage load error:', err);
-    }
-  }, []);
-        }
-      }
-    } catch {
-      if (!navigator.onLine) {
-        setSyncStatus('offline');
-      }
     }
   }, []);
 
