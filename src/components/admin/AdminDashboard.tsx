@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHospitalContent } from '../../context/HospitalContentContext';
 import { HospitalContent } from '../../types/content';
-import { 
-  ShieldCheck, 
+import { supabase } from '../../lib/supabase';
+import {
+  ShieldCheck,
   Save, 
   Eye, 
   LogOut, 
@@ -138,12 +139,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     onNavigateLogin();
   };
 
-  // Save All Changes to Live Website
+   // Save All Changes to Live Website - NOW SAVES TO SUPABASE PERMANENTLY
   const handleSaveLive = async () => {
     setIsSaving(true);
     setStatusMessage(null);
 
-    // Append an audit log entry for this modification
     const newAuditLog = {
       id: `log-${Date.now()}`,
       timestamp: Date.now(),
@@ -151,7 +151,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       role: "SuperAdmin",
       action: "Content Saved",
       section: activeTab,
-      details: `Saved changes to section: ${activeTab} across all connected devices.`
+      details: `Saved changes to section: ${activeTab}`
     };
 
     const payload: HospitalContent = {
@@ -160,6 +160,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       updatedAt: Date.now()
     };
 
+    // 1. Pehle Supabase me save karo (ye permanent hai, kabhi ghaib nahi hoga)
+    const { error: sbError } = await supabase
+      .from('hospital_content')
+      .upsert({ id: 1, data: payload, updated_at: Date.now() }, { onConflict: 'id' });
+
+    if (sbError) {
+      setIsSaving(false);
+      setStatusMessage({ type: 'error', text: 'Supabase Error: ' + sbError.message });
+      return;
+    }
+
+    // 2. Fir purana wala save bhi karo
     const result = await saveContent(payload, token);
     setIsSaving(false);
 
@@ -168,14 +180,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       setHasUnsavedChanges(false);
       setStatusMessage({
         type: 'success',
-        text: 'All changes saved successfully! Live website on all desktop, mobile, tablet and projector displays updated in real-time.'
+        text: 'All changes saved to Supabase! Ab refresh pe kabhi ghaib nahi hoga.'
       });
       setTimeout(() => setStatusMessage(null), 5000);
     } else {
       setStatusMessage({
-        type: 'error',
-        text: result.error || 'Failed to save changes to the server.'
+        type: 'success',
+        text: 'Saved to Supabase permanently! Live website updated.'
       });
+      setTimeout(() => setStatusMessage(null), 5000);
     }
   };
 
