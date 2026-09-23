@@ -30,23 +30,16 @@ const BROADCAST_CHANNEL_NAME = 'awt_hospital_cross_tab_sync';
 
 export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<HospitalContent>(() => {
-    try {
-      const siteDataCached = localStorage.getItem('siteData');
-      if (siteDataCached) {
-        const parsed = JSON.parse(siteDataCached);
-        if (parsed && (parsed.header || parsed.hero)) {
-          return parsed;
-        }
+    if (typeof window !== 'undefined') {
+      try {
+        const v2Data = localStorage.getItem('awt_hospital_live_content_v2');
+        if (v2Data) return JSON.parse(v2Data);
+
+        const siteData = localStorage.getItem('siteData');
+        if (siteData) return JSON.parse(siteData);
+      } catch (e) {
+        console.error('Failed to parse cached content:', e);
       }
-      const cached = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (parsed && (parsed.header || parsed.hero)) {
-          return parsed;
-        }
-      }
-    } catch (e) {
-      console.warn('Failed to parse cached content:', e);
     }
     return DEFAULT_HOSPITAL_CONTENT;
   });
