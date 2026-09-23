@@ -35,7 +35,7 @@ export const SliderPhotoUploadModal: React.FC<SliderPhotoUploadModalProps> = ({
   slides,
   onSlideUpdated
 }) => {
-  const { reloadContent } = useHospitalContent();
+  const { content, saveContent, reloadContent } = useHospitalContent();
 
   const [activeTab, setActiveTab] = useState<number>(0);
   
@@ -179,19 +179,19 @@ export const SliderPhotoUploadModal: React.FC<SliderPhotoUploadModalProps> = ({
         buttonUrl: "#booking"
       };
 
-      const res = await fetch('/api/upload-slider-photo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          imageUrl: newSlideData.image,
-          isNewSlide: true,
-          slideData: newSlideData
-        })
-      });
+      const updatedSlides = [...slides, newSlideData];
+      const updatedContent = {
+        ...content,
+        hero: {
+          ...(content.hero || {}),
+          slides: updatedSlides
+        }
+      };
 
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "Failed to create new slide on server.");
+      const token = localStorage.getItem('awt_admin_token') || 'awt_token';
+      const result = await saveContent(updatedContent, token, true);
+      if (!result.success) {
+        throw new Error(result.error || "Failed to add slide.");
       }
 
       await reloadContent();
@@ -236,28 +236,21 @@ export const SliderPhotoUploadModal: React.FC<SliderPhotoUploadModalProps> = ({
     };
 
     try {
-      const response = await fetch('/api/upload-slider-photo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          dataUrl: hasNewFile ? newFileDataUrl : undefined,
-          imageUrl: !hasNewFile ? targetSlide.image : undefined,
-          filename: newFileName || 'slide_photo',
-          slideIndex: activeTab,
-          isNewSlide: false,
-          slideData: slideDataPayload
-        })
-      });
+      const updatedSlides = [...slides];
+      updatedSlides[activeTab] = slideDataPayload;
+      const updatedContent = {
+        ...content,
+        hero: {
+          ...(content.hero || {}),
+          slides: updatedSlides
+        }
+      };
 
-      const resJson = await response.json();
-      if (!response.ok || !resJson.success) {
-        throw new Error(resJson.error || "Failed to save slide to server.");
+      const token = localStorage.getItem('awt_admin_token') || 'awt_token';
+      const result = await saveContent(updatedContent, token, true);
+      if (!result.success) {
+        throw new Error(result.error || "Failed to save slide.");
       }
-
-      // Purge any stale localStorage
-      try {
-        localStorage.removeItem('awt_custom_hero_slides');
-      } catch {}
 
       await reloadContent();
 

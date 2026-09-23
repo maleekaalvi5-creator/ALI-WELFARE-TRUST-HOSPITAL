@@ -150,59 +150,24 @@ export const FounderMemorial: React.FC = () => {
   const zaminInputRef = useRef<HTMLInputElement>(null);
   const khawarInputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-sync any existing photos from localStorage to the server filesystem on mount
+  // Load saved photos from localStorage on mount
   useEffect(() => {
-    const autoSyncPhotos = async () => {
-      const savedFounder = localStorage.getItem('ali_hospital_founder_custom_photo');
-      const savedZamin = localStorage.getItem('ali_hospital_leader_zamin-alvi');
-      const savedKhawar = localStorage.getItem('ali_hospital_leader_khawar-awan');
-
-      const toSync: Array<{ id: string; dataUrl: string }> = [];
-      if (savedFounder && savedFounder.startsWith('data:image')) {
-        toSync.push({ id: 'nazar-alvi', dataUrl: savedFounder });
-      }
+    const savedFounder = localStorage.getItem('ali_hospital_founder_custom_photo');
+    if (savedFounder && savedFounder.startsWith('data:image')) {
+      setCustomFounderPhoto(savedFounder);
+    }
+    const savedZamin = localStorage.getItem('ali_hospital_leader_zamin-alvi');
+    const savedKhawar = localStorage.getItem('ali_hospital_leader_khawar-awan');
+    setUploadedLeaderPhotos((prev) => {
+      const updated = { ...prev };
       if (savedZamin && savedZamin.startsWith('data:image')) {
-        toSync.push({ id: 'zamin-alvi', dataUrl: savedZamin });
+        updated['zamin-alvi'] = savedZamin;
       }
       if (savedKhawar && savedKhawar.startsWith('data:image')) {
-        toSync.push({ id: 'khawar-awan', dataUrl: savedKhawar });
+        updated['khawar-awan'] = savedKhawar;
       }
-
-      for (const item of toSync) {
-        try {
-          await fetch('/api/upload-leadership-photo', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(item),
-          });
-          console.log(`[Auto-Sync] Permanently saved ${item.id} to server files`);
-        } catch (e) {
-          console.warn(`[Auto-Sync] Failed for ${item.id}:`, e);
-        }
-      }
-    };
-
-    // 1. Fetch permanent photos from server manifest so images never reset across devices or published views
-    fetch('/leadership-manifest.json?t=' + Date.now())
-      .then((res) => res.json())
-      .then((manifest) => {
-        if (manifest && manifest['nazar-alvi']?.url) {
-          setCustomFounderPhoto(manifest['nazar-alvi'].url);
-        }
-        setUploadedLeaderPhotos((prev) => {
-          const updated = { ...prev };
-          if (manifest && manifest['zamin-alvi']?.url && !updated['zamin-alvi']) {
-            updated['zamin-alvi'] = manifest['zamin-alvi'].url;
-          }
-          if (manifest && manifest['khawar-awan']?.url && !updated['khawar-awan']) {
-            updated['khawar-awan'] = manifest['khawar-awan'].url;
-          }
-          return updated;
-        });
-      })
-      .catch(() => {});
-
-    autoSyncPhotos();
+      return updated;
+    });
   }, []);
 
   const handleUploadPhoto = (id: string, file: File) => {
@@ -236,7 +201,6 @@ export const FounderMemorial: React.FC = () => {
           ctx.drawImage(img, 0, 0, width, height);
           const dataUrl = canvas.toDataURL('image/jpeg', 0.90);
 
-          // 1. Instant local client display & backup
           if (id === 'nazar-alvi' || id === 'founder') {
             setCustomFounderPhoto(dataUrl);
             localStorage.setItem('ali_hospital_founder_custom_photo', dataUrl);
@@ -245,24 +209,9 @@ export const FounderMemorial: React.FC = () => {
             localStorage.setItem(`ali_hospital_leader_${id}`, dataUrl);
           }
 
-          // 2. Permanently save to server filesystem so it persists across publish & all devices
-          fetch('/api/upload-leadership-photo', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id, dataUrl }),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              setSavingTarget(null);
-              setSyncStatus(`Photo permanently saved to project files! It will stay permanent across all devices and published links.`);
-              setTimeout(() => setSyncStatus(null), 5000);
-            })
-            .catch((err) => {
-              console.warn('Server write error, kept in local storage:', err);
-              setSavingTarget(null);
-              setSyncStatus(`Photo saved in browser! Server sync will re-try automatically.`);
-              setTimeout(() => setSyncStatus(null), 5000);
-            });
+          setSavingTarget(null);
+          setSyncStatus('Photo successfully saved to browser storage!');
+          setTimeout(() => setSyncStatus(null), 4000);
         }
       };
       img.src = e.target?.result as string;

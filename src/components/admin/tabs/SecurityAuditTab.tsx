@@ -53,7 +53,7 @@ export const SecurityAuditTab: React.FC<SecurityAuditTabProps> = ({
         },
         body: JSON.stringify({ currentPassword, newPassword })
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       setIsChangingPassword(false);
 
       if (res.ok && data.success) {

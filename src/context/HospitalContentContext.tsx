@@ -31,10 +31,17 @@ const BROADCAST_CHANNEL_NAME = 'awt_hospital_cross_tab_sync';
 export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<HospitalContent>(() => {
     try {
+      const siteDataCached = localStorage.getItem('siteData');
+      if (siteDataCached) {
+        const parsed = JSON.parse(siteDataCached);
+        if (parsed && (parsed.header || parsed.hero)) {
+          return parsed;
+        }
+      }
       const cached = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (cached) {
         const parsed = JSON.parse(cached);
-        if (parsed && parsed.header) {
+        if (parsed && (parsed.header || parsed.hero)) {
           return parsed;
         }
       }
@@ -230,7 +237,7 @@ export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = 
     };
   }, [fetchContent]);
 
-  // Save changes from Admin Panel with Conflict Detection & Instant Cross-Device Broadcast
+  // Save changes from Admin Panel directly into localStorage (pure static client-side save)
   const saveContent = async (
     newContent: HospitalContent,
     token: string,
@@ -240,45 +247,8 @@ export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = 
     setSyncStatus('saving');
 
     try {
-      const payload = {
-        ...newContent,
-        clientLastUpdated: lastUpdated,
-        clientRevision: revision,
-        forceOverwrite
-      };
-
-      const res = await fetch('/api/admin/content', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      if (res.status === 409 || data.conflict) {
-        setIsLoading(false);
-        setSyncStatus('conflict');
-        return {
-          success: false,
-          conflict: true,
-          error: data.error || 'This content was modified on another device. Review the latest version before saving.',
-          serverUpdatedAt: data.serverUpdatedAt,
-          serverRevision: data.serverRevision
-        };
-      }
-
-      if (!res.ok) {
-        setIsLoading(false);
-        setSyncStatus('synced');
-        return { success: false, error: data.error || `Server error (${res.status})` };
-      }
-
-      // Update local state with newly assigned server revision and timestamp
-      const savedTime = data.updatedAt || Date.now();
-      const savedRev = data.revision || revision + 1;
+      const savedTime = Date.now();
+      const savedRev = revision + 1;
       const finalContent = {
         ...newContent,
         updatedAt: savedTime,
@@ -288,8 +258,17 @@ export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = 
       setContent(finalContent);
       setLastUpdated(savedTime);
       setRevision(savedRev);
-      persistLocally(finalContent);
+
+      // Save all current admin site state directly into localStorage as requested
+      try {
+        localStorage.setItem('siteData', JSON.stringify(finalContent));
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(finalContent));
+      } catch (e) {
+        console.warn('Failed to save to localStorage:', e);
+      }
+
       setSyncStatus('synced');
+      setIsLoading(false);
 
       // Notify other tabs immediately
       if (broadcastChannelRef.current) {
@@ -299,12 +278,11 @@ export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = 
         });
       }
 
-      setIsLoading(false);
       return { success: true };
     } catch (err: any) {
       setIsLoading(false);
-      setSyncStatus(navigator.onLine ? 'synced' : 'offline');
-      return { success: false, error: err.message || 'Network error occurred while saving.' };
+      setSyncStatus('synced');
+      return { success: false, error: err.message || 'Failed to save changes.' };
     }
   };
 

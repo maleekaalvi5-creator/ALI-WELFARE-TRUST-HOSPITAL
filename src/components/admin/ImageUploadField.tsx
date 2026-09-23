@@ -23,12 +23,12 @@ export const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
   const [mode, setMode] = useState<'upload' | 'url'>('upload');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (file.size > 20 * 1024 * 1024) {
-      setUploadError('File exceeds 20MB limit. Please choose a smaller photo.');
+    if (file.size > 10 * 1024 * 1024) {
+      setUploadError('File exceeds 10MB limit. Please choose a smaller photo.');
       return;
     }
 
@@ -36,33 +36,14 @@ export const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
     setUploadError(null);
 
     const reader = new FileReader();
-    reader.onload = async () => {
-      const dataUrl = reader.result as string;
-      try {
-        const res = await fetch('/api/admin/upload-image', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            dataUrl,
-            filename: file.name.replace(/\.[^/.]+$/, ""),
-            category
-          })
-        });
-
-        const data = await res.json();
-        if (res.ok && data.url) {
-          onChange(data.url);
-        } else {
-          setUploadError(data.error || 'Failed to upload photo to server');
-        }
-      } catch (err: any) {
-        setUploadError(err.message || 'Network upload error');
-      } finally {
-        setIsUploading(false);
-      }
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      onChange(base64String);
+      setIsUploading(false);
+    };
+    reader.onerror = () => {
+      setUploadError('Failed to read selected image file.');
+      setIsUploading(false);
     };
     reader.readAsDataURL(file);
   };
