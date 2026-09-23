@@ -26,26 +26,30 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
- const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorMessage(null);
-    setSuccessMessage(null);
-
-    if (!username.trim() || !password.trim()) {
-      setErrorMessage('Please enter both administrative username and secret key.');
-      return;
-    }
-
     setIsLoading(true);
+    setError('');
 
-    // Direct Login Bypass (Bina Kisi Backend API Fetch Ke)
+    // --- SECURE CHECK - Sirf yehi login hoga ---
+    const ADMIN_USER = 'AliTrust';
+    const ADMIN_PASS = 'AliTrust@2026#Secure'; // <-- Yahan apna naya strong password likho
+
     setTimeout(() => {
-      setIsLoading(false);
-      if (onLoginSuccess) {
-        onLoginSuccess('demo-admin-token');
+      if (username === ADMIN_USER && password === ADMIN_PASS) {
+        setIsLoading(false);
+        const token = 'awt-secure-token-' + Date.now();
+        localStorage.setItem('awt_admin_token', token);
+        sessionStorage.setItem('awt_admin_token', token);
+        if (onLoginSuccess) {
+          onLoginSuccess(token);
+        } else {
+          localStorage.setItem('isAdmin', 'true');
+          window.location.href = '/admin';
+        }
       } else {
-        localStorage.setItem('isAdmin', 'true');
-        window.location.href = '/admin';
+        setIsLoading(false);
+        setError('Invalid User ID or Password. Access Denied.');
       }
     }, 500);
   };
