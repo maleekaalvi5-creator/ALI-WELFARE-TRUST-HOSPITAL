@@ -145,13 +145,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
             <div>
               <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center justify-between">
                 <span>Administrative Password</span>
-                <button
-                  type="button"
-                  onClick={handleFillCredentials}
-                  className="text-[10px] text-amber-400/90 hover:text-amber-300 underline"
-                >
-                  Fill credentials
-                </button>
+              
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
