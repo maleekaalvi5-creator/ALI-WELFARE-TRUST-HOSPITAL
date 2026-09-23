@@ -26,7 +26,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
     setSuccessMessage(null);
@@ -38,38 +38,16 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
 
     setIsLoading(true);
 
-    try {
-      const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: username.trim(),
-          password: password.trim()
-        })
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        setErrorMessage(data.error || 'Authentication rejected. Invalid credentials.');
-        setIsLoading(false);
-        return;
-      }
-
-      setSuccessMessage('Credentials authenticated via scrypt. Initializing secure session...');
-      
-      // Store bearer token
-      localStorage.setItem('awt_admin_token', data.token);
-      sessionStorage.setItem('awt_admin_token', data.token);
-
-      setTimeout(() => {
-        onLoginSuccess(data.token);
-      }, 500);
-
-    } catch (err: any) {
-      setErrorMessage(err.message || 'Connection failure. Could not reach authentication server.');
+    // Direct Login Bypass (Bina Kisi Backend API Fetch Ke)
+    setTimeout(() => {
       setIsLoading(false);
-    }
+      if (onLoginSuccess) {
+        onLoginSuccess('demo-admin-token');
+      } else {
+        localStorage.setItem('isAdmin', 'true');
+        window.location.href = '/admin';
+      }
+    }, 500);
   };
 
   const handleFillCredentials = () => {
