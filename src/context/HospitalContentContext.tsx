@@ -178,45 +178,40 @@ export const HospitalContentProvider: React.FC<{ children: React.ReactNode }> = 
           // Auto-reconnect with exponential backoff fallback
           clearTimeout(reconnectTimeoutRef.current);
           reconnectTimeoutRef.current = setTimeout(() => {
-            if (active) {
-              connectSSE();
-              fetchContent();
-            }
-          }, 4000);
-        };
-      } catch {
-        setSyncStatus('offline');
-      }
-    };
-
-    connectSSE();
-    fetchContent();
-
-    // Online / Offline handlers
-    const handleOnline = () => {
-      setIsOnline(true);
-      setSyncStatus('connecting');
-      connectSSE();
+           if (active) {
       fetchContent();
-    };
+    }
+  }, 4000);
+};
+} catch {
+  setSyncStatus('synced');
+}
+};
 
-    const handleOffline = () => {
-      setIsOnline(false);
-      setSyncStatus('offline');
-    };
+fetchContent();
 
-    // Refetch when tab becomes active
-    const handleVisibility = () => {
-      if (document.visibilityState === 'visible') {
-        fetchContent();
-      }
-    };
+// Online / Offline handlers (Pure Client Persistence)
+const handleOnline = () => {
+  setIsOnline(true);
+  setSyncStatus('synced');
+  fetchContent();
+};
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-    window.addEventListener('visibilitychange', handleVisibility);
-    window.addEventListener('focus', fetchContent);
+const handleOffline = () => {
+  setIsOnline(false);
+  setSyncStatus('synced');
+};
 
+const handleVisibility = () => {
+  if (document.visibilityState === 'visible') {
+    fetchContent();
+  }
+};
+
+window.addEventListener('online', handleOnline);
+window.addEventListener('offline', handleOffline);
+window.addEventListener('visibilitychange', handleVisibility);
+window.addEventListener('focus', fetchContent);
     return () => {
       active = false;
       clearTimeout(reconnectTimeoutRef.current);
