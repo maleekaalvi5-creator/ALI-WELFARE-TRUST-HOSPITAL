@@ -49,7 +49,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onNaviga
       }
     }, 500);
   };
-
+ 
   const handleFillCredentials = () => {
   setUsername('AliTrust');
   setPassword('1234567Ali');
