@@ -109,6 +109,40 @@ function loadCentralContent(): any {
   return null;
 }
 
+// Async boot loader for Supabase site_settings table
+async function initSupabaseContent() {
+  if (supabaseAdmin) {
+    try {
+      console.log("[Supabase Sync] Fetching full website content from site_settings table...");
+      const { data, error } = await supabaseAdmin
+        .from('site_settings')
+        .select('value')
+        .eq('key', 'full_content')
+        .single();
+      
+      if (!error && data && data.value && data.value.header) {
+        liveContent = data.value;
+        currentRevision = data.value.revision || 1;
+        lastUpdatedAt = data.value.updatedAt || Date.now();
+        fs.writeFileSync(PRIMARY_CONTENT_FILE, JSON.stringify(liveContent, null, 2), "utf-8");
+        fs.writeFileSync(PUBLIC_CONTENT_FILE, JSON.stringify(liveContent, null, 2), "utf-8");
+        console.log("[Supabase Sync] Successfully loaded website content from Supabase site_settings.");
+      } else if (error) {
+        console.log("[Supabase Sync] site_settings 'full_content' not found or error:", error.message);
+        // If local content exists, seed Supabase with it
+        if (liveContent) {
+          await supabaseAdmin
+            .from('site_settings')
+            .upsert({ key: 'full_content', value: liveContent, updated_at: new Date().toISOString() }, { onConflict: 'key' });
+          console.log("[Supabase Sync] Seeded Supabase site_settings with initial content.");
+        }
+      }
+    } catch (e: any) {
+      console.error("[Supabase Sync] Boot initialization error:", e.message);
+    }
+  }
+}
+
 function saveCentralContent(content: any): { success: boolean; error?: string } {
   try {
     currentRevision++;
@@ -121,6 +155,20 @@ function saveCentralContent(content: any): { success: boolean; error?: string } 
     fs.writeFileSync(PRIMARY_CONTENT_FILE, payload, "utf-8");
     fs.writeFileSync(PUBLIC_CONTENT_FILE, payload, "utf-8");
 
+    // Explicitly save to Supabase site_settings table
+    if (supabaseAdmin) {
+      supabaseAdmin
+        .from('site_settings')
+        .upsert({ key: 'full_content', value: content, updated_at: new Date().toISOString() }, { onConflict: 'key' })
+        .then(({ error }) => {
+          if (error) {
+            console.error("[Supabase Sync] Error upserting full_content to site_settings:", error);
+          } else {
+            console.log("[Supabase Sync] Successfully saved full_content to Supabase site_settings table.");
+          }
+        });
+    }
+
     // Broadcast update immediately to all connected desktop and mobile clients
     broadcastContentUpdate(content);
     return { success: true };
@@ -132,6 +180,7 @@ function saveCentralContent(content: any): { success: boolean; error?: string } 
 
 // Load on boot
 loadCentralContent();
+initSupabaseContent();
 
 // -------------------------------------------------------------------------
 // Central Appointments Store
@@ -328,9 +377,22 @@ async function startServer() {
   // -----------------------------------------------------------------------
   // DYNAMIC HOSPITAL CONTENT API (Cross-Device Live Sync with Conflict Detection)
   // -----------------------------------------------------------------------
-  // Public GET: returns current live content with cache-invalidation headers
-  app.get("/api/content", (req, res) => {
+  // Public GET: returns current live content with cache-invalidation headers (fetching directly from Supabase site_settings when available)
+  app.get("/api/content", async (req, res) => {
     try {
+      if (supabaseAdmin) {
+        const { data, error } = await supabaseAdmin
+          .from('site_settings')
+          .select('value')
+          .eq('key', 'full_content')
+          .single();
+        if (!error && data && data.value && data.value.header) {
+          liveContent = data.value;
+          currentRevision = data.value.revision || currentRevision;
+          lastUpdatedAt = data.value.updatedAt || lastUpdatedAt;
+        }
+      }
+
       const content = liveContent || loadCentralContent();
       if (content) {
         res.setHeader("ETag", `"${currentRevision}-${lastUpdatedAt}"`);
@@ -343,6 +405,10 @@ async function startServer() {
       return res.json({ initialized: false });
     } catch (err: any) {
       console.error("[Content GET Error]", err);
+      const content = liveContent || loadCentralContent();
+      if (content) {
+        return res.json({ ...content, revision: currentRevision, updatedAt: lastUpdatedAt });
+      }
       return res.status(500).json({ error: err.message });
     }
   });

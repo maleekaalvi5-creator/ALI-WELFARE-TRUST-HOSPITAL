@@ -28,6 +28,7 @@ import {
   DollarSign
 } from 'lucide-react';
 import { BANK_DETAILS, DONATION_CAUSES, HOSPITAL_INFO } from '../data/hospitalData';
+import { useHospitalContent } from '../context/HospitalContentContext';
 
 interface DonatePageProps {
   onNavigateHome: () => void;
@@ -38,6 +39,8 @@ export const DonatePage: React.FC<DonatePageProps> = ({
   onNavigateHome,
   onBookAppointment,
 }) => {
+  const { content } = useHospitalContent();
+  const bank = content?.donation?.bank || BANK_DETAILS;
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [selectedCauseId, setSelectedCauseId] = useState<string>(DONATION_CAUSES[0].id);
   const [donationAmount, setDonationAmount] = useState<number>(DONATION_CAUSES[0].suggestedAmount);
@@ -285,7 +288,7 @@ export const DonatePage: React.FC<DonatePageProps> = ({
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200">
                   <span className="text-slate-500 font-medium">Bank Name</span>
                   <span className="font-extrabold text-[#0f172a] text-right">
-                    {BANK_DETAILS.bankName}
+                    {bank.bankName}
                   </span>
                 </div>
 
@@ -293,7 +296,7 @@ export const DonatePage: React.FC<DonatePageProps> = ({
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200">
                   <span className="text-slate-500 font-medium">Account Title</span>
                   <span className="font-black text-emerald-900 tracking-wide text-right">
-                    {BANK_DETAILS.accountTitle}
+                    {bank.accountTitle}
                   </span>
                 </div>
 
@@ -302,11 +305,11 @@ export const DonatePage: React.FC<DonatePageProps> = ({
                   <div>
                     <span className="text-slate-500 font-medium block">Account Number</span>
                     <span className="font-mono font-bold text-sm text-[#0f172a]">
-                      {BANK_DETAILS.accountNo}
+                      {bank.accountNo}
                     </span>
                   </div>
                   <button
-                    onClick={() => handleCopy(BANK_DETAILS.accountNo, 'acc')}
+                    onClick={() => handleCopy(bank.accountNo, 'acc')}
                     className="btn-3d-gold px-3 py-1.5 rounded-lg text-xs font-bold text-[#3a1d04] flex items-center gap-1 cursor-pointer"
                   >
                     {copiedField === 'acc' ? <Check className="w-3.5 h-3.5 text-emerald-800" /> : <Copy className="w-3.5 h-3.5" />}
@@ -319,11 +322,11 @@ export const DonatePage: React.FC<DonatePageProps> = ({
                   <div className="pr-2">
                     <span className="text-slate-500 font-medium block">IBAN (International Transfer)</span>
                     <span className="font-mono font-extrabold text-xs sm:text-sm text-emerald-950 break-all">
-                      PK57**** **** 6635
+                      {bank.iban}
                     </span>
                   </div>
                   <button
-                    onClick={() => handleCopy(BANK_DETAILS.iban, 'iban')}
+                    onClick={() => handleCopy(bank.iban, 'iban')}
                     className="btn-3d-gold px-3 py-1.5 rounded-lg text-xs font-bold text-[#3a1d04] flex items-center gap-1 cursor-pointer flex-shrink-0"
                   >
                     {copiedField === 'iban' ? <Check className="w-3.5 h-3.5 text-emerald-800" /> : <Copy className="w-3.5 h-3.5" />}
@@ -335,7 +338,7 @@ export const DonatePage: React.FC<DonatePageProps> = ({
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200">
                   <span className="text-slate-500 font-medium">Branch</span>
                   <span className="font-bold text-slate-800 text-right">
-                    {BANK_DETAILS.branchName} (Code: {BANK_DETAILS.branchCode})
+                    {bank.branchName} (Code: {bank.branchCode})
                   </span>
                 </div>
 
@@ -354,7 +357,7 @@ export const DonatePage: React.FC<DonatePageProps> = ({
                   <span>EasyPaisa / JazzCash / Raast Instructions</span>
                 </div>
                 <p className="text-slate-700 leading-relaxed">
-                  Open your <strong>EasyPaisa</strong>, <strong>JazzCash</strong>, or mobile banking app → Select <strong>Bank Transfer</strong> → Choose <strong>Meezan Bank</strong> → Enter Account <strong>{BANK_DETAILS.accountNo}</strong> or IBAN.
+                  Open your <strong>EasyPaisa</strong>, <strong>JazzCash</strong>, or mobile banking app → Select <strong>Bank Transfer</strong> → Choose <strong>Meezan Bank</strong> → Enter Account <strong>{bank.accountNo}</strong> or IBAN.
                 </p>
                 <div className="text-emerald-900 font-semibold pt-1 flex items-center gap-1">
                   <Phone className="w-3.5 h-3.5 text-emerald-700" />
