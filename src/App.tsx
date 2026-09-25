@@ -17,7 +17,7 @@ import { AppointmentModal } from './components/AppointmentModal';
 import { MyAppointmentsModal } from './components/MyAppointmentsModal';
 import { DonationPopupBanner } from './components/DonationPopupBanner';
 import { HospitalAIAgent } from './components/HospitalAIAgent';
-import { AdminLogin } from './components/admin/AdminLogin';
+import AdminLogin from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { DoctorProfilePage } from './components/DoctorProfilePage';
 import { FounderPage } from './components/founder/FounderPage';
