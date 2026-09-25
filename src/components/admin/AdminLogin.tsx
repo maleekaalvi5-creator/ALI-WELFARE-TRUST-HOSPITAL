@@ -109,4 +109,3 @@ export function AdminLogin({ onLoginSuccess }: any) {
     </div>
   );
 }
-
