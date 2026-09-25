@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export function AdminLogin({ onLoginSuccess }: any) {
   const [username, setUsername] = useState('');
@@ -6,17 +6,22 @@ export function AdminLogin({ onLoginSuccess }: any) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showPass, setShowPass] = useState(false);
+  const [readonly, setReadonly] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setReadonly(false), 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-
     try {
       const res = await fetch('/api/admin-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: username.trim(), password: password }),
+        body: JSON.stringify({ username: username.trim(), password }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
@@ -37,32 +42,45 @@ export function AdminLogin({ onLoginSuccess }: any) {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0a1f1f] px-4 relative">
-      <div className="w-full max-w-[440px] bg-[#102e2e]/90 rounded-[20px] p-8 border border-teal-900/50 shadow-2xl backdrop-blur">
+      <style>{`
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+          -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0.4) inset !important;
+          -webkit-text-fill-color: white !important;
+          transition: background-color 5000s ease-in-out 0s;
+        }
+      `}</style>
+      
+      <div className="w-full max-w-[440px] bg-[#102e2e]/90 rounded-[20px] p-8 border border-teal-900/50 shadow-2xl">
         <div className="flex flex-col items-center mb-6">
           <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-3">
-            <span className="text-2xl">❤️</span>
+            <span className="text-2xl">🏥</span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-teal-900/40 border border-teal-700/50 text-[11px] text-teal-300">
-            <span>🔒</span> Private Administrative Portal
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-900/40 border border-green-700/50 text-[11px] text-green-300">
+            🔒 Secure Admin V4.0 - Build Fixed - Anti Fill
           </div>
           <h1 className="text-[22px] font-bold text-white mt-4">Ali Welfare Trust Hospital</h1>
           <p className="text-teal-200/60 text-[13px] mt-1">Management & Live Content Control Center</p>
         </div>
 
         <form onSubmit={handleSubmit} autoComplete="off" className="space-y-4">
+          <input type="text" style={{display:'none'}} autoComplete="off" />
+          <input type="password" style={{display:'none'}} autoComplete="off" />
+          
           <div>
-            <label className="text-[13px] text-gray-300">Administrative User ID</label>
+            <label className="text-[13px] text-gray-300">Administrative User ID *</label>
             <div className="relative mt-2">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">👤</span>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onFocus={() => setReadonly(false)}
+                readOnly={readonly}
                 autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck={false}
-                name="awt_admin_user_xyz_987_secure"
+                data-lpignore="true"
+                name="awt_user_v4_secure_123"
                 className="w-full pl-10 pr-4 py-3 bg-black/40 border border-gray-700/60 rounded-xl text-white text-sm outline-none focus:border-teal-500"
                 placeholder="Enter User ID"
                 required
@@ -71,15 +89,18 @@ export function AdminLogin({ onLoginSuccess }: any) {
           </div>
 
           <div>
-            <label className="text-[13px] text-gray-300">Administrative Password</label>
+            <label className="text-[13px] text-gray-300">Administrative Password *</label>
             <div className="relative mt-2">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">🔑</span>
               <input
                 type={showPass ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => setReadonly(false)}
+                readOnly={readonly}
                 autoComplete="new-password"
-                name="awt_admin_pass_xyz_987_secure"
+                data-lpignore="true"
+                name="awt_pass_v4_secure_123"
                 className="w-full pl-10 pr-12 py-3 bg-black/40 border border-gray-700/60 rounded-xl text-white text-sm outline-none focus:border-teal-500"
                 placeholder="Enter Password"
                 required
@@ -101,11 +122,13 @@ export function AdminLogin({ onLoginSuccess }: any) {
           </button>
         </form>
 
-        <p className="text-[11px] text-gray-500 text-center mt-6 leading-relaxed">
-          Unlisted security route for authorized hospital leadership only. All access attempts are recorded with cryptographic session hashes.
+        <p className="text-[11px] text-gray-500 text-center mt-6">
+          V4.0 Secure - Fill Removed - Anti AutoFill Active
         </p>
       </div>
-      <p className="absolute bottom-4 text-[11px] text-gray-600">© 2026 Ali Welfare Trust Hospital • Non-Profit Healthcare Trust #1142</p>
     </div>
   );
 }
+
+// BOTH exports - to fix build error permanently
+export default AdminLogin;
