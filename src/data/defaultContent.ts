@@ -207,6 +207,6 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
   auditLogs: [
     { id: "log-init", timestamp: 1716200000000, user: "superadmin", role: "SuperAdmin", action: "System Initialized", section: "All Modules", details: "Central Content Engine synchronized across all client devices." }
   ],
-  revision: 2,
+  revision: 998,
   updatedAt: 1716200000000
 };
