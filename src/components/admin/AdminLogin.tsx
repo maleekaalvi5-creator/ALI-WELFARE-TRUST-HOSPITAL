@@ -14,13 +14,20 @@ export function AdminLogin({ onLoginSuccess }: any) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Heartbeat animation every 1.5s
   useEffect(() => {
     const interval = setInterval(() => {
       setBeat(true);
-      setTimeout(() => setBeat(false), 400);
-    }, 1500);
+      setTimeout(() => setBeat(false), 450);
+    }, 1600);
     return () => clearInterval(interval);
+  }, []);
+
+  // If already logged in, redirect to /admin
+  useEffect(() => {
+    const token = localStorage.getItem('awt_admin_token');
+    if(token && localStorage.getItem('isAdmin')==='true') {
+      window.location.href = '/admin';
+    }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,42 +71,22 @@ export function AdminLogin({ onLoginSuccess }: any) {
       <style>{`
         @keyframes heartbeat {
           0% { transform: scale(1); }
-          14% { transform: scale(1.12); }
+          14% { transform: scale(1.13); }
           28% { transform: scale(1); }
-          42% { transform: scale(1.12); }
+          42% { transform: scale(1.13); }
           70% { transform: scale(1); }
         }
         @keyframes glowPulse {
-          0%, 100% { box-shadow: 0 0 20px rgba(20,184,166,0.15), 0 0 40px rgba(20,184,166,0.08); }
-          50% { box-shadow: 0 0 30px rgba(20,184,166,0.35), 0 0 60px rgba(20,184,166,0.18), 0 0 80px rgba(20,184,166,0.08); }
-        }
-        @keyframes shimmer {
-          0% { transform: translateX(-100%) skewX(-20deg); }
-          100% { transform: translateX(200%) skewX(-20deg); }
+          0%, 100% { box-shadow: 0 0 22px rgba(20,184,166,0.18), 0 0 45px rgba(20,184,166,0.1); }
+          50% { box-shadow: 0 0 32px rgba(20,184,166,0.42), 0 0 68px rgba(20,184,166,0.22); }
         }
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-4px); }
+          50% { transform: translateY(-5px); }
         }
-        .logo-beat {
-          animation: heartbeat 0.8s ease-in-out;
-        }
-        .logo-glow {
-          animation: glowPulse 1.5s ease-in-out infinite;
-        }
-        .logo-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        .shimmer::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 50%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-          animation: shimmer 2.2s ease-in-out infinite;
-        }
+        .logo-beat { animation: heartbeat 0.8s ease-in-out; }
+        .logo-glow { animation: glowPulse 1.6s ease-in-out infinite; }
+        .logo-float { animation: float 3.2s ease-in-out infinite; }
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus {
@@ -109,45 +96,28 @@ export function AdminLogin({ onLoginSuccess }: any) {
         }
       `}</style>
       
-      <div className="w-full max-w-[420px] bg-[#0c3d4a]/90 rounded-[24px] p-8 border border-[#1a5a6b]/40 shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-md">
+      <div className="w-full max-w-[420px] bg-[#0c3d4a]/92 rounded-[24px] p-8 border border-[#1a5a6b]/45 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-md">
         <div className="flex flex-col items-center mb-8">
-          {/* ANIMATED LOGO - EXACT SAME LOGO WITH HEARTBEAT */}
+          {/* PURE SVG LOGO - NO EXTERNAL IMAGE, NO GLITCH */}
           <div 
-            className={`relative w-[80px] h-[80px] bg-white rounded-[20px] flex items-center justify-center mb-5 shadow-xl border border-white/20 cursor-pointer logo-float logo-glow overflow-hidden ${beat ? 'logo-beat' : ''}`}
+            className={`relative w-[82px] h-[82px] bg-white rounded-[20px] flex items-center justify-center mb-5 shadow-xl border border-white/25 cursor-pointer logo-float logo-glow ${beat ? 'logo-beat' : ''}`}
             onClick={() => { setBeat(true); setTimeout(()=>setBeat(false), 800); }}
-            title="Click for heartbeat"
           >
-            {/* Shimmer layer */}
-            <div className="absolute inset-0 shimmer pointer-events-none rounded-[20px] overflow-hidden"></div>
-            
-            {/* Pulse rings on beat */}
             {beat && (
-              <>
-                <div className="absolute inset-0 rounded-[20px] border-2 border-[#14b8a6]/40 animate-ping"></div>
-                <div className="absolute -inset-3 rounded-[24px] border border-[#14b8a6]/20 animate-ping" style={{animationDelay: '0.1s'}}></div>
-              </>
+              <div className="absolute inset-0 rounded-[20px] border-2 border-[#14b8a6]/40 animate-ping"></div>
             )}
-
-            <img 
-              src="/logo.png" 
-              alt="Ali Welfare Trust Hospital" 
-              className={`w-[58px] h-[58px] object-contain relative z-10 transition-transform duration-200 ${beat ? 'scale-110' : 'scale-100'}`}
-              onError={(e:any)=>{
-                e.target.style.display='none';
-                const fb = e.target.parentElement.querySelector('.fallback-logo');
-                if(fb) fb.style.display='flex';
-              }}
-            />
-            {/* Fallback - your red crescent heart logo */}
-            <div className={`fallback-logo hidden w-full h-full items-center justify-center relative z-10 ${beat ? 'scale-110' : 'scale-100'} transition-transform`}>
-              <svg width="52" height="52" viewBox="0 0 48 48" fill="none">
-                <path d="M24 6C13 6 6 13 6 24C6 35 13 42 24 42C21 38 19 31 19 24C19 17 21 10 24 6Z" fill="#a51c30" opacity="0.95"/>
-                <path d="M18 18C18 18 16 22 18 26C20 30 24 32 28 32C28 32 26 28 24 24C22 20 20 18 18 18Z" fill="#4a0f1a"/>
-                <path d="M22 20C22 20 20 24 22 28C24 30 26 31 29 31" stroke="white" strokeWidth="1" strokeLinecap="round" opacity="0.6"/>
-                <circle cx="30" cy="14" r="3" fill="#1a8a9e"/>
-                <circle cx="36" cy="17" r="1.8" fill="#1a8a9e"/>
-              </svg>
-            </div>
+            {/* EXACT LOGO - Red crescent + heart like your website header - PURE SVG, NO IMG TAG */}
+            <svg width="58" height="58" viewBox="0 0 100 100" className={`relative z-10 ${beat ? 'scale-110' : 'scale-100'} transition-transform duration-200`}>
+              {/* Outer crescent - deep maroon like your logo */}
+              <path d="M50 8 C 22 8, 8 24, 8 50 C 8 76, 22 92, 50 92 C 42 84, 38 67, 38 50 C 38 33, 42 16, 50 8 Z" fill="#8b1538"/>
+              {/* Inner heart shape - dark */}
+              <path d="M35 38 C 35 30, 42 26, 50 32 C 58 26, 65 30, 65 38 C 65 48, 50 58, 50 58 C 50 58, 35 48, 35 38 Z" fill="#2a0f1a" opacity="0.9"/>
+              {/* Small dots - teal like original */}
+              <circle cx="58" cy="22" r="5" fill="#0e8a8a"/>
+              <circle cx="72" cy="26" r="3.5" fill="#0e8a8a"/>
+              {/* Highlight line */}
+              <path d="M42 40 Q 50 48 58 40" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.5"/>
+            </svg>
           </div>
 
           <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#082f3b] border border-[#1a5a6b]/50 text-[11px] text-[#7ec8d8]">
@@ -173,7 +143,7 @@ export function AdminLogin({ onLoginSuccess }: any) {
                 readOnly={readonly}
                 autoComplete="off"
                 data-lpignore="true"
-                name="awt_teal_user_v8_anim"
+                name="awt_secure_v10_user"
                 className="w-full pl-10 pr-4 py-3.5 bg-[#082f3b] border border-[#1a4e5e] rounded-xl text-white text-[14px] outline-none focus:border-[#2a8aa3] focus:bg-[#0a3a48] transition placeholder:text-[#5a7d87]"
                 placeholder="Enter User ID"
                 required
@@ -193,18 +163,18 @@ export function AdminLogin({ onLoginSuccess }: any) {
                 readOnly={readonly}
                 autoComplete="new-password"
                 data-lpignore="true"
-                name="awt_teal_pass_v8_anim"
+                name="awt_secure_v10_pass"
                 className="w-full pl-10 pr-11 py-3.5 bg-[#082f3b] border border-[#1a4e5e] rounded-xl text-white text-[14px] outline-none focus:border-[#2a8aa3] focus:bg-[#0a3a48] transition placeholder:text-[#5a7d87]"
                 placeholder="Enter Password"
                 required
               />
-              <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#5a7d87] hover:text-[#8ec5d1] text-[16px] transition">
+              <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#5a7d87] hover:text-[#8ec5d1] text-[16px]">
                 {showPass ? "🙈" : "👁️"}
               </button>
             </div>
           </div>
 
-          {error && <p className="text-red-300 text-[12px] text-center bg-red-950/40 py-2.5 rounded-xl border border-red-900/30 animate-pulse">{error}</p>}
+          {error && <p className="text-red-300 text-[12px] text-center bg-red-950/40 py-2.5 rounded-xl border border-red-900/30">{error}</p>}
 
           <button
             type="submit"
@@ -218,7 +188,6 @@ export function AdminLogin({ onLoginSuccess }: any) {
         <p className="text-[10px] text-[#5a8a96] text-center mt-6 leading-relaxed px-2">
           Unlisted security route for authorized hospital leadership only. All access attempts are recorded with cryptographic session hashes.
         </p>
-        <p className="text-[10px] text-[#4a7580] text-center mt-4">© 2026 Ali Welfare Trust Hospital • Non-Profit Healthcare Trust #1142</p>
       </div>
     </div>
   );
