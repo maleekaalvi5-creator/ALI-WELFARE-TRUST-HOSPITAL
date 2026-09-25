@@ -49,86 +49,14 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       { label: 'Medical Facilities', value: '24/7 Ready', sub: 'Emergency, Lab & Pharmacy' },
     ],
     slides: [
-      {
-        id: "slide-1",
-        image: "/images/hospital-building.jpg",
-        category: "Main Campus Entrance",
-        title: "Official Hospital Compound & Reception Gate",
-        urduTitle: "علی ویلفیئر ٹرسٹ ہسپتال — مرکزی گیٹ اور استقبالیہ",
-        location: "Chahal Kalan Road, Qila Didar Singh",
-        tag: "24/7 Access",
-        description: "Official entrance compound of Ali Welfare Trust Hospital providing round-the-clock emergency vehicle and patient access."
-      },
-      {
-        id: "slide-2",
-        image: "/images/hospital-aerial.jpg",
-        category: "Hospital Complex & Grounds",
-        title: "Aerial View of Main Hospital Campus",
-        urduTitle: "ہسپتال کی مرکزی عمارت کا فضائی منظر",
-        location: "Campus Grounds & Patient Access",
-        tag: "Registered Facility",
-        description: "Spacious multi-story hospital complex with ambulance driveway, accessible ramps, and green open surroundings."
-      },
-      {
-        id: "slide-3",
-        image: "/images/hospital-interior-1.jpg",
-        category: "Diagnostic & Pathology Lab",
-        title: "Central Diagnostic Laboratory & Computerized Reporting",
-        urduTitle: "استقبالیہ و جدید تشخیصی لیبارٹری",
-        location: "Ground Floor Diagnostic Wing",
-        tag: "Subsidized & Free",
-        description: "Pathology testing, registration counter, computerized reporting, and comfortable waiting hall."
-      },
-      {
-        id: "slide-4",
-        image: "/images/hospital-interior-2.jpg",
-        category: "Specialist Consultation OPD",
-        title: "Specialist Consultant Examination Chambers",
-        urduTitle: "ماہرینِ طب کا معائنہ و طبی مشاورت",
-        location: "Outpatient Department (OPD)",
-        tag: "Specialist Care",
-        description: "Experienced medical specialists conducting thorough examinations with modern clinical instruments."
-      },
-      {
-        id: "slide-5",
-        image: "/images/hospital-interior-3.jpg",
-        category: "Inpatient Care Ward",
-        title: "General Medical & Surgical Inpatient Ward",
-        urduTitle: "مریضوں کا انڈور وارڈ اور آرام دہ بیڈز",
-        location: "First Floor Inpatient Wing",
-        tag: "Clean & Sterile",
-        description: "Hygienic patient recovery ward providing round-the-clock nursing care and comfortable patient beds."
-      },
-      {
-        id: "slide-6",
-        image: "/images/gallery-2.jpg",
-        category: "Dialysis & Renal Center",
-        title: "Advanced Hemodialysis Suite & Procedure Center",
-        urduTitle: "جدید ڈائیلاسز یونٹ و آپریشن روم",
-        location: "Specialized Dialysis Centre",
-        tag: "100% Free Dialysis",
-        description: "Dedicated dialysis machines and procedural beds offering free hemodialysis to underprivileged renal patients."
-      },
-      {
-        id: "slide-7",
-        image: "/images/gallery-1.jpg",
-        category: "Emergency & Acute Trauma",
-        title: "24/7 Emergency Triage & Trauma Resuscitation Unit",
-        urduTitle: "ایمرجنسی و فوری طبی امداد کا شعبہ",
-        location: "Emergency Ground Wing",
-        tag: "24/7 Emergency",
-        description: "Round-the-clock emergency medical response with central oxygen manifold and acute trauma stabilization beds."
-      },
-      {
-        id: "slide-8",
-        image: "/images/gallery-3.jpg",
-        category: "Maternal & Child Health",
-        title: "Maternal Delivery & Pediatric Observation Wing",
-        urduTitle: "شعبہ اطفال و زچگی و نوزائیدہ نگہداشت",
-        location: "Maternity & Pediatric Section",
-        tag: "Specialized Care",
-        description: "Safe, sterile labor and recovery rooms with experienced female gynecologists and trained healthcare staff."
-      }
+      { id: "slide-1", image: "/images/hospital-building.jpg", category: "Main Campus Entrance", title: "Official Hospital Compound & Reception Gate", urduTitle: "علی ویلفیئر ٹرسٹ ہسپتال — مرکزی گیٹ اور استقبالیہ", location: "Chahal Kalan Road, Qila Didar Singh", tag: "24/7 Access", description: "Official entrance compound of Ali Welfare Trust Hospital providing round-the-clock emergency vehicle and patient access." },
+      { id: "slide-2", image: "/images/hospital-aerial.jpg", category: "Hospital Complex & Grounds", title: "Aerial View of Main Hospital Campus", urduTitle: "ہسپتال کی مرکزی عمارت کا فضائی منظر", location: "Campus Grounds & Patient Access", tag: "Registered Facility", description: "Spacious multi-story hospital complex with ambulance driveway, accessible ramps, and green open surroundings." },
+      { id: "slide-3", image: "/images/hospital-interior-1.jpg", category: "Diagnostic & Pathology Lab", title: "Central Diagnostic Laboratory & Computerized Reporting", urduTitle: "استقبالیہ و جدید تشخیصی لیبارٹری", location: "Ground Floor Diagnostic Wing", tag: "Subsidized & Free", description: "Pathology testing, registration counter, computerized reporting, and comfortable waiting hall." },
+      { id: "slide-4", image: "/images/hospital-interior-2.jpg", category: "Specialist Consultation OPD", title: "Specialist Consultant Examination Chambers", urduTitle: "ماہرینِ طب کا معائنہ و طبی مشاورت", location: "Outpatient Department (OPD)", tag: "Specialist Care", description: "Experienced medical specialists conducting thorough examinations with modern clinical instruments." },
+      { id: "slide-5", image: "/images/hospital-interior-3.jpg", category: "Inpatient Care Ward", title: "General Medical & Surgical Inpatient Ward", urduTitle: "مریضوں کا انڈور وارڈ اور آرام دہ بیڈز", location: "First Floor Inpatient Wing", tag: "Clean & Sterile", description: "Hygienic patient recovery ward providing round-the-clock nursing care and comfortable patient beds." },
+      { id: "slide-6", image: "/images/gallery-2.jpg", category: "Dialysis & Renal Center", title: "Advanced Hemodialysis Suite & Procedure Center", urduTitle: "جدید ڈائیلاسز یونٹ و آپریشن روم", location: "Specialized Dialysis Centre", tag: "100% Free Dialysis", description: "Dedicated dialysis machines and procedural beds offering free hemodialysis to underprivileged renal patients." },
+      { id: "slide-7", image: "/images/gallery-1.jpg", category: "Emergency & Acute Trauma", title: "24/7 Emergency Triage & Trauma Resuscitation Unit", urduTitle: "ایمرجنسی و فوری طبی امداد کا شعبہ", location: "Emergency Ground Wing", tag: "24/7 Emergency", description: "Round-the-clock emergency medical response with central oxygen manifold and acute trauma stabilization beds." },
+      { id: "slide-8", image: "/images/gallery-3.jpg", category: "Maternal & Child Health", title: "Maternal Delivery & Pediatric Observation Wing", urduTitle: "شعبہ اطفال و زچگی و نوزائیدہ نگہداشت", location: "Maternity & Pediatric Section", tag: "Specialized Care", description: "Safe, sterile labor and recovery rooms with experienced female gynecologists and trained healthcare staff." }
     ]
   },
   marquee: [
@@ -141,12 +69,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
     { text: "Founded by Late Nazar Hussain Alvi", highlight: "Compassionate Care" },
     { text: "Main Campus: Qila Didar Singh Gujranwala", highlight: "Accessible" },
   ],
-  quickStats: STATS.map(s => ({
-    label: s.label,
-    value: s.value,
-    sub: s.sub,
-    icon: s.icon
-  })),
+  quickStats: STATS.map(s => ({ label: s.label, value: s.value, sub: s.sub, icon: s.icon })),
   founder: {
     name: "Nazar Hussain Alvi",
     title: "Late Founder & Visionary Patron",
@@ -156,21 +79,9 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
     bio: "The benevolent founder whose compassion and devotion laid the cornerstone of Ali Welfare Trust Hospital in 2005, ensuring that no patient in Qila Didar Singh and surrounding villages is ever denied world-class healthcare due to lack of funds.",
     imageUrl: "/images/founder-nazar-alvi.jpg",
     memorialPillars: [
-      {
-        title: "Foundation of Compassion (2005)",
-        desc: "Established with a solemn pledge that financial constraints should never prevent a human being from receiving dignified healthcare.",
-        icon: "ShieldCheck"
-      },
-      {
-        title: "Free Dialysis & Eye Care Legacy",
-        desc: "Pioneered community welfare health camps, subsidized dialysis programs, and free cataract eye surgeries across Gujranwala district.",
-        icon: "Heart"
-      },
-      {
-        title: "Perpetual Sadqah-e-Jariyah",
-        desc: "Operating purely on non-profit principles with transparent zakat governance and audited community trust accountability.",
-        icon: "Award"
-      }
+      { title: "Foundation of Compassion (2005)", desc: "Established with a solemn pledge that financial constraints should never prevent a human being from receiving dignified healthcare.", icon: "ShieldCheck" },
+      { title: "Free Dialysis & Eye Care Legacy", desc: "Pioneered community welfare health camps, subsidized dialysis programs, and free cataract eye surgeries across Gujranwala district.", icon: "Heart" },
+      { title: "Perpetual Sadqah-e-Jariyah", desc: "Operating purely on non-profit principles with transparent zakat governance and audited community trust accountability.", icon: "Award" }
     ],
     executiveTeam: LEADERSHIP
   },
@@ -180,84 +91,25 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
     visionEn: MISSION_AND_VALUES.vision,
     visionUrdu: MISSION_AND_VALUES.urduVision,
     pillars: [
-      {
-        title: "Compassionate Care",
-        urdu: "ہمدردانہ نگہداشت",
-        desc: "Treating every patient with dignity, warmth, and clinical sensitivity regardless of socioeconomic standing."
-      },
-      {
-        title: "Clinical Excellence",
-        urdu: "معیاری طبی مہارت",
-        desc: "Modern diagnostic imaging, international sterilization protocols, and qualified medical specialists."
-      },
-      {
-        title: "Transparent Welfare",
-        urdu: "شفاف رفاہی نظام",
-        desc: "Every rupee of Zakat and Sadqah directly utilized for patient treatments, dialysis sessions, and free medicine."
-      }
+      { title: "Compassionate Care", urdu: "ہمدردانہ نگہداشت", desc: "Treating every patient with dignity, warmth, and clinical sensitivity regardless of socioeconomic standing." },
+      { title: "Clinical Excellence", urdu: "معیاری طبی مہارت", desc: "Modern diagnostic imaging, international sterilization protocols, and qualified medical specialists." },
+      { title: "Transparent Welfare", urdu: "شفاف رفاہی نظام", desc: "Every rupee of Zakat and Sadqah directly utilized for patient treatments, dialysis sessions, and free medicine." }
     ]
   },
   departments: DEPARTMENTS,
   doctors: DOCTORS,
   donation: {
-    banner: {
-      enabled: true,
-      headline: "Ali Welfare Trust Hospital",
-      badge: "Non-Profit Healthcare Trust #1142",
-      appealEnglish: "Help us save precious human lives through free hemodialysis sessions, subsidized medicines, and free cataract surgeries for the impoverished.",
-      appealUrdu: "مستحق اور نادار مریضوں کے علاج اور ادویات کے لیے دل کھول کر عطیات دیں",
-      backgroundImage: "/images/hospital-building.jpg",
-      showLiveTime: true,
-      autoPopupSeconds: 120
-    },
-    bank: {
-      bankName: BANK_DETAILS.bankName,
-      accountTitle: BANK_DETAILS.accountTitle,
-      iban: BANK_DETAILS.iban,
-      accountNo: BANK_DETAILS.accountNo,
-      branchName: BANK_DETAILS.branchName,
-      branchCode: BANK_DETAILS.branchCode,
-      city: BANK_DETAILS.city,
-      currency: BANK_DETAILS.currency,
-      taxStatus: BANK_DETAILS.taxStatus,
-      appealUrdu: BANK_DETAILS.appealUrdu,
-      appealEnglish: BANK_DETAILS.appealEnglish,
-      easypaisaNo: "03452074974",
-      jazzcashNo: "03324711101"
-    },
+    banner: { enabled: true, headline: "Ali Welfare Trust Hospital", badge: "Non-Profit Healthcare Trust #1142", appealEnglish: "Help us save precious human lives through free hemodialysis sessions, subsidized medicines, and free cataract surgeries for the impoverished.", appealUrdu: "مستحق اور نادار مریضوں کے علاج اور ادویات کے لیے دل کھول کر عطیات دیں", backgroundImage: "/images/hospital-building.jpg", showLiveTime: true, autoPopupSeconds: 120 },
+    bank: { bankName: BANK_DETAILS.bankName, accountTitle: BANK_DETAILS.accountTitle, iban: BANK_DETAILS.iban, accountNo: BANK_DETAILS.accountNo, branchName: BANK_DETAILS.branchName, branchCode: BANK_DETAILS.branchCode, city: BANK_DETAILS.city, currency: BANK_DETAILS.currency, taxStatus: BANK_DETAILS.taxStatus, appealUrdu: BANK_DETAILS.appealUrdu, appealEnglish: BANK_DETAILS.appealEnglish, easypaisaNo: "03452074974", jazzcashNo: "03324711101" },
     causes: DONATION_CAUSES
   },
   campus: {
     facilities: GALLERY_ITEMS,
     photoFrames: [
-      {
-        id: "frame-1",
-        title: "Main Hospital Entrance & Grounds",
-        caption: "Main entrance with dedicated ambulance ramp and 24/7 reception",
-        imageUrl: "/images/hospital-building.jpg",
-        dateAdded: "Official Campus"
-      },
-      {
-        id: "frame-2",
-        title: "Aerial View of Healthcare Campus",
-        caption: "Multi-wing facility in Qila Didar Singh, Gujranwala",
-        imageUrl: "/images/hospital-aerial.jpg",
-        dateAdded: "Campus Aerial"
-      },
-      {
-        id: "frame-3",
-        title: "Hemodialysis Treatment Wing",
-        caption: "Modern German-engineered dialysis stations providing free sessions",
-        imageUrl: "/images/hospital-interior-1.jpg",
-        dateAdded: "Renal Wing"
-      },
-      {
-        id: "frame-4",
-        title: "Sterile Inpatient Recovery Ward",
-        caption: "Air-conditioned recovery rooms with central oxygen monitoring",
-        imageUrl: "/images/hospital-interior-2.jpg",
-        dateAdded: "Inpatient Care"
-      }
+      { id: "frame-1", title: "Main Hospital Entrance & Grounds", caption: "Main entrance with dedicated ambulance ramp and 24/7 reception", imageUrl: "/images/hospital-building.jpg", dateAdded: "Official Campus" },
+      { id: "frame-2", title: "Aerial View of Healthcare Campus", caption: "Multi-wing facility in Qila Didar Singh, Gujranwala", imageUrl: "/images/hospital-aerial.jpg", dateAdded: "Campus Aerial" },
+      { id: "frame-3", title: "Hemodialysis Treatment Wing", caption: "Modern German-engineered dialysis stations providing free sessions", imageUrl: "/images/hospital-interior-1.jpg", dateAdded: "Renal Wing" },
+      { id: "frame-4", title: "Sterile Inpatient Recovery Ward", caption: "Air-conditioned recovery rooms with central oxygen monitoring", imageUrl: "/images/hospital-interior-2.jpg", dateAdded: "Inpatient Care" }
     ]
   },
   contact: {
@@ -273,19 +125,19 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
     googleMapsLink: HOSPITAL_INFO.googleMapsLink,
     mapEmbedUrl: HOSPITAL_INFO.mapEmbedUrl,
     footerDescription: "Ali Welfare Trust Hospital is a dedicated non-profit registered healthcare institution committed to delivering accessible, high-standard clinical treatments, free kidney dialysis, and subsidized healthcare to humanity.",
-    copyrightText: `© ${new Date().getFullYear()} Ali Welfare Trust Hospital (Regd. #1142). All rights reserved.`
+    copyrightText: "© 2026 Ali Welfare Trust Hospital (Regd. #1142). All rights reserved."
   },
   aiSettings: {
     enabled: true,
     assistantName: "Ali Care",
     welcomePrayerMessage: "Peace be upon you, Sir. I am Ali Care, your 24/7 dedicated AI Consultant for Ali Welfare Trust Hospital. I can schedule specialist appointments, answer any medical or general question from the internet, guide your Zakat & Sadqah donations, provide appointment reminders, and connect emergency calls. How may I serve you today, Sir?",
     welcomeUrduMessage: "السلام علیکم محترم جناب! میں علی کیئر ہوں، علی ویلفیئر ٹرسٹ ہسپتال کا 24/7 ذہین اے آئی کنسلٹنٹ۔ میں ڈاکٹرز کے معائنے کا وقت، عطیات، یاد دہانی اور انٹرنیٹ سے تمام معلومات فراہم کر سکتا ہوں۔ فرمائیے میں آپ کی کیا خدمت کر سکتا ہوں؟",
-    tone: "professional",
+    tone: "super-intelligent",
     enableVoiceInput: true,
     enableVoiceOutput: true,
     enableWebSearch: true,
     enableAppointmentBooking: true,
-    customSystemInstructions: "You are Ali Care, the 24/7 intelligent, respectful AI healthcare consultant and problem solver for Ali Welfare Trust Hospital, Qila Didar Singh. Always address users politely as Sir or Respected Sir/Madam.",
+    customSystemInstructions: "You are Ali Care, a Super Intelligent 24/7 AI healthcare consultant for Ali Welfare Trust Hospital, Qila Didar Singh, Gujranwala. You are an expert doctor assistant, receptionist, and donation guide. RULES: 1. Always be respectful, call user Sir/Madam. 2. Speak in user's language - Urdu, Roman Urdu, or English. 3. You can answer ANY question via web search - medical, general, Islamic. 4. For emergencies, immediately give emergency number and tell to call 1122 or hospital emergency. 5. Guide for appointments - ask department, doctor, date, phone number. 6. Guide for Zakat/Sadqah - give Meezan Bank IBAN, Easypaisa, JazzCash. 7. Be concise but super helpful. 8. Never say you cannot do something - always try to help. 9. Remember hospital is non-profit Trust #1142 since 2005, founded by Nazar Hussain Alvi. 10. Promote free dialysis, free eye camps, 24/7 emergency.",
     suggestedQuestions: [
       "Book an appointment with specialist doctor",
       "Free dialysis registration process & timings",
@@ -349,40 +201,12 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
     aiAgent: { enabled: true, title: "Ali Care 24/7 AI Health Consultant" }
   },
   videos: [
-    {
-      id: "vid-1",
-      title: "Ali Welfare Trust Hospital Campus Documentary",
-      urduTitle: "ہسپتال کی دستاویزی فلم اور خدمات کا جائزہ",
-      category: "Documentary",
-      youtubeId: "dQw4w9WgXcQ",
-      posterUrl: "/images/hospital-building.jpg",
-      duration: "04:15",
-      description: "A comprehensive documentary showing the founding vision, 24/7 dialysis unit, modern emergency ward, and patient care facilities.",
-      isFeatured: true
-    },
-    {
-      id: "vid-2",
-      title: "Advanced Kidney Hemodialysis Unit Virtual Tour",
-      urduTitle: "جدید ہیمو ڈائیلاسز سینٹر کا تفصیلی معائنہ",
-      category: "Renal Center",
-      youtubeId: "dQw4w9WgXcQ",
-      posterUrl: "/images/gallery-2.jpg",
-      duration: "03:40",
-      description: "Take a virtual step inside the specialized renal center where deserving patients receive 100% free hemodialysis sessions daily.",
-      isFeatured: false
-    }
+    { id: "vid-1", title: "Ali Welfare Trust Hospital Campus Documentary", urduTitle: "ہسپتال کی دستاویزی فلم اور خدمات کا جائزہ", category: "Documentary", youtubeId: "dQw4w9WgXcQ", posterUrl: "/images/hospital-building.jpg", duration: "04:15", description: "A comprehensive documentary showing the founding vision, 24/7 dialysis unit, modern emergency ward, and patient care facilities.", isFeatured: true },
+    { id: "vid-2", title: "Advanced Kidney Hemodialysis Unit Virtual Tour", urduTitle: "جدید ہیمو ڈائیلاسز سینٹر کا تفصیلی معائنہ", category: "Renal Center", youtubeId: "dQw4w9WgXcQ", posterUrl: "/images/gallery-2.jpg", duration: "03:40", description: "Take a virtual step inside the specialized renal center where deserving patients receive 100% free hemodialysis sessions daily.", isFeatured: false }
   ],
   auditLogs: [
-    {
-      id: "log-init",
-      timestamp: Date.now() - 3600000,
-      user: "superadmin",
-      role: "SuperAdmin",
-      action: "System Initialized",
-      section: "All Modules",
-      details: "Central Content Engine synchronized across all client devices."
-    }
+    { id: "log-init", timestamp: 1716200000000, user: "superadmin", role: "SuperAdmin", action: "System Initialized", section: "All Modules", details: "Central Content Engine synchronized across all client devices." }
   ],
-  revision: 1,
-  updatedAt: Date.now()
+  revision: 2,
+  updatedAt: 1716200000000
 };
