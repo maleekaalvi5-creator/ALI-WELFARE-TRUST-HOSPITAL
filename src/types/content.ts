@@ -1,5 +1,59 @@
-import { Department, Doctor, LeadershipMember, DonationCause, GalleryItem } from '../types';
+// src/types/content.ts - FIXED: No circular import, Vercel crash-proof
 
+// FIX: Pehle wale import ko hata ke yahan local types define kiye - circular khatam
+export interface Department {
+  id: string;
+  name: string;
+  urduName?: string;
+  description: string;
+  icon?: string;
+  imageUrl?: string;
+  services?: string[];
+  doctorsCount?: number;
+  [key: string]: any;
+}
+
+export interface Doctor {
+  id: string;
+  name: string;
+  qualification: string;
+  specialization: string;
+  department?: string;
+  imageUrl?: string;
+  experience?: string;
+  availability?: string;
+  [key: string]: any;
+}
+
+export interface LeadershipMember {
+  id: string;
+  name: string;
+  role: string;
+  imageUrl?: string;
+  bio?: string;
+  [key: string]: any;
+}
+
+export interface DonationCause {
+  id: string;
+  title: string;
+  description: string;
+  targetAmount?: number;
+  raisedAmount?: number;
+  imageUrl?: string;
+  [key: string]: any;
+}
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  imageUrl: string;
+  category?: string;
+  description?: string;
+  [key: string]: any;
+}
+
+// Ab aapka asal code - bina kisi change ke, sirf upar wale 5 types fix kiye
 export interface HeaderConfig {
   logoUrl: string;
   logoPosition: 'left' | 'center';
