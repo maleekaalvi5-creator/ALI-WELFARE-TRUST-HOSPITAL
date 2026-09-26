@@ -79,7 +79,7 @@ export const DonationPopupBanner: React.FC<DonationPopupBannerProps> = ({
   const iban = bank?.iban || BANK_DETAILS.iban;
   const city = bank?.city || BANK_DETAILS.city;
   const appealEn = banner?.appealEnglish || "Please donate generously for supporting poor and needy patients.";
-  const bgImg = banner?.backgroundImage || "/images/hospital-building.jpg";
+  const bgImg = banner?.backgroundImage || "/images/Slide-8.jpg";
   const showClock = banner?.showLiveTime ?? true;
 
   // Is modal open (either controlled by parent or auto-triggered internally)
