@@ -887,6 +887,3 @@ if (currentRoute === '/admin') {
         }}
       />
 
-    </div>
-  );
-}
