@@ -860,7 +860,7 @@ if (currentRoute === '/admin') {
         }}
       />
 
-      {/* 24/7 AI Hospital Care Agent */}
+{/* 24/7 AI Hospital Care Agent */}
       <HospitalAIAgent
         onOpenBooking={(deptId, docId) => handleOpenBooking(deptId, docId)}
         onOpenDonation={handleScrollToDonation}
@@ -875,17 +875,17 @@ if (currentRoute === '/admin') {
         onAppointmentBooked={handleAppointmentBooked}
       />
 
-{/* My Booked Appointments Drawer / Modal */}
-    <AppointmentsModal
-      isOpen={myAppointmentsOpen}
-      onClose={() => setMyAppointmentsOpen(false)}
-      appointments={appointments}
-      onCancelAppointment={handleCancelAppointment}
-      onBookNew={() => {
-        setMyAppointmentsOpen(false);
-        handleOpenBooking();
-      }}
-    />
-  </div>
-);
+      {/* My Booked Appointments Drawer / Modal */}
+      <AppointmentsModal
+        isOpen={myAppointmentsOpen}
+        onClose={() => setMyAppointmentsOpen(false)}
+        appointments={appointments}
+        onCancelAppointment={handleCancelAppointment}
+        onBookNew={() => {
+          setMyAppointmentsOpen(false);
+          handleOpenBooking();
+        }}
+      />
+    </div>
+  );
 }
