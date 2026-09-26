@@ -1,4 +1,4 @@
-// api/content.ts - 100% Crash-Proof - Loop Breaker - Admin Panel Same
+// api/content.ts - 100% Crash-Proof, Loop Breaker
 export default function handler(req: any, res: any) {
   try {
     res.setHeader('Access-Control-Allow-Origin', '*');
