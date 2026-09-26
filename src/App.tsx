@@ -875,15 +875,17 @@ if (currentRoute === '/admin') {
         onAppointmentBooked={handleAppointmentBooked}
       />
 
-      {/* My Booked Appointments Drawer / Modal */}
-      <MyAppointmentsModal
-        isOpen={myAppointmentsOpen}
-        onClose={() => setMyAppointmentsOpen(false)}
-        appointments={appointments}
-        onCancelAppointment={handleCancelAppointment}
-        onBookNew={() => {
-          setMyAppointmentsOpen(false);
-          handleOpenBooking();
-        }}
-      />
-
+     {/* My Booked Appointments Drawer / Modal */}
+    <AppointmentsModal
+      isOpen={myAppointmentsOpen}
+      onClose={() => setMyAppointmentsOpen(false)}
+      appointments={appointments}
+      onCancelAppointment={handleCancelAppointment}
+      onBookNew={() => {
+        setMyAppointmentsOpen(false);
+        handleOpenBooking();
+      }}
+    />
+  </div>
+);
+}
