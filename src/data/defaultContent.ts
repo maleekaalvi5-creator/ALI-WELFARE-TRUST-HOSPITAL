@@ -56,7 +56,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       title: "Honoring the Eternal Legacy of Our Late Founder",
       urduTitle: "بانیِ ہسپتال حاجی نذر حسین علوی (مرحوم) — جنھوں نے 2005 میں اس فلاحی سفر کی بنیاد رکھی",
       subheading: "A Sacred Mission Started in 2005",
-      description: "Ye tasveer hamare muhtaram bani Late Nazar Hussain Alvi ki yaad ko taaza karti hai jo is dunya se rukhsat hone se pehle qila didar singh mein dKhi insaniyat ke liye yeh shifa-khana chhor gaye. Is poster mein heart care, eye care aur ultrasound jaise ahem sections ke nishaan aur peechay aasmaan ke badal us pakeeza soch ki gawaahi dete hain jo aaj bhi zinda hai.",
+      description: "This portrait honors the enduring legacy of our esteemed late founder, Haji Nazar Hussain Alvi, who dedicated his life to humanity and left behind this beacon of healing in Qila Didar Singh. In this tribute, symbols representing vital care sections—including heart care, eye care, and ultrasound—stand beneath a serene, cloud-filled sky, bearing witness to a pure vision of compassion that continues to live on today.",
       location: "Main Tribute Hall",
       active: true
     },
@@ -67,7 +67,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       title: "Main Hospital Building and Campus Architecture",
       urduTitle: "ہسپتال کی مرکزی عمارت کا منظر — جہاں انسانیت کی خدمت دن رات جاری ہے",
       subheading: "Serving Humanity with Complete Dignity",
-      description: "Hspatal ki grand aur khubsurat main building ka manzar, jahan har mariz ko baghair kisi bhed-bhav ke behtareen, saaf-suthra aur pur-sukoon mahol mein tibbi sahulat faraham ki jati hai.",
+      description: "Explore the majestic main architecture of our facility, dedicated to delivering equitable, world-class healthcare in a clean, healing, and compassionate environment for every community member.",
       location: "Qila Didar Singh Main Campus",
       active: true
     },
@@ -78,7 +78,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       title: "Warm Reception Desk for Patient Care",
       urduTitle: "ریپشن اور رہنمائی کاؤنٹر — جہاں ہر آنے والے کا خلوص سے استقبال ہوتا ہے",
       subheading: "Guiding Every Visitor with Deep Empathy",
-      description: "Hspatal ka reception area jahan marizon aur unke luvahqeen ko foran registration, checkup ki raahnumai aur munasib madad di jati hai taaki unka waqt zaya na ho.",
+      description: "Step into our patient-centric reception and support desk, dedicated to delivering immediate registration, streamlined navigation, and compassionate care assistance from the moment you arrive.",
       location: "Entrance Lobby Level 1",
       active: true
     },
@@ -89,7 +89,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       title: "The Gateway of Hope — Sirf Ek Gate Ke Andar Har Tarhan Ki Shifa",
       urduTitle: "مرکزی دروازہ — صرف ایک گیٹ کے اندر ہر طرح کی شفا",
       subheading: "Complete Healthcare Under One Roof",
-      description: "Hspatal ka woh markazi darwaza jo har dKhi aur zarortmand ke liye khula hai. Is gate ke andar qadam rakhte hi mariz ko lab, pharmacy, OPD, aur emergency ki saari sahulatein ek hi chhat ke neeche mil jati hain.",
+      description: "Our central hospital entrance serves as a gateway of hope, providing accessible, all-in-one healthcare facilities. From advanced laboratory testing and on-site pharmacies to specialized OPD and 24/7 emergency care, complete medical support is available under a single roof.",
       location: "Main Campus Gateway",
       active: true
     },
@@ -100,7 +100,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       title: "A Legacy That Lives On —",
       urduTitle: "وہ ورثہ جو آج بھی زندہ ہے — بانی اور موجودہ سی ای او کی ساتھ میں تصویر",
       subheading: "Passing the Torch of Devotion",
-      description: "Late Nazar Hussain Alvi aur moujooda CEO Zamin Ali Alvi ki yeh tasveer is baat ka paigham hai ke khidmat ka yeh silsila kabhi nahi rukega. Jo pyara virsa bani chhor kar gaye thay, use aaj unki naseehat ke mutabiq behtareen andaz mein agay barhaya ja raha hai.",
+      description: "A symbol of enduring leadership and continuity: our current CEO, Zamin Ali Alvi, honoring the visionary foundation laid by late founder Nazar Hussain Alvi, ensuring our charitable healthcare mission continues to thrive and expand across generations.",
       location: "Executive Administration",
       active: true
     },
@@ -111,7 +111,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       title: "24/7 Wings of Hope — Active Emergency Ambulance Service",
       urduTitle: "امید کے بازو — ہنگامی حالات اور ٹراما کے لیے چوبیس گھنٹے تیار ایمبولینس",
       subheading: "Round-the-Clock Lifesaving Response",
-      description: "Hspatal ki emergency ambulances jo din ho ya raat, fouri tor par mariz tak pahunch kar unki jaan bachane aur unhein mahfooz tareeqay se trauma unit tak laane ke liye hamesha tayar rehti hain.",
+      description: "Dedicated 24/7 emergency medical services and rapid-response ambulance fleet, ensuring immediate pre-hospital care, timely patient rescue, and safe transit to our specialized trauma center when every second counts.",
       location: "Emergency Bay 24/7",
       active: true
     },
@@ -122,7 +122,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       title: "Aerial Drone View of the Hospital Complex",
       urduTitle: "ہسپتال کی عمارت کا ڈرون اور فضائی منظر",
       subheading: "Expansive Medical Infrastructure for the Region",
-      description: "Drone view ke zariye dekhi gayi hspatal ki yeh vishal aur khubsurat imarat is baat ki gawaahi deti hai ke yeh fariq qila didar singh aur aas-paas ke 20 se zyada gaon ke logon ko kitni badi satah par saholat de rahi hai.",
+      description: "Explore the comprehensive medical infrastructure of our hospital complex from above, highlighting our extensive reach and commitment to providing accessible, community-wide healthcare services to over 20 villages in the region.",
       location: "Campus Overhead",
       active: true
     },
@@ -133,7 +133,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       title: "The Historical Foundation Building from 2005",
       urduTitle: "سال ۲۰۰۵ کی تاریخی عمارت — جہاں سے اس عظیم فلاحی سفر کا آغاز ہوا",
       subheading: "Rooted in Sincerity and Pure Sacrifice",
-      description: "Hspatal ki woh ibtedayi imarat jo 2005 mein qaim ki gayi thi. Yeh tasveer yaad dilati hai ke kaise ek choti si shuruat aur sachhi niyat ne aage chal kar lakhon marizon ke liye shifa ka yeh behtareen markaz banaya.",
+      description: "Tracing our origins back to 2005: a look at our foundational building where our charitable healthcare journey began, demonstrating how unwavering dedication and pure intent evolved into a trusted center of medical excellence.",
       location: "Original Foundation Site",
       active: true
    }
