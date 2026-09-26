@@ -49,16 +49,95 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       { label: 'Medical Facilities', value: '24/7 Ready', sub: 'Emergency, Lab & Pharmacy' },
     ],
     slides: [
-      { id: "slide-1", image: "/images/hospital-building.jpg", category: "Main Campus Entrance", title: "Official Hospital Compound & Reception Gate", urduTitle: "علی ویلفیئر ٹرسٹ ہسپتال — مرکزی گیٹ اور استقبالیہ", location: "Chahal Kalan Road, Qila Didar Singh", tag: "24/7 Access", description: "Official entrance compound of Ali Welfare Trust Hospital providing round-the-clock emergency vehicle and patient access." },
-      { id: "slide-2", image: "/images/hospital-aerial.jpg", category: "Hospital Complex & Grounds", title: "Aerial View of Main Hospital Campus", urduTitle: "ہسپتال کی مرکزی عمارت کا فضائی منظر", location: "Campus Grounds & Patient Access", tag: "Registered Facility", description: "Spacious multi-story hospital complex with ambulance driveway, accessible ramps, and green open surroundings." },
-      { id: "slide-3", image: "/images/hospital-interior-1.jpg", category: "Diagnostic & Pathology Lab", title: "Central Diagnostic Laboratory & Computerized Reporting", urduTitle: "استقبالیہ و جدید تشخیصی لیبارٹری", location: "Ground Floor Diagnostic Wing", tag: "Subsidized & Free", description: "Pathology testing, registration counter, computerized reporting, and comfortable waiting hall." },
-      { id: "slide-4", image: "/images/hospital-interior-2.jpg", category: "Specialist Consultation OPD", title: "Specialist Consultant Examination Chambers", urduTitle: "ماہرینِ طب کا معائنہ و طبی مشاورت", location: "Outpatient Department (OPD)", tag: "Specialist Care", description: "Experienced medical specialists conducting thorough examinations with modern clinical instruments." },
-      { id: "slide-5", image: "/images/hospital-interior-3.jpg", category: "Inpatient Care Ward", title: "General Medical & Surgical Inpatient Ward", urduTitle: "مریضوں کا انڈور وارڈ اور آرام دہ بیڈز", location: "First Floor Inpatient Wing", tag: "Clean & Sterile", description: "Hygienic patient recovery ward providing round-the-clock nursing care and comfortable patient beds." },
-      { id: "slide-6", image: "/images/gallery-2.jpg", category: "Dialysis & Renal Center", title: "Advanced Hemodialysis Suite & Procedure Center", urduTitle: "جدید ڈائیلاسز یونٹ و آپریشن روم", location: "Specialized Dialysis Centre", tag: "100% Free Dialysis", description: "Dedicated dialysis machines and procedural beds offering free hemodialysis to underprivileged renal patients." },
-      { id: "slide-7", image: "/images/gallery-1.jpg", category: "Emergency & Acute Trauma", title: "24/7 Emergency Triage & Trauma Resuscitation Unit", urduTitle: "ایمرجنسی و فوری طبی امداد کا شعبہ", location: "Emergency Ground Wing", tag: "24/7 Emergency", description: "Round-the-clock emergency medical response with central oxygen manifold and acute trauma stabilization beds." },
-      { id: "slide-8", image: "/images/gallery-3.jpg", category: "Maternal & Child Health", title: "Maternal Delivery & Pediatric Observation Wing", urduTitle: "شعبہ اطفال و زچگی و نوزائیدہ نگہداشت", location: "Maternity & Pediatric Section", tag: "Specialized Care", description: "Safe, sterile labor and recovery rooms with experienced female gynecologists and trained healthcare staff." }
-    ]
-  },
+    {
+      id: "slide-1",
+      image: "/images/Slide-1.jpg",
+      category: "Founding Vision & Poster",
+      title: "Honoring the Eternal Legacy of Our Late Founder",
+      urduTitle: "بانیِ ہسپتال حاجی نذر حسین علوی (مرحوم) — جنھوں نے 2005 میں اس فلاحی سفر کی بنیاد رکھی",
+      subheading: "A Sacred Mission Started in 2005",
+      description: "Ye tasveer hamare muhtaram bani Late Nazar Hussain Alvi ki yaad ko taaza karti hai jo is dunya se rukhsat hone se pehle qila didar singh mein dKhi insaniyat ke liye yeh shifa-khana chhor gaye. Is poster mein heart care, eye care aur ultrasound jaise ahem sections ke nishaan aur peechay aasmaan ke badal us pakeeza soch ki gawaahi dete hain jo aaj bhi zinda hai.",
+      location: "Main Tribute Hall",
+      active: true
+    },
+    {
+      id: "slide-2",
+      image: "/images/Slide-2.jpg",
+      category: "Main Building",
+      title: "Main Hospital Building and Campus Architecture",
+      urduTitle: "ہسپتال کی مرکزی عمارت کا منظر — جہاں انسانیت کی خدمت دن رات جاری ہے",
+      subheading: "Serving Humanity with Complete Dignity",
+      description: "Hspatal ki grand aur khubsurat main building ka manzar, jahan har mariz ko baghair kisi bhed-bhav ke behtareen, saaf-suthra aur pur-sukoon mahol mein tibbi sahulat faraham ki jati hai.",
+      location: "Qila Didar Singh Main Campus",
+      active: true
+    },
+    {
+      id: "slide-3",
+      image: "/images/Slide-3.jpg",
+      category: "Reception Desk",
+      title: "Warm Reception Desk for Patient Care",
+      urduTitle: "ریپشن اور رہنمائی کاؤنٹر — جہاں ہر آنے والے کا خلوص سے استقبال ہوتا ہے",
+      subheading: "Guiding Every Visitor with Deep Empathy",
+      description: "Hspatal ka reception area jahan marizon aur unke luvahqeen ko foran registration, checkup ki raahnumai aur munasib madad di jati hai taaki unka waqt zaya na ho.",
+      location: "Entrance Lobby Level 1",
+      active: true
+    },
+    {
+      id: "slide-4",
+      image: "/images/Slide-4.jpg",
+      category: "Main Entrance Gate",
+      title: "The Gateway of Hope — Sirf Ek Gate Ke Andar Har Tarhan Ki Shifa",
+      urduTitle: "مرکزی دروازہ — صرف ایک گیٹ کے اندر ہر طرح کی شفا",
+      subheading: "Complete Healthcare Under One Roof",
+      description: "Hspatal ka woh markazi darwaza jo har dKhi aur zarortmand ke liye khula hai. Is gate ke andar qadam rakhte hi mariz ko lab, pharmacy, OPD, aur emergency ki saari sahulatein ek hi chhat ke neeche mil jati hain.",
+      location: "Main Campus Gateway",
+      active: true
+    },
+    {
+      id: "slide-5",
+      image: "/images/Slide-5.jpg",
+      category: "Leadership & Continuity",
+      title: "A Legacy That Lives On — وہ ورثہ جو آج بھی زندہ ہے",
+      urduTitle: "وہ ورثہ جو آج بھی زندہ ہے — بانی اور موجودہ سی ای او کی ساتھ میں تصویر",
+      subheading: "Passing the Torch of Devotion",
+      description: "Late Nazar Hussain Alvi aur moujooda CEO Zamin Ali Alvi ki yeh tasveer is baat ka paigham hai ke khidmat ka yeh silsila kabhi nahi rukega. Jo pyara virsa bani chhor kar gaye thay, use aaj unki naseehat ke mutabiq behtareen andaz mein agay barhaya ja raha hai.",
+      location: "Executive Administration",
+      active: true
+    },
+    {
+      id: "slide-6",
+      image: "/images/Slide-6.jpg",
+      category: "Emergency Fleet",
+      title: "24/7 Wings of Hope — Active Emergency Ambulance Service",
+      urduTitle: "امید کے بازو — ہنگامی حالات اور ٹراما کے لیے چوبیس گھنٹے تیار ایمبولینس",
+      subheading: "Round-the-Clock Lifesaving Response",
+      description: "Hspatal ki emergency ambulances jo din ho ya raat, fouri tor par mariz tak pahunch kar unki jaan bachane aur unhein mahfooz tareeqay se trauma unit tak laane ke liye hamesha tayar rehti hain.",
+      location: "Emergency Bay 24/7",
+      active: true
+    },
+    {
+      id: "slide-7",
+      image: "/images/Slide-7.jpg",
+      category: "Aerial Drone View",
+      title: "Aerial Drone View of the Hospital Complex",
+      urduTitle: "ہسپتال کی عمارت کا ڈرون اور فضائی منظر",
+      subheading: "Expansive Medical Infrastructure for the Region",
+      description: "Drone view ke zariye dekhi gayi hspatal ki yeh vishal aur khubsurat imarat is baat ki gawaahi deti hai ke yeh fariq qila didar singh aur aas-paas ke 20 se zyada gaon ke logon ko kitni badi satah par saholat de rahi hai.",
+      location: "Campus Overhead",
+      active: true
+    },
+    {
+      id: "slide-8",
+      image: "/images/Slide-8.jpg",
+      category: "Historical Heritage Block",
+      title: "The Historical Foundation Building from 2005",
+      urduTitle: "سال ۲۰۰۵ کی تاریخی عمارت — جہاں سے اس عظیم فلاحی سفر کا آغاز ہوا",
+      subheading: "Rooted in Sincerity and Pure Sacrifice",
+      description: "Hspatal ki woh ibtedayi imarat jo 2005 mein qaim ki gayi thi. Yeh tasveer yaad dilati hai ke kaise ek choti si shuruat aur sachhi niyat ne aage chal kar lakhon marizon ke liye shifa ka yeh behtareen markaz banaya.",
+      location: "Original Foundation Site",
+      active: true
+   }
+],
   marquee: [
     { text: "Advanced Kidney Hemodialysis Unit", highlight: "24/7 Shifts" },
     { text: "Phaco Stitchless Cataract Eye Surgery", highlight: "Free Camps" },
@@ -99,17 +178,17 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
   departments: DEPARTMENTS,
   doctors: DOCTORS,
   donation: {
-    banner: { enabled: true, headline: "Ali Welfare Trust Hospital", badge: "Non-Profit Healthcare Trust #1142", appealEnglish: "Help us save precious human lives through free hemodialysis sessions, subsidized medicines, and free cataract surgeries for the impoverished.", appealUrdu: "مستحق اور نادار مریضوں کے علاج اور ادویات کے لیے دل کھول کر عطیات دیں", backgroundImage: "/images/hospital-building.jpg", showLiveTime: true, autoPopupSeconds: 120 },
+    banner: { enabled: true, headline: "Ali Welfare Trust Hospital", badge: "Non-Profit Healthcare Trust #1142", appealEnglish: "Help us save precious human lives through free hemodialysis sessions, subsidized medicines, and free cataract surgeries for the impoverished.", appealUrdu: "مستحق اور نادار مریضوں کے علاج اور ادویات کے لیے دل کھول کر عطیات دیں", backgroundImage: "/images/Slide-8.jpg", showLiveTime: true, autoPopupSeconds: 120 },
     bank: { bankName: BANK_DETAILS.bankName, accountTitle: BANK_DETAILS.accountTitle, iban: BANK_DETAILS.iban, accountNo: BANK_DETAILS.accountNo, branchName: BANK_DETAILS.branchName, branchCode: BANK_DETAILS.branchCode, city: BANK_DETAILS.city, currency: BANK_DETAILS.currency, taxStatus: BANK_DETAILS.taxStatus, appealUrdu: BANK_DETAILS.appealUrdu, appealEnglish: BANK_DETAILS.appealEnglish, easypaisaNo: "03452074974", jazzcashNo: "03324711101" },
     causes: DONATION_CAUSES
   },
   campus: {
     facilities: GALLERY_ITEMS,
     photoFrames: [
-      { id: "frame-1", title: "Main Hospital Entrance & Grounds", caption: "Main entrance with dedicated ambulance ramp and 24/7 reception", imageUrl: "/images/hospital-building.jpg", dateAdded: "Official Campus" },
-      { id: "frame-2", title: "Aerial View of Healthcare Campus", caption: "Multi-wing facility in Qila Didar Singh, Gujranwala", imageUrl: "/images/hospital-aerial.jpg", dateAdded: "Campus Aerial" },
-      { id: "frame-3", title: "Hemodialysis Treatment Wing", caption: "Modern German-engineered dialysis stations providing free sessions", imageUrl: "/images/hospital-interior-1.jpg", dateAdded: "Renal Wing" },
-      { id: "frame-4", title: "Sterile Inpatient Recovery Ward", caption: "Air-conditioned recovery rooms with central oxygen monitoring", imageUrl: "/images/hospital-interior-2.jpg", dateAdded: "Inpatient Care" }
+      { id: "frame-1", title: "Main Hospital Entrance & Grounds", caption: "Main entrance with dedicated ambulance ramp and 24/7 reception", imageUrl: "/images/Slide-2.jpg", dateAdded: "Official Campus" },
+      { id: "frame-2", title: "Aerial View of Healthcare Campus", caption: "Multi-wing facility in Qila Didar Singh, Gujranwala", imageUrl: "/images/Slide-7.jpg", dateAdded: "Campus Aerial" },
+      { id: "frame-3", title: "The Gateway of Hope", caption: "Stepping Through Doors Built on Sincerity, Dedicated to Total Healing", imageUrl: "/images/Slide-4.jpg", dateAdded: "Hospital Gate" },
+      { id: "frame-4", title: "24/7 Wings of Hope", caption: "Always on the Move, Always Ready: Round-the-Clock Emergency Trauma Response", imageUrl: "/images/Slide-6.jpg", dateAdded: "Ambulance / Emergency Service" }
     ]
   },
   contact: {
@@ -160,7 +239,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
     metaTitle: "Ali Welfare Trust Hospital | 100% Free Kidney Dialysis & Emergency Care in Gujranwala",
     metaDescription: "Registered Non-Profit Healthcare Trust #1142 in Qila Didar Singh, Gujranwala. Offering 24/7 emergency care, 100% free hemodialysis, specialist doctors, and modern laboratory diagnostics.",
     keywords: "Ali Welfare Trust Hospital, Qila Didar Singh, free dialysis hospital, Gujranwala hospital, non profit hospital Pakistan, zakat hospital Pakistan, free eye surgery",
-    ogImage: "/images/hospital-building.jpg",
+    ogImage: "/images/Slide-5.jpg",
     ogTitle: "Ali Welfare Trust Hospital — Serving Humanity with Dignity",
     ogDescription: "Dedicated registered non-profit medical trust providing free hemodialysis, round-the-clock emergency care, and modern healthcare facilities.",
     canonicalUrl: "https://aliwelfaretrust.org",
@@ -200,10 +279,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
     donationPopupBanner: { enabled: true, title: "2-Minute Recurring Donation Modal" },
     aiAgent: { enabled: true, title: "Ali Care 24/7 AI Health Consultant" }
   },
-  videos: [
-    { id: "vid-1", title: "Ali Welfare Trust Hospital Campus Documentary", urduTitle: "ہسپتال کی دستاویزی فلم اور خدمات کا جائزہ", category: "Documentary", youtubeId: "dQw4w9WgXcQ", posterUrl: "/images/hospital-building.jpg", duration: "04:15", description: "A comprehensive documentary showing the founding vision, 24/7 dialysis unit, modern emergency ward, and patient care facilities.", isFeatured: true },
-    { id: "vid-2", title: "Advanced Kidney Hemodialysis Unit Virtual Tour", urduTitle: "جدید ہیمو ڈائیلاسز سینٹر کا تفصیلی معائنہ", category: "Renal Center", youtubeId: "dQw4w9WgXcQ", posterUrl: "/images/gallery-2.jpg", duration: "03:40", description: "Take a virtual step inside the specialized renal center where deserving patients receive 100% free hemodialysis sessions daily.", isFeatured: false }
-  ],
+ 
   auditLogs: [
     { id: "log-init", timestamp: 1716200000000, user: "superadmin", role: "SuperAdmin", action: "System Initialized", section: "All Modules", details: "Central Content Engine synchronized across all client devices." }
   ],
