@@ -97,7 +97,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
       id: "slide-5",
       image: "/images/Slide-5.jpg",
       category: "Leadership & Continuity",
-      title: "A Legacy That Lives On — وہ ورثہ جو آج بھی زندہ ہے",
+      title: "A Legacy That Lives On —",
       urduTitle: "وہ ورثہ جو آج بھی زندہ ہے — بانی اور موجودہ سی ای او کی ساتھ میں تصویر",
       subheading: "Passing the Torch of Devotion",
       description: "Late Nazar Hussain Alvi aur moujooda CEO Zamin Ali Alvi ki yeh tasveer is baat ka paigham hai ke khidmat ka yeh silsila kabhi nahi rukega. Jo pyara virsa bani chhor kar gaye thay, use aaj unki naseehat ke mutabiq behtareen andaz mein agay barhaya ja raha hai.",
