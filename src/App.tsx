@@ -38,8 +38,12 @@ export default function App() {
     const hash = window.location.hash.toLowerCase();
     const search = window.location.search.toLowerCase();
     
-    if (path.includes('/admin-login') || hash.includes('admin-login')) return '/admin-login';
-    if (path.includes('/admin') || hash.includes('admin')) return '/admin';
+    if (path.includes('/admin-login') || hash.includes('/admin-login')) return '/admin-login';
+
+if (path.includes('/admin') || hash.includes('/admin')) {
+  const isAdminLoggedIn = localStorage.getItem("isAdminLoggedIn") === "true";
+  return isAdminLoggedIn ? '/admin' : '/admin-login';
+}
     
     if (path.startsWith('/doctor/') || hash.includes('/doctor/')) {
       return path.startsWith('/doctor/') ? path : hash.replace('#', '');
@@ -277,19 +281,30 @@ export default function App() {
       />
     );
   }
-
+if (currentRoute === '/admin') {
   if (currentRoute === '/admin') {
+  const isAdminLoggedIn = localStorage.getItem("isAdminLoggedIn") === "true";
+  
+  if (!isAdminLoggedIn) {
     return (
-      <AdminDashboard
+      <AdminLogin
+        onLoginSuccess={() => navigateTo('/admin')}
         onNavigateHome={() => navigateTo('/')}
-        onNavigateLogin={() => navigateTo('/admin-login')}
-        onPreviewDoctor={(docId) => {
-          setActiveDoctorId(docId);
-          navigateTo(`/doctor/${docId}`);
-        }}
       />
     );
   }
+
+  return (
+    <AdminDashboard
+      onNavigateHome={() => navigateTo('/')}
+      onNavigateLogin={() => navigateTo('/admin-login')}
+      onPreviewDoctor={(docId) => {
+        setActiveDoctorId(docId);
+        navigateTo(`/doctor/${docId}`);
+      }}
+    />
+  );
+}
 
   // Doctor Detail Page View (Dedicated Subpage)
   const targetDocId = activeDoctorId || (currentRoute.startsWith('/doctor/') ? currentRoute.replace('/doctor/', '') : null);
