@@ -663,43 +663,43 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: "gal-1",
     title: "Official Hospital Compound & Gate",
     category: "exterior",
-    imageUrl: "/images/hospital-building.jpg",
+    imageUrl: "/images/Slide-4.jpg",
     description: "Official hospital compound entrance with blue Urdu calligraphy signboard and security gate welcoming patients 24/7."
   },
   {
     id: "gal-2",
     title: "Aerial View of Hospital Campus",
     category: "campus",
-    imageUrl: "/images/hospital-aerial.jpg",
+    imageUrl: "/images/Slide-7.jpg",
     description: "Elevated aerial drone photograph showing the multi-story hospital complex, open courtyard, and motorcycle/ambulance parking."
   },
   {
     id: "gal-3",
     title: "Central Reception & Diagnostic Lab",
-    category: "facilities",
-    imageUrl: "/images/hospital-interior-1.jpg",
+    category: "campus",
+    imageUrl: "/images/Slide-3.jpg",
     description: "Ali Welfare Diagnostic Laboratory registration, computerized reporting counter, and spacious waiting hall."
   },
   {
     id: "gal-4",
-    title: "Specialist OPD Consultation Chambers",
-    category: "facilities",
-    imageUrl: "/images/hospital-interior-2.jpg",
-    description: "Senior physicians and surgeons examining and advising patients with modern diagnostic tools."
+    title: "Main Hospital Campus",
+    category: "campus exterior",
+    imageUrl: "/images/Slide-2.jpg",
+    description: "Our expansive main building designed with complete clinical dignity, providing a sterile, safe, and welcoming environment for patients and their families."
   },
   {
     id: "gal-5",
-    title: "Inpatient General Medical Ward",
-    category: "wards",
+    title: "Main Entrance Board",
+    category: "exterior",
     imageUrl: "/images/hospital-interior-3.jpg",
-    description: "Spacious, hygienic, air-conditioned patient recovery wards maintained with strict medical hygiene standards."
+    description: "Our prominent entrance board and welcoming gate displaying Urdu calligraphy and charitable healthcare credentials, greeting every patient and needy visitor with open arms 24/7."
   },
   {
     id: "gal-6",
-    title: "Sterile Procedure & Dialysis Suite",
-    category: "wards",
-    imageUrl: "/images/gallery-2.jpg",
-    description: "Dedicated eye surgical beds and German hemodialysis stations equipped with sterile clinical privacy curtains and lighting."
+    title: "Ambulance & Emergency Service",
+    category: "Emergency Fleet",
+    imageUrl: "/images/Slide-6.jpg",
+    description: "Round-the-clock active emergency transport delivering urgent trauma care and safely rushing critical patients to our facility day and night."
   }
 ];
 
