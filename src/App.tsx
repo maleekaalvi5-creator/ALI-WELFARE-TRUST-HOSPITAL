@@ -875,7 +875,7 @@ if (currentRoute === '/admin') {
         onAppointmentBooked={handleAppointmentBooked}
       />
 
-     {/* My Booked Appointments Drawer / Modal */}
+{/* My Booked Appointments Drawer / Modal */}
     <AppointmentsModal
       isOpen={myAppointmentsOpen}
       onClose={() => setMyAppointmentsOpen(false)}
