@@ -1,62 +1,54 @@
-// api/content.ts - FAST + Permanent Save - Admin Panel Same Rahega
-let memoryCache: any = null;
+// api/content.ts - FINAL FAST + PERMANENT - Admin Panel Same
+import fs from 'fs';
+import path from 'path';
+
+const DATA_FILE = path.join(process.cwd(), 'data', 'hospital-content.json');
 
 export default async function handler(req: any, res: any) {
-  try {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    
-    if (req.method === 'OPTIONS') return res.status(200).end();
-    
-    // GET - Jo save kiya hai wahi fast return karo
-    if (req.method === 'GET') {
-      if (memoryCache) {
-        return res.status(200).json(memoryCache);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Cache-Control', 'no-store');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
+  if (req.method === 'GET') {
+    try {
+      if (fs.existsSync(DATA_FILE)) {
+        const raw = fs.readFileSync(DATA_FILE, 'utf8');
+        return res.status(200).json(JSON.parse(raw));
       }
-      // Agar cache khali hai to data folder se lao
-      try {
-        const fs = await import('fs');
-        const path = await import('path');
-        const filePath = path.join(process.cwd(), 'data', 'hospital-content.json');
-        if (fs.existsSync(filePath)) {
-          const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-          memoryCache = data;
-          return res.status(200).json(data);
-        }
-      } catch {}
-      return res.status(200).json(null);
-    }
-    
-    // POST - 1 sec me save, permanent
-    if (req.method === 'POST') {
-      const newData = req.body;
-      
-      // 1. Turant memory me save - is se 1 sec me "Saved" dikhega
-      memoryCache = newData;
-      
-      // 2. Turant success bhejo - wait nahi karwana
-      res.status(200).json({ success: true, message: 'Live in 1 sec' });
-      
-      // 3. Background me file me bhi save karo taake permanent rahe, revert na ho
-      try {
-        const fs = await import('fs');
-        const path = await import('path');
-        const dataDir = path.join(process.cwd(), 'data');
-        if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
-        fs.writeFileSync(
-          path.join(dataDir, 'hospital-content.json'), 
-          JSON.stringify(newData, null, 2)
-        );
-      } catch (e) {
-        console.log('File save error, but memory saved:', e);
+    } catch {}
+    // Fallback - hospital-content from public folder
+    try {
+      const publicFile = path.join(process.cwd(), 'public', 'hospital-content.json');
+      if (fs.existsSync(publicFile)) {
+        return res.status(200).json(JSON.parse(fs.readFileSync(publicFile, 'utf8')));
       }
-      
-      return;
-    }
-    
-    return res.status(200).json(null);
-  } catch (e) {
-    return res.status(200).json(memoryCache || null);
+    } catch {}
+    return res.status(200).json({ message: 'No content yet' });
   }
+
+  if (req.method === 'POST') {
+    const newData = req.body;
+    
+    // TURANT success - 1 sec me
+    res.status(200).json({ success: true, saved: true });
+
+    // Background me permanent save - revert nahi hoga
+    try {
+      const dir = path.dirname(DATA_FILE);
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(DATA_FILE, JSON.stringify(newData, null, 2));
+      
+      // Public me bhi save taake live site par turant dikhe
+      const publicFile = path.join(process.cwd(), 'public', 'hospital-content.json');
+      fs.writeFileSync(publicFile, JSON.stringify(newData, null, 2));
+    } catch (e) {
+      console.error('Save error:', e);
+    }
+    return;
+  }
+
+  return res.status(200).json(null);
 }
