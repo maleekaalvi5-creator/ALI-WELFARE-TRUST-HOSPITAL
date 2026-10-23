@@ -16,7 +16,7 @@ export const DEFAULT_HOSPITAL_CONTENT: HospitalContent = {
     logoUrl: '/images/hospital-logo.png',
     logoPosition: 'left',
     hospitalName: HOSPITAL_INFO.name,
-    tagline: '( A Non-profitable ,Regd,Orginaztion Devoted to provide health facilities)',
+    tagline: '(A Regd. non-profit organization dedicated to healthcare.)',
     tickerText: '24/7 Emergency & Dialysis Active',
     emergencyBadge: 'Emergency 24/7',
     locationBadge: 'Qila Didar Singh, Gujranwala',
