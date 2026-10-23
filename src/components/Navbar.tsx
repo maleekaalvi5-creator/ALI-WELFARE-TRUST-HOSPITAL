@@ -75,7 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const emergencyPhone = header?.emergencyPhone || HOSPITAL_INFO.emergencyPhone;
   const whatsappNumber = header?.whatsappNumber || HOSPITAL_INFO.whatsapp;
   const hospitalName = header?.hospitalName || "Ali Welfare Trust Hospital";
-  const tagline = header?.tagline || "(A Non-Profit, Regd. Organization Devoted to Providing Health Facilities)";
+  const tagline = header?.tagline || "(A Regd. non-profit organization dedicated to healthcare.)";
   const donateBtnText = header?.donateButtonText || "DONATE NOW";
   const logoPosition = header?.logoPosition || 'left';
 
